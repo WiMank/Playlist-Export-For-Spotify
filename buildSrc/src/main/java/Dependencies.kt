@@ -1,6 +1,7 @@
 import Version.androidJunitVersion
 import Version.appcompatVersion
 import Version.constraintlayoutVersion
+import Version.coroutinesVersion
 import Version.daggerHiltVersion
 import Version.espresso
 import Version.junitVersion
@@ -28,7 +29,7 @@ object Dependencies {
     const val navigationComponentKtx = "androidx.navigation:navigation-ui-ktx:$navigationComponentVersion"
     const val viewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${viewmodel}"
     const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${viewmodel}"
-
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
 }
 
 object Version {
@@ -44,4 +45,5 @@ object Version {
     const val daggerHiltVersion = "2.28.3-alpha"
     const val navigationComponentVersion = "2.3.0"
     const val viewmodel = "2.1.0-beta01"
+    const val coroutinesVersion = "1.3.8"
 }

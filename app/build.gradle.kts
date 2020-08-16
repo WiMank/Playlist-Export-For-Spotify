@@ -2,6 +2,7 @@ import Dependencies.androidxJunit
 import Dependencies.appcompat
 import Dependencies.constraintlayout
 import Dependencies.coreKtx
+import Dependencies.coroutines
 import Dependencies.daggerHilt
 import Dependencies.espressoCore
 import Dependencies.hiltAndroidCompiler
@@ -77,4 +78,6 @@ dependencies {
     implementation(viewmodelKtx)
     implementation(lifecycleExtensions)
 
+    //Coroutines
+    implementation(coroutines)
 }
