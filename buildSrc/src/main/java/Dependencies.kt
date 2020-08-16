@@ -4,12 +4,14 @@ import Version.constraintlayoutVersion
 import Version.coroutinesVersion
 import Version.daggerHiltVersion
 import Version.espresso
+import Version.glideVersion
 import Version.junitVersion
 import Version.kotlin
 import Version.kotlinGradlePluginVersion
 import Version.ktx
 import Version.moshiVersion
 import Version.navigationComponentVersion
+import Version.retrofitVersion
 import Version.toolsGradle
 import Version.viewmodel
 
@@ -33,6 +35,9 @@ object Dependencies {
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     const val moshi = "com.squareup.moshi:moshi-kotlin:$moshiVersion"
     const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
+    const val retrofit ="com.squareup.retrofit2:retrofit:$retrofitVersion"
+    const val glide ="com.github.bumptech.glide:glide:$glideVersion"
+    const val glideCompiler ="com.github.bumptech.glide:compiler:$glideVersion"
 }
 
 object Version {
@@ -50,4 +55,6 @@ object Version {
     const val viewmodel = "2.1.0-beta01"
     const val coroutinesVersion = "1.3.8"
     const val moshiVersion = "1.9.3"
+    const val retrofitVersion = "2.9.0"
+    const val glideVersion = "4.11.0"
 }

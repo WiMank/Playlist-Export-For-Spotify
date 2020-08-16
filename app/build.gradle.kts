@@ -5,6 +5,8 @@ import Dependencies.coreKtx
 import Dependencies.coroutines
 import Dependencies.daggerHilt
 import Dependencies.espressoCore
+import Dependencies.glide
+import Dependencies.glideCompiler
 import Dependencies.hiltAndroidCompiler
 import Dependencies.junit
 import Dependencies.kotlinStdlib
@@ -13,6 +15,7 @@ import Dependencies.moshi
 import Dependencies.moshiCodegen
 import Dependencies.navigationComponent
 import Dependencies.navigationComponentKtx
+import Dependencies.retrofit
 import Dependencies.viewmodelKtx
 
 plugins {
@@ -87,5 +90,12 @@ dependencies {
     //Moshi
     implementation(moshi)
     kapt(moshiCodegen)
+
+    //Retrofit
+    implementation(retrofit)
+
+    //Glide
+    implementation(glide)
+    kapt(glideCompiler)
 
 }
