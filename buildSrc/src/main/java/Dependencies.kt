@@ -8,6 +8,7 @@ import Version.junitVersion
 import Version.kotlin
 import Version.kotlinGradlePluginVersion
 import Version.ktx
+import Version.moshiVersion
 import Version.navigationComponentVersion
 import Version.toolsGradle
 import Version.viewmodel
@@ -30,6 +31,8 @@ object Dependencies {
     const val viewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${viewmodel}"
     const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${viewmodel}"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    const val moshi = "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+    const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 }
 
 object Version {
@@ -46,4 +49,5 @@ object Version {
     const val navigationComponentVersion = "2.3.0"
     const val viewmodel = "2.1.0-beta01"
     const val coroutinesVersion = "1.3.8"
+    const val moshiVersion = "1.9.3"
 }

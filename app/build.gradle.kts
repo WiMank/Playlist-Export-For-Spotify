@@ -9,6 +9,8 @@ import Dependencies.hiltAndroidCompiler
 import Dependencies.junit
 import Dependencies.kotlinStdlib
 import Dependencies.lifecycleExtensions
+import Dependencies.moshi
+import Dependencies.moshiCodegen
 import Dependencies.navigationComponent
 import Dependencies.navigationComponentKtx
 import Dependencies.viewmodelKtx
@@ -58,11 +60,12 @@ dependencies {
     implementation(kotlinStdlib)
     implementation(coreKtx)
 
+    //Test
     testImplementation(junit)
     androidTestImplementation(androidxJunit)
     androidTestImplementation(espressoCore)
 
-
+    //View
     implementation(appcompat)
     implementation(constraintlayout)
 
@@ -80,4 +83,9 @@ dependencies {
 
     //Coroutines
     implementation(coroutines)
+
+    //Moshi
+    implementation(moshi)
+    kapt(moshiCodegen)
+
 }
