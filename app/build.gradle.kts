@@ -16,7 +16,7 @@ import Dependencies.moshiCodegen
 import Dependencies.navigationComponent
 import Dependencies.navigationComponentKtx
 import Dependencies.retrofit
-import Dependencies.viewmodelKtx
+import Dependencies.viewModelKtx
 
 plugins {
     id(Plugins.androidApplication)
@@ -24,6 +24,7 @@ plugins {
     kotlin(Plugins.androidExtensions)
     kotlin(Plugins.kapt)
     id(Plugins.hiltPlugin)
+    id("kotlin-android")
 }
 
 android {
@@ -56,12 +57,18 @@ android {
         correctErrorTypes = true
     }
 
+    buildFeatures {
+        dataBinding = true
+    }
 }
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlinStdlib)
     implementation(coreKtx)
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
 
     //Test
     testImplementation(junit)
@@ -77,11 +84,11 @@ dependencies {
     kapt(hiltAndroidCompiler)
 
     //Navigation
-    implementation (navigationComponent)
-    implementation (navigationComponentKtx)
+    implementation(navigationComponent)
+    implementation(navigationComponentKtx)
 
     //ViewModel
-    implementation(viewmodelKtx)
+    implementation(viewModelKtx)
     implementation(lifecycleExtensions)
 
     //Coroutines

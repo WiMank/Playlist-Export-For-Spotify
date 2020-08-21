@@ -41,7 +41,7 @@ object Dependencies {
     const val navigationComponent = "androidx.navigation:navigation-fragment-ktx:$navigationComponentVersion"
     const val navigationComponentKtx = "androidx.navigation:navigation-ui-ktx:$navigationComponentVersion"
 
-    const val viewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${viewModel}"
+    const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${viewModel}"
     const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${viewModel}"
 
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
