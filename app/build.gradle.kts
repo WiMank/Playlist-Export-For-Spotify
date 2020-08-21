@@ -16,6 +16,7 @@ import Dependencies.moshiCodegen
 import Dependencies.navigationComponent
 import Dependencies.navigationComponentKtx
 import Dependencies.retrofit
+import Dependencies.timber
 import Dependencies.viewModelKtx
 
 plugins {
@@ -24,7 +25,7 @@ plugins {
     kotlin(Plugins.androidExtensions)
     kotlin(Plugins.kapt)
     id(Plugins.hiltPlugin)
-    id("kotlin-android")
+    id(Plugins.safeargsKotlinPlugin)
 }
 
 android {
@@ -104,5 +105,8 @@ dependencies {
     //Glide
     implementation(glide)
     kapt(glideCompiler)
+
+    //Timber
+    implementation(timber)
 
 }
