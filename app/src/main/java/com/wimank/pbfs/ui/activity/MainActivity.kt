@@ -1,9 +1,10 @@
-package com.wimank.pbfs.ui
+package com.wimank.pbfs.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.wimank.pbfs.R
+import com.wimank.pbfs.ui.utils.UiRouter
 
 
 class MainActivity : AppCompatActivity() {

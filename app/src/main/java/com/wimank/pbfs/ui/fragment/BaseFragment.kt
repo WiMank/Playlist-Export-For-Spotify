@@ -1,4 +1,4 @@
-package com.wimank.pbfs.ui
+package com.wimank.pbfs.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
