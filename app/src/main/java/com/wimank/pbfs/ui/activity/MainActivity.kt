@@ -9,6 +9,8 @@ import com.wimank.pbfs.ui.utils.UiRouter
 
 class MainActivity : AppCompatActivity() {
 
+    private companion object;
+
     private val uiRouter: UiRouter by lazy {
         UiRouter(findNavController(R.id.main_nav_host))
     }
@@ -16,5 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
     }
+
 }

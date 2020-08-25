@@ -11,11 +11,18 @@ import Dependencies.hiltAndroidCompiler
 import Dependencies.junit
 import Dependencies.kotlinStdlib
 import Dependencies.lifecycleExtensions
+import Dependencies.loggingInterceptor
 import Dependencies.moshi
 import Dependencies.moshiCodegen
 import Dependencies.navigationComponent
 import Dependencies.navigationComponentKtx
+import Dependencies.okHttp
 import Dependencies.retrofit
+import Dependencies.retrofitConverterMoshi
+import Dependencies.room
+import Dependencies.roomCompiler
+import Dependencies.roomKtx
+import Dependencies.spotifyAuth
 import Dependencies.timber
 import Dependencies.viewModelKtx
 
@@ -44,10 +51,23 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
+
+        getByName("debug") {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            )
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
@@ -80,6 +100,11 @@ dependencies {
     implementation(appcompat)
     implementation(constraintlayout)
 
+    //Room
+    implementation(room)
+    implementation(roomKtx)
+    kapt(roomCompiler)
+
     //Dagger
     implementation(daggerHilt)
     kapt(hiltAndroidCompiler)
@@ -101,6 +126,11 @@ dependencies {
 
     //Retrofit
     implementation(retrofit)
+    implementation(retrofitConverterMoshi)
+
+    //OkHttp
+    implementation(okHttp)
+    implementation(loggingInterceptor)
 
     //Glide
     implementation(glide)
@@ -108,5 +138,8 @@ dependencies {
 
     //Timber
     implementation(timber)
+
+    //SpotifyAuth
+    implementation(spotifyAuth)
 
 }

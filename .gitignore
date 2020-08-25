@@ -88,3 +88,6 @@ lint/tmp/
 # Android Profiling
 *.hprof
 /.idea/
+
+# Sectet file
+Secret.kt

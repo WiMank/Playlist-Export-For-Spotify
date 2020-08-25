@@ -9,10 +9,14 @@ import Version.junitVersion
 import Version.kotlinGradlePluginVersion
 import Version.kotlinVersion
 import Version.ktxVersion
+import Version.loggingInterceptorVersion
 import Version.moshiVersion
 import Version.navigationComponentVersion
 import Version.navigationSafeArgsVersion
+import Version.okHttpVersion
 import Version.retrofitVersion
+import Version.roomVersion
+import Version.spotifyAuthVersion
 import Version.timberVersion
 import Version.toolsGradleVersion
 import Version.viewModelVersion
@@ -25,7 +29,8 @@ object Dependencies {
 
     const val appcompat = "androidx.appcompat:appcompat:$appcompatVersion"
 
-    const val constraintlayout = "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+    const val constraintlayout =
+        "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
 
     const val junit = "junit:junit:$junitVersion"
 
@@ -58,11 +63,22 @@ object Dependencies {
     const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 
     const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    const val retrofitConverterMoshi = "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+
+    const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    const val loggingInterceptor =
+        "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion"
 
     const val glide = "com.github.bumptech.glide:glide:$glideVersion"
     const val glideCompiler = "com.github.bumptech.glide:compiler:$glideVersion"
 
     const val timber = "com.jakewharton.timber:timber:$timberVersion"
+
+    const val spotifyAuth = "com.spotify.android:auth:$spotifyAuthVersion"
+
+    const val room = "androidx.room:room-runtime:$roomVersion"
+    const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
+    const val roomKtx = "androidx.room:room-ktx:$roomVersion"
 }
 
 object Version {
@@ -84,4 +100,8 @@ object Version {
     const val glideVersion = "4.11.0"
     const val timberVersion = "4.7.1"
     const val navigationSafeArgsVersion = "2.3.0"
+    const val spotifyAuthVersion = "1.2.3"
+    const val roomVersion = "2.2.5"
+    const val okHttpVersion = "4.8.1"
+    const val loggingInterceptorVersion = "4.8.1"
 }
