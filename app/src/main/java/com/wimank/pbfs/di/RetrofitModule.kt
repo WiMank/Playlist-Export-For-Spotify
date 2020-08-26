@@ -37,18 +37,15 @@ class RetrofitModule {
     @Provides
     @Singleton
     fun provideInterceptor(): HttpLoggingInterceptor {
-        val logging = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+        return HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
                 Timber.tag("OkHttp").d(message)
             }
-        })
-
-        if (BuildConfig.DEBUG) {
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-        } else {
-            logging.setLevel(HttpLoggingInterceptor.Level.NONE)
+        }).apply {
+            if (BuildConfig.DEBUG)
+                setLevel(HttpLoggingInterceptor.Level.BODY)
+            else
+                setLevel(HttpLoggingInterceptor.Level.NONE)
         }
-
-        return logging
     }
 }
