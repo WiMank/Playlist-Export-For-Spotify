@@ -1,4 +1,4 @@
-package com.wimank.pbfs.rest.request
+package com.wimank.pbfs.rest.response
 
 import com.squareup.moshi.Json
 

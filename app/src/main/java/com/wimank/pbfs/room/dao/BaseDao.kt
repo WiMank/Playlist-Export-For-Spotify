@@ -1,12 +1,15 @@
 package com.wimank.pbfs.room.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.Update
 
 @Dao
 interface BaseDao<in T> {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = REPLACE)
     fun insert(insertData: T)
 
 

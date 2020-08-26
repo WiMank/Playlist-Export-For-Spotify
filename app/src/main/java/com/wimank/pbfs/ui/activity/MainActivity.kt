@@ -31,15 +31,6 @@ class MainActivity : AppCompatActivity() {
         AuthorizationClient.openLoginActivity(this, AUTH_TOKEN_REQUEST_CODE, request)
     }
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        val response = AuthorizationClient.getResponse(resultCode, data)
-        if (AUTH_TOKEN_REQUEST_CODE == requestCode) {
-            val accessToken = response.accessToken
-        }
-    }
-
     private fun getAuthenticationRequest(): AuthorizationRequest? {
         return AuthorizationRequest.Builder(
             CLIENT_ID,
@@ -55,4 +46,11 @@ class MainActivity : AppCompatActivity() {
         return Uri.parse(REDIRECT_URI)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val response = AuthorizationClient.getResponse(resultCode, data)
+        if (AUTH_TOKEN_REQUEST_CODE == requestCode) {
+            val accessToken = response.accessToken
+        }
+    }
 }

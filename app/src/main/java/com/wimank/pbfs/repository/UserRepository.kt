@@ -1,3 +1,7 @@
 package com.wimank.pbfs.repository
 
-class UserRepository
+interface UserRepository {
+
+    fun loadUserProfile()
+
+}

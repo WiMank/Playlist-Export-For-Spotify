@@ -1,6 +1,6 @@
 package com.wimank.pbfs.rest
 
-import com.wimank.pbfs.rest.request.NetworkUser
+import com.wimank.pbfs.rest.response.NetworkUser
 import retrofit2.http.GET
 import retrofit2.http.Header
 
