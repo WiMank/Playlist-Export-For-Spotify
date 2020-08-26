@@ -1,4 +1,4 @@
-package com.wimank.pbfs.domain.authentication
+package com.wimank.pbfs.domain.datasource.authentication
 
 import com.wimank.pbfs.room.dao.AuthenticationDao
 import javax.inject.Inject
