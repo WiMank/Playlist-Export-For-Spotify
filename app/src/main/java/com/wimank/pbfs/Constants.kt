@@ -5,3 +5,7 @@ const val DATABASE_NAME = "pbfs.db"
 
 //The base address of Web API
 const val BASE_SPOTIFY_URL = "https://api.spotify.com/v1"
+
+//Just empty string
+const val EMPTY_STRING = ""
+

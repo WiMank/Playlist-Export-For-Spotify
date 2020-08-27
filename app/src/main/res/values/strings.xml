@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Playlist Backup For Spotify</string>
+    <string name="preference_file_key">pbfs_prefs</string>
 </resources>
