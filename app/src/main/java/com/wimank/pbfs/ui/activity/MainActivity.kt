@@ -12,14 +12,14 @@ import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
 import com.wimank.pbfs.*
 import com.wimank.pbfs.databinding.ActivityMainBinding
-import com.wimank.pbfs.ui.fragment.BackupFragment
+import com.wimank.pbfs.ui.fragment.PlaylistFragment
 import com.wimank.pbfs.ui.utils.UiRouter
 import com.wimank.pbfs.util.AppPreferencesManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), BackupFragment.BackupFragmentCallback {
+class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallback {
 
     @Inject
     lateinit var appPreferencesManager: AppPreferencesManager

@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/backupFragment"
-        android:name="com.wimank.pbfs.ui.fragment.BackupFragment"
+        android:name="com.wimank.pbfs.ui.fragment.PlaylistFragment"
         android:label="BackupFragment">
 
         <action
