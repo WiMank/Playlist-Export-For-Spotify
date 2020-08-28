@@ -33,6 +33,7 @@ plugins {
     kotlin(Plugins.kapt)
     id(Plugins.hiltPlugin)
     id(Plugins.safeargsKotlinPlugin)
+    id("kotlin-android")
 }
 
 android {

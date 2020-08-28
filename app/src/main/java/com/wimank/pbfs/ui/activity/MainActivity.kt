@@ -31,6 +31,13 @@ class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallbac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        /*val navGraph = findNavController(R.id.main_nav_host).navInflater.inflate(R.navigation.app_navigation)
+        if (condition) {
+            navGraph.setStartDestination(R.id.screen1)
+        } else {
+            navGraph.setStartDestination(R.id.screen2)
+        }
+        findNavController(R.id.main_nav_host).graph = navGraph*/
     }
 
     private fun requestToken() {
