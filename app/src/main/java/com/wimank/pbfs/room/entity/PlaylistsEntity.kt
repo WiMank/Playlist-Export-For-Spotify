@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "playlists")
-data class DbPlaylistsEntity(
+data class PlaylistsEntity(
 
     @PrimaryKey
     @ColumnInfo(name = "playlist_id")

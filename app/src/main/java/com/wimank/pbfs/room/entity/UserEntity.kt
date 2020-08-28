@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "user")
-data class DbUserEntity(
+data class UserEntity(
     @PrimaryKey
     val name: String,
     val avatar: String,
