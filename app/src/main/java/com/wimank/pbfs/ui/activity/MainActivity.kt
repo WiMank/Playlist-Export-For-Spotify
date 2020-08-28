@@ -3,8 +3,10 @@ package com.wimank.pbfs.ui.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.wimank.pbfs.*
 import com.wimank.pbfs.R
@@ -12,6 +14,7 @@ import com.wimank.pbfs.databinding.ActivityMainBinding
 import com.wimank.pbfs.ui.fragment.PlaylistFragment
 import com.wimank.pbfs.ui.utils.UiRouter
 import com.wimank.pbfs.util.AppPreferencesManager
+import com.wimank.pbfs.viewmodel.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import net.openid.appauth.*
 import timber.log.Timber
@@ -23,14 +26,20 @@ class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallbac
 
     @Inject
     lateinit var appPreferencesManager: AppPreferencesManager
+
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private val authService by lazy { AuthorizationService(this) }
-    private val uiRouter: UiRouter by lazy {
-        UiRouter(findNavController(R.id.main_nav_host))
-    }
+    private val uiRouter: UiRouter by lazy { UiRouter(findNavController(R.id.main_nav_host)) }
+    private val viewModel: MainActivityViewModel by viewModels { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+
+        viewModel.checkAuthorize()
+
         /*val navGraph = findNavController(R.id.main_nav_host).navInflater.inflate(R.navigation.app_navigation)
         if (condition) {
             navGraph.setStartDestination(R.id.screen1)

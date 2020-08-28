@@ -15,3 +15,6 @@ const val TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token"
 //Just empty string
 const val EMPTY_STRING = ""
 
+//Default session id
+const val SESSION_ID = 0L
+

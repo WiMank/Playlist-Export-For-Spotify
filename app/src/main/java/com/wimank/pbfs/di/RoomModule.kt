@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.wimank.pbfs.DATABASE_NAME
 import com.wimank.pbfs.room.AppDataBase
+import com.wimank.pbfs.room.dao.SessionDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,4 +23,11 @@ class RoomModule {
         return Room.databaseBuilder(applicationContext, AppDataBase::class.java, DATABASE_NAME)
             .build()
     }
+
+    @Singleton
+    @Provides
+    fun provideSessionDao(db: AppDataBase): SessionDao {
+        return db.getSessionDao()
+    }
+
 }
