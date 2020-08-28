@@ -15,19 +15,20 @@ data class NetworkUser(
     val product: String?,
     val type: String?,
     val uri: String?
-)
+) {
 
-data class Image(
-    val height: Any?,
-    val url: String?,
-    val width: Any?
-)
+    data class Image(
+        val height: Any?,
+        val url: String?,
+        val width: Any?
+    )
 
-data class Followers(
-    val href: Any?,
-    val total: Int?
-)
+    data class Followers(
+        val href: Any?,
+        val total: Int?
+    )
 
-data class ExternalUrls(
-    val spotify: String?
-)
+    data class ExternalUrls(
+        val spotify: String?
+    )
+}

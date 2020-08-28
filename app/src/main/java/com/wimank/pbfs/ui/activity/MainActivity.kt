@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallbac
             getRedirectUri().toString()
         )
             .setShowDialog(false)
-            .setScopes(arrayOf(AUTH_SCOPE))
+            .setScopes(SPOTIFY_SCOPES)
             .build()
     }
 

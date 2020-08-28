@@ -1,6 +1,7 @@
 package com.wimank.pbfs.util
 
 import android.content.Context
+import androidx.core.content.edit
 import com.wimank.pbfs.EMPTY_STRING
 import com.wimank.pbfs.R
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -20,10 +21,9 @@ class AppPreferencesManager @Inject constructor(@ApplicationContext context: Con
         Context.MODE_PRIVATE
     )
 
-    private val sharedPrefEditor = sharedPref.edit()
 
     fun putToken(token: String) {
-        sharedPrefEditor.putString(PREF_TOKEN_KEY, token).apply()
+        sharedPref.edit { putString(PREF_TOKEN_KEY, token) }
     }
 
     fun getToken(): String {
