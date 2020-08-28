@@ -17,6 +17,7 @@ import net.openid.appauth.*
 import timber.log.Timber
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallback {
 
@@ -30,8 +31,6 @@ class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallbac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-
-        requestToken()
     }
 
     private fun requestToken() {
@@ -67,12 +66,13 @@ class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallbac
         if (AUTH_REQUEST_CODE == requestCode) {
             val resp: AuthorizationResponse? = data?.let { AuthorizationResponse.fromIntent(it) }
             Timber.e(AuthorizationException.fromIntent(data))
+            Timber.i("AUTH CODE: ${resp?.authorizationCode} ")
 
             resp?.createTokenExchangeRequest()?.let {
                 authService.performTokenRequest(it) { response, ex ->
                     if (response != null) {
-                        Timber.i("TOKEN ACCESS: ${response.accessToken} ")
-                        Timber.i("TOKEN REFRESH: ${response.refreshToken} ")
+                        Timber.i("TOKEN ACCESS: ${response.accessToken}")
+                        Timber.i("TOKEN REFRESH: ${response.refreshToken}")
                         Timber.i("TOKEN ACCESS EXPIRE: ${response.accessTokenExpirationTime} ")
                     } else {
                         // authorization failed, check ex for more details
