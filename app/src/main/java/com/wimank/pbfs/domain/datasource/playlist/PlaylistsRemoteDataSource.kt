@@ -5,7 +5,7 @@ import javax.inject.Inject
 
 class PlaylistsRemoteDataSource @Inject constructor(private val playlistsApi: PlaylistsApi) {
 
-    suspend fun loadPlaylists(token: String, limit: String, offset: String) =
-        playlistsApi.loadPlaylistsList(token, limit, offset)
+    suspend fun loadPlaylists(token: String, limit: Int = 50, offset: Int = 0) =
+        playlistsApi.loadPlaylistsList(limit, offset)
 
 }

@@ -15,7 +15,7 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
 
     @Inject
     lateinit var appPreferencesManager: AppPreferencesManager
-    private val viewModel: PlaylistViewModel by viewModels()
+    private val viewModel: PlaylistViewModel by viewModels { viewModelFactory }
     private var backupFragmentCallback: BackupFragmentCallback? = null
 
     override fun getLayoutRes() = R.layout.playlist_fragment
@@ -28,7 +28,7 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
     }
 
     override fun setBindingViewModel() {
-
+        dataBinding.viewModel = viewModel
     }
 
     override fun onAttach(context: Context) {

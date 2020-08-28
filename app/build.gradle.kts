@@ -142,4 +142,6 @@ dependencies {
     //SpotifyAuth
     implementation(spotifyAuth)
 
+    implementation("net.openid:appauth:0.7.1")
+
 }

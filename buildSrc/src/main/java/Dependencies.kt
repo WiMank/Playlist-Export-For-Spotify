@@ -59,7 +59,7 @@ object Dependencies {
 
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
 
-    const val moshi = "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+    const val moshi = "com.squareup.moshi:moshi:$moshiVersion"
     const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 
     const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"

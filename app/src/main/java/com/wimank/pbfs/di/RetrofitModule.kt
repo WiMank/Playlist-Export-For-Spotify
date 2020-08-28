@@ -2,11 +2,15 @@ package com.wimank.pbfs.di
 
 import com.wimank.pbfs.BASE_SPOTIFY_URL
 import com.wimank.pbfs.BuildConfig
+import com.wimank.pbfs.util.AppPreferencesManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.ApplicationComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -15,7 +19,7 @@ import javax.inject.Singleton
 
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(ApplicationComponent::class)
 class RetrofitModule {
 
     @Provides
@@ -30,8 +34,20 @@ class RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideOkHttp(interceptor: HttpLoggingInterceptor): OkHttpClient {
-        return OkHttpClient().newBuilder().addInterceptor(interceptor).build()
+    fun provideOkHttp(
+        interceptor: HttpLoggingInterceptor,
+        appPreferencesManager: AppPreferencesManager
+    ): OkHttpClient {
+        return OkHttpClient().newBuilder().addInterceptor(object : Interceptor {
+            override fun intercept(chain: Interceptor.Chain): Response {
+                val request: Request =
+                    chain.request()
+                        .newBuilder()
+                        .addHeader("Authorization", "Bearer ${appPreferencesManager.getToken()}")
+                        .build()
+                return chain.proceed(request)
+            }
+        }).addInterceptor(interceptor).build()
     }
 
     @Provides

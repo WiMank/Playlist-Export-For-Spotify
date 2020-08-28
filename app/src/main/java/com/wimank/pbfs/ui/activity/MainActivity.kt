@@ -3,19 +3,18 @@ package com.wimank.pbfs.ui.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import com.spotify.sdk.android.auth.AuthorizationClient
-import com.spotify.sdk.android.auth.AuthorizationRequest
-import com.spotify.sdk.android.auth.AuthorizationResponse
 import com.wimank.pbfs.*
+import com.wimank.pbfs.R
 import com.wimank.pbfs.databinding.ActivityMainBinding
 import com.wimank.pbfs.ui.fragment.PlaylistFragment
 import com.wimank.pbfs.ui.utils.UiRouter
 import com.wimank.pbfs.util.AppPreferencesManager
 import dagger.hilt.android.AndroidEntryPoint
+import net.openid.appauth.*
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -23,6 +22,7 @@ class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallbac
 
     @Inject
     lateinit var appPreferencesManager: AppPreferencesManager
+    private val authService by lazy { AuthorizationService(this) }
     private val uiRouter: UiRouter by lazy {
         UiRouter(findNavController(R.id.main_nav_host))
     }
@@ -30,35 +30,56 @@ class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallbac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+
+        requestToken()
     }
 
     private fun requestToken() {
-        val request = getAuthenticationRequest()
-        AuthorizationClient.openLoginActivity(this, AUTH_TOKEN_REQUEST_CODE, request)
+        startActivityForResult(buildAuthIntent(), AUTH_REQUEST_CODE)
     }
 
-    private fun getAuthenticationRequest(): AuthorizationRequest? {
-        return AuthorizationRequest.Builder(
-            CLIENT_ID,
-            AuthorizationResponse.Type.TOKEN,
-            getRedirectUri().toString()
+    private fun buildAuthIntent(): Intent {
+        return authService.getAuthorizationRequestIntent(
+            prepareAuthRequestBuilder()
+                .setScopes(SPOTIFY_SCOPES.asIterable())
+                .build()
         )
-            .setShowDialog(false)
-            .setScopes(SPOTIFY_SCOPES)
-            .build()
     }
 
-    private fun getRedirectUri(): Uri? {
-        return Uri.parse(REDIRECT_URI)
+    private fun prepareServiceConfig(): AuthorizationServiceConfiguration {
+        return AuthorizationServiceConfiguration(
+            Uri.parse(AUTHORIZATION_ENDPOINT),  // authorization endpoint
+            Uri.parse(TOKEN_ENDPOINT) // token endpoint
+        )
+    }
+
+    private fun prepareAuthRequestBuilder(): AuthorizationRequest.Builder {
+        return AuthorizationRequest.Builder(
+            prepareServiceConfig(),  // the authorization service configuration
+            CLIENT_ID,  // the client ID, typically pre-registered and static
+            ResponseTypeValues.CODE,  // the response_type value: we want a code
+            Uri.parse(REDIRECT_URI) // the redirect URI to which the auth response is sent
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val response = AuthorizationClient.getResponse(resultCode, data)
-        if (AUTH_TOKEN_REQUEST_CODE == requestCode) {
-            appPreferencesManager.putToken(response.accessToken)
-            //TODO: Удалить это
-            Toast.makeText(this, "Token [${response.accessToken}]", Toast.LENGTH_SHORT).show()
+        if (AUTH_REQUEST_CODE == requestCode) {
+            val resp: AuthorizationResponse? = data?.let { AuthorizationResponse.fromIntent(it) }
+            Timber.e(AuthorizationException.fromIntent(data))
+
+            resp?.createTokenExchangeRequest()?.let {
+                authService.performTokenRequest(it) { response, ex ->
+                    if (response != null) {
+                        Timber.i("TOKEN ACCESS: ${response.accessToken} ")
+                        Timber.i("TOKEN REFRESH: ${response.refreshToken} ")
+                        Timber.i("TOKEN ACCESS EXPIRE: ${response.accessTokenExpirationTime} ")
+                    } else {
+                        // authorization failed, check ex for more details
+                        Timber.e(ex)
+                    }
+                }
+            }
         }
     }
 

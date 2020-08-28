@@ -11,6 +11,9 @@ data class DbPlaylistsEntity(
     @ColumnInfo(name = "playlist_id")
     val playlistId: String,
 
+    @ColumnInfo(name = "playlist_name")
+    val playlistName: String,
+
     @ColumnInfo(name = "playlist_image")
     val playlistImage: String,
 

@@ -25,6 +25,7 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
     ): View? {
         container?.let { createBinding(inflater, it) }
         iniView(savedInstanceState)
+        setBindingViewModel()
         return dataBinding.root
     }
 

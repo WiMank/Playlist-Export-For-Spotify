@@ -1,7 +1,9 @@
 package com.wimank.pbfs.rest.response
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class NetworkUser(
     val country: String?,
     val display_name: String?,
