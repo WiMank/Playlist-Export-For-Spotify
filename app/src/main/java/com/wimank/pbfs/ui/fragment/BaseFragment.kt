@@ -32,6 +32,7 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
 
     private fun createBinding(inflater: LayoutInflater, container: ViewGroup) {
         dataBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
+        dataBinding.lifecycleOwner = this
     }
 
     @LayoutRes

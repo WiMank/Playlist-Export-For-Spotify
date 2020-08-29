@@ -15,6 +15,7 @@ import com.wimank.pbfs.ui.fragment.AuthenticationFragment
 import com.wimank.pbfs.ui.fragment.PlaylistFragment
 import com.wimank.pbfs.ui.utils.UiRouter
 import com.wimank.pbfs.util.AppPreferencesManager
+import com.wimank.pbfs.viewmodel.AuthenticationViewModel
 import com.wimank.pbfs.viewmodel.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import net.openid.appauth.*
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity(),
     private val authService by lazy { AuthorizationService(this) }
     private val uiRouter: UiRouter by lazy { UiRouter(findNavController(R.id.main_nav_host)) }
     private val viewModel: MainActivityViewModel by viewModels { viewModelFactory }
+    private val authViewModel: AuthenticationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +53,7 @@ class MainActivity : AppCompatActivity(),
     private fun setupNavGraph(authStart: Boolean) {
         val navGraph = uiRouter.getNavController().navInflater.inflate(R.navigation.app_navigation)
         if (authStart) {
-            navGraph.startDestination = R.id.backupFragment
+            navGraph.startDestination = R.id.playlistFragment
         } else {
             navGraph.startDestination = R.id.authenticationFragment
         }
@@ -95,6 +97,7 @@ class MainActivity : AppCompatActivity(),
                 authService.performTokenRequest(it) { response, ex ->
                     if (response != null) {
                         viewModel.prepareAndWriteSession(response)
+                        authViewModel.showCompleteActionForAuth()
                     } else {
                         // authorization failed, check ex for more details
                         Timber.e(ex)
@@ -109,6 +112,6 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun completeAuthentication() {
-
+        uiRouter.navigateToPlaylistFragment()
     }
 }

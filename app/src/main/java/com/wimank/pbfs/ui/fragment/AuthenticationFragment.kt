@@ -18,7 +18,6 @@ class AuthenticationFragment : BaseFragment<AuthenticationFragmentBinding>() {
 
         dataBinding.startAuth.setOnClickListener {
             authenticationFragmentCallBack?.startAuthentication()
-
         }
 
         dataBinding.ok.setOnClickListener {
@@ -40,5 +39,4 @@ class AuthenticationFragment : BaseFragment<AuthenticationFragmentBinding>() {
         fun startAuthentication()
         fun completeAuthentication()
     }
-
 }

@@ -6,18 +6,18 @@
     tools:ignore="UnusedNavigation">
 
     <fragment
-        android:id="@+id/backupFragment"
+        android:id="@+id/playlistFragment"
         android:name="com.wimank.pbfs.ui.fragment.PlaylistFragment"
-        android:label="BackupFragment" />
+        android:label="PlaylistFragment" />
 
     <fragment
         android:id="@+id/authenticationFragment"
         android:name="com.wimank.pbfs.ui.fragment.AuthenticationFragment"
         android:label="AuthenticationFragment">
         <action
-            android:id="@+id/action_authenticationFragment_to_backupFragment"
-            app:destination="@id/backupFragment"
-            app:popUpTo="@id/backupFragment"
+            android:id="@+id/action_authenticationFragment_to_playlistFragment"
+            app:destination="@id/playlistFragment"
+            app:popUpTo="@id/authenticationFragment"
             app:popUpToInclusive="true" />
     </fragment>
 
