@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/backupFragment">
+    tools:ignore="UnusedNavigation">
 
     <fragment
         android:id="@+id/backupFragment"
         android:name="com.wimank.pbfs.ui.fragment.PlaylistFragment"
-        android:label="BackupFragment">
+        android:label="BackupFragment" />
 
+    <fragment
+        android:id="@+id/authenticationFragment"
+        android:name="com.wimank.pbfs.ui.fragment.AuthenticationFragment"
+        android:label="AuthenticationFragment">
+        <action
+            android:id="@+id/action_authenticationFragment_to_backupFragment"
+            app:destination="@id/backupFragment"
+            app:popUpTo="@id/backupFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

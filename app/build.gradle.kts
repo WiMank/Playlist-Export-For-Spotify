@@ -1,4 +1,5 @@
 import Dependencies.androidxJunit
+import Dependencies.appAuth
 import Dependencies.appcompat
 import Dependencies.constraintlayout
 import Dependencies.coreKtx
@@ -11,6 +12,7 @@ import Dependencies.hiltAndroidCompiler
 import Dependencies.junit
 import Dependencies.kotlinStdlib
 import Dependencies.lifecycleExtensions
+import Dependencies.liveDataKtx
 import Dependencies.loggingInterceptor
 import Dependencies.moshi
 import Dependencies.moshiCodegen
@@ -117,6 +119,7 @@ dependencies {
     //ViewModel
     implementation(viewModelKtx)
     implementation(lifecycleExtensions)
+    implementation(liveDataKtx)
 
     //Coroutines
     implementation(coroutines)
@@ -143,6 +146,12 @@ dependencies {
     //SpotifyAuth
     implementation(spotifyAuth)
 
-    implementation("net.openid:appauth:0.7.1")
+    //AppAuth
+    implementation(appAuth)
+
+    val arrow_version = "0.10.5"
+    implementation("io.arrow-kt:arrow-core:$arrow_version")
+    implementation("io.arrow-kt:arrow-syntax:$arrow_version")
+    kapt("io.arrow-kt:arrow-meta:$arrow_version")
 
 }

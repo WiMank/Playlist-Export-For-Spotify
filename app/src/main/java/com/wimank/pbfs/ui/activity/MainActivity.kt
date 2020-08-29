@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.wimank.pbfs.*
 import com.wimank.pbfs.R
 import com.wimank.pbfs.databinding.ActivityMainBinding
+import com.wimank.pbfs.ui.fragment.AuthenticationFragment
 import com.wimank.pbfs.ui.fragment.PlaylistFragment
 import com.wimank.pbfs.ui.utils.UiRouter
 import com.wimank.pbfs.util.AppPreferencesManager
@@ -20,15 +21,15 @@ import net.openid.appauth.*
 import timber.log.Timber
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallback {
+class MainActivity : AppCompatActivity(),
+    PlaylistFragment.BackupFragmentCallback,
+    AuthenticationFragment.AuthenticationFragmentCallBack {
 
     @Inject
     lateinit var appPreferencesManager: AppPreferencesManager
 
     @Inject
-    //@Named("ActivityViewModelFactory")
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val authService by lazy { AuthorizationService(this) }
@@ -38,14 +39,23 @@ class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallbac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        startObserve()
+    }
 
-        /*val navGraph = findNavController(R.id.main_nav_host).navInflater.inflate(R.navigation.app_navigation)
-        if (condition) {
-            navGraph.setStartDestination(R.id.screen1)
+    private fun startObserve() {
+        viewModel.sessionState.observe(this, {
+            setupNavGraph(it)
+        })
+    }
+
+    private fun setupNavGraph(authStart: Boolean) {
+        val navGraph = uiRouter.getNavController().navInflater.inflate(R.navigation.app_navigation)
+        if (authStart) {
+            navGraph.startDestination = R.id.backupFragment
         } else {
-            navGraph.setStartDestination(R.id.screen2)
+            navGraph.startDestination = R.id.authenticationFragment
         }
-        findNavController(R.id.main_nav_host).graph = navGraph*/
+        uiRouter.getNavController().graph = navGraph
     }
 
     private fun requestToken() {
@@ -94,8 +104,11 @@ class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallbac
         }
     }
 
-    override fun requestAuthentication() {
+    override fun startAuthentication() {
         requestToken()
     }
 
+    override fun completeAuthentication() {
+
+    }
 }

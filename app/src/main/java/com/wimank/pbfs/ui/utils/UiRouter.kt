@@ -7,6 +7,12 @@ import timber.log.Timber
 
 class UiRouter(private val navController: NavController) {
 
+    fun popBackStack() {
+        navController.popBackStack()
+    }
+
+    fun getNavController() = navController
+
     private fun NavController.navigateSafe(navDirections: NavDirections? = null) {
         try {
             navDirections?.let {

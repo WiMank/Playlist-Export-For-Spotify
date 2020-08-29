@@ -1,4 +1,5 @@
 import Version.androidJunitVersion
+import Version.appAuthVersion
 import Version.appcompatVersion
 import Version.constraintlayoutVersion
 import Version.coroutinesVersion
@@ -9,6 +10,7 @@ import Version.junitVersion
 import Version.kotlinGradlePluginVersion
 import Version.kotlinVersion
 import Version.ktxVersion
+import Version.liveDataKtxVersion
 import Version.loggingInterceptorVersion
 import Version.moshiVersion
 import Version.navigationComponentVersion
@@ -79,6 +81,10 @@ object Dependencies {
     const val room = "androidx.room:room-runtime:$roomVersion"
     const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
     const val roomKtx = "androidx.room:room-ktx:$roomVersion"
+
+    const val appAuth = "net.openid:appauth:$appAuthVersion"
+
+    const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataKtxVersion"
 }
 
 object Version {
@@ -104,4 +110,6 @@ object Version {
     const val roomVersion = "2.2.5"
     const val okHttpVersion = "4.8.1"
     const val loggingInterceptorVersion = "4.8.1"
+    const val appAuthVersion = "0.7.1"
+    const val liveDataKtxVersion = "2.2.0"
 }

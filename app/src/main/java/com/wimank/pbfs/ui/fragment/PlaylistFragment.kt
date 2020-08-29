@@ -34,8 +34,6 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
             backupFragmentCallback = context
     }
 
-    interface BackupFragmentCallback {
-        fun requestAuthentication()
-    }
+    interface BackupFragmentCallback
 
 }
