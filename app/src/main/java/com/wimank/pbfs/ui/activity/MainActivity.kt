@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallbac
     lateinit var appPreferencesManager: AppPreferencesManager
 
     @Inject
+    //@Named("ActivityViewModelFactory")
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val authService by lazy { AuthorizationService(this) }
@@ -37,8 +38,6 @@ class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallbac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-
-        viewModel.checkAuthorize()
 
         /*val navGraph = findNavController(R.id.main_nav_host).navInflater.inflate(R.navigation.app_navigation)
         if (condition) {
@@ -82,14 +81,10 @@ class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallbac
         if (AUTH_REQUEST_CODE == requestCode) {
             val resp: AuthorizationResponse? = data?.let { AuthorizationResponse.fromIntent(it) }
             Timber.e(AuthorizationException.fromIntent(data))
-            Timber.i("AUTH CODE: ${resp?.authorizationCode} ")
-
             resp?.createTokenExchangeRequest()?.let {
                 authService.performTokenRequest(it) { response, ex ->
                     if (response != null) {
-                        Timber.i("TOKEN ACCESS: ${response.accessToken}")
-                        Timber.i("TOKEN REFRESH: ${response.refreshToken}")
-                        Timber.i("TOKEN ACCESS EXPIRE: ${response.accessTokenExpirationTime} ")
+                        viewModel.prepareAndWriteSession(response)
                     } else {
                         // authorization failed, check ex for more details
                         Timber.e(ex)
@@ -102,4 +97,5 @@ class MainActivity : AppCompatActivity(), PlaylistFragment.BackupFragmentCallbac
     override fun requestAuthentication() {
         requestToken()
     }
+
 }

@@ -21,10 +21,7 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
     override fun getLayoutRes() = R.layout.playlist_fragment
 
     override fun iniView(savedInstanceState: Bundle?) {
-        appPreferencesManager.getToken().ifEmpty {
-            //TODO: Показывать кнопку для начала процесса аутентификации
-            backupFragmentCallback?.requestAuthentication()
-        }
+
     }
 
     override fun setBindingViewModel() {

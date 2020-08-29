@@ -15,7 +15,7 @@ import com.wimank.pbfs.room.entity.UserEntity
         PlaylistsEntity::class,
         SessionEntity::class,
     ],
-    version = 1
+    version = 2
 )
 abstract class AppDataBase : RoomDatabase() {
 

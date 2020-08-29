@@ -24,8 +24,8 @@ class RoomModule {
             .build()
     }
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideSessionDao(db: AppDataBase): SessionDao {
         return db.getSessionDao()
     }

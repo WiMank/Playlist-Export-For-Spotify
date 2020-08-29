@@ -1,27 +1,27 @@
 package com.wimank.pbfs.repository
 
-import com.wimank.pbfs.domain.datasource.session.SessionLocalDataSource
+import com.wimank.pbfs.room.dao.SessionDao
 import com.wimank.pbfs.room.entity.SessionEntity
 import javax.inject.Inject
 
 class SessionRepositoryImpl @Inject constructor(
-    private val sessionLocalDataSource: SessionLocalDataSource
+    private val sessionDao: SessionDao
 ) : SessionRepository {
 
     override suspend fun insertSession(session: SessionEntity) {
-        sessionLocalDataSource.insertSession(session)
+        sessionDao.insert(session)
     }
 
     override suspend fun updateSession(session: SessionEntity) {
-        sessionLocalDataSource.updateSession(session)
+        sessionDao.update(session)
     }
 
     override suspend fun deleteSession(session: SessionEntity) {
-        sessionLocalDataSource.deleteSession(session)
+        sessionDao.delete(session)
     }
 
     override suspend fun getSession(): SessionEntity {
-        return sessionLocalDataSource.getSession()
+        return sessionDao.getCurrentSession()
     }
 
 }
