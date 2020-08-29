@@ -45,9 +45,13 @@ class MainActivityViewModel @Inject constructor(private val sessionUseCase: Sess
 
     private fun writeSession(session: Session) {
         viewModelScope.launch(context = Dispatchers.IO) {
-            sessionUseCase.getRepository().insertSession(
-                sessionUseCase.getMapper().map(session)
-            )
+            sessionUseCase.getRepository().run {
+                if (this.hasSession()) {
+                    updateSession(sessionUseCase.getMapper().map(session))
+                } else {
+                    insertSession(sessionUseCase.getMapper().map(session))
+                }
+            }
         }
     }
 }

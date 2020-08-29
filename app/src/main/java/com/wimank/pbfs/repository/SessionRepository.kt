@@ -12,4 +12,6 @@ interface SessionRepository {
 
     suspend fun getSession(): SessionEntity
 
+    suspend fun hasSession(): Boolean
+
 }

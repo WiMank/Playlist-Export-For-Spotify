@@ -11,4 +11,7 @@ interface SessionDao : BaseDao<SessionEntity> {
     @Query("SELECT * FROM session WHERE session_id = :sessionId")
     suspend fun getCurrentSession(sessionId: Long = SESSION_ID): SessionEntity
 
+    @Query("SELECT EXISTS(SELECT * FROM session WHERE session_id = :id)")
+    suspend fun hasSession(id: Long = SESSION_ID): Boolean
+
 }

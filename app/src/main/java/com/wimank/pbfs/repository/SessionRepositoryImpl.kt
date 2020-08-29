@@ -24,4 +24,7 @@ class SessionRepositoryImpl @Inject constructor(
         return sessionDao.getCurrentSession()
     }
 
+    override suspend fun hasSession(): Boolean {
+        return sessionDao.hasSession()
+    }
 }
