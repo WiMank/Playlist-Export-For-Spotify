@@ -1,7 +1,7 @@
 package com.wimank.pbfs.di
 
-import com.wimank.pbfs.BASE_SPOTIFY_URL
 import com.wimank.pbfs.BuildConfig
+import com.wimank.pbfs.util.BASE_SPOTIFY_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

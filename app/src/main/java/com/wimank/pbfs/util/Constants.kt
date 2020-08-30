@@ -1,4 +1,4 @@
-package com.wimank.pbfs
+package com.wimank.pbfs.util
 
 //Name for app database
 const val DATABASE_NAME = "pbfs.db"

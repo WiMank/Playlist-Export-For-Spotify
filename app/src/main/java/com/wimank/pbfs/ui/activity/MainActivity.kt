@@ -13,6 +13,8 @@ import com.wimank.pbfs.databinding.ActivityMainBinding
 import com.wimank.pbfs.ui.fragment.AuthenticationFragment
 import com.wimank.pbfs.ui.fragment.PlaylistFragment
 import com.wimank.pbfs.ui.utils.UiRouter
+import com.wimank.pbfs.util.AUTHORIZATION_ENDPOINT
+import com.wimank.pbfs.util.TOKEN_ENDPOINT
 import com.wimank.pbfs.viewmodel.AuthenticationViewModel
 import com.wimank.pbfs.viewmodel.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint

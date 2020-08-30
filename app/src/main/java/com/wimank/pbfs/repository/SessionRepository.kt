@@ -8,7 +8,7 @@ interface SessionRepository {
 
     suspend fun updateSession(session: SessionEntity)
 
-    suspend fun deleteSession(session: SessionEntity)
+    suspend fun deleteSession()
 
     suspend fun getSession(): SessionEntity
 

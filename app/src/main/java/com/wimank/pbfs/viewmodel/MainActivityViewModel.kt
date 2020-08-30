@@ -4,16 +4,16 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import com.wimank.pbfs.EMPTY_STRING
-import com.wimank.pbfs.SESSION_ID
 import com.wimank.pbfs.domain.model.Session
-import com.wimank.pbfs.domain.usecase.SessionUseCase
+import com.wimank.pbfs.domain.usecase.SessionManager
+import com.wimank.pbfs.mapper.SessionMapper
+import com.wimank.pbfs.util.EMPTY_STRING
+import com.wimank.pbfs.util.SESSION_ID
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.openid.appauth.TokenResponse
 
-
-class MainActivityViewModel @ViewModelInject constructor(private val sessionUseCase: SessionUseCase) :
+class MainActivityViewModel @ViewModelInject constructor(private val sessionManager: SessionManager) :
     ViewModel() {
 
     val sessionState = liveData(Dispatchers.IO) {
@@ -35,9 +35,7 @@ class MainActivityViewModel @ViewModelInject constructor(private val sessionUseC
 
     private suspend fun checkSessionState(): Boolean {
         return try {
-            with(sessionUseCase.getRepository().getSession()) {
-                accessToken.isNotEmpty() && (refreshToken.isNotEmpty())
-            }
+            sessionManager.hasSession()
         } catch (e: Exception) {
             false
         }
@@ -45,13 +43,7 @@ class MainActivityViewModel @ViewModelInject constructor(private val sessionUseC
 
     private fun writeSession(session: Session) {
         viewModelScope.launch(context = Dispatchers.IO) {
-            sessionUseCase.getRepository().run {
-                if (this.hasSession()) {
-                    updateSession(sessionUseCase.getMapper().map(session))
-                } else {
-                    insertSession(sessionUseCase.getMapper().map(session))
-                }
-            }
+            sessionManager.writeSession(SessionMapper().map(session))
         }
     }
 }

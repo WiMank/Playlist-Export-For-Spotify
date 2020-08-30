@@ -2,7 +2,6 @@ package com.wimank.pbfs.util
 
 import android.content.Context
 import androidx.core.content.edit
-import com.wimank.pbfs.EMPTY_STRING
 import com.wimank.pbfs.R
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject

@@ -2,9 +2,9 @@ package com.wimank.pbfs.di
 
 import android.content.Context
 import androidx.room.Room
-import com.wimank.pbfs.DATABASE_NAME
 import com.wimank.pbfs.room.AppDataBase
 import com.wimank.pbfs.room.dao.SessionDao
+import com.wimank.pbfs.util.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
