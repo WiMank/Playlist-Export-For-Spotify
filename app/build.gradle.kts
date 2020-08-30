@@ -5,6 +5,8 @@ import Dependencies.constraintlayout
 import Dependencies.coreKtx
 import Dependencies.coroutines
 import Dependencies.daggerHilt
+import Dependencies.daggerHiltCompiler
+import Dependencies.daggerHiltLifecycle
 import Dependencies.espressoCore
 import Dependencies.glide
 import Dependencies.glideCompiler
@@ -111,6 +113,10 @@ dependencies {
     //Dagger
     implementation(daggerHilt)
     kapt(hiltAndroidCompiler)
+
+    //Dagger Lifecycle
+    implementation(daggerHiltLifecycle)
+    kapt(daggerHiltCompiler)
 
     //Navigation
     implementation(navigationComponent)

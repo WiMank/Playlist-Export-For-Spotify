@@ -8,15 +8,9 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import javax.inject.Inject
-
 
 abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
 
-    @Inject
-    //@Named("FragmentViewModelFactory")
-    internal lateinit var viewModelFactory: ViewModelProvider.Factory
     internal lateinit var dataBinding: DB
 
     override fun onCreateView(

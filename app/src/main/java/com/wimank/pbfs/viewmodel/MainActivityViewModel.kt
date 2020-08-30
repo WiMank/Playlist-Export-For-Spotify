@@ -1,5 +1,6 @@
 package com.wimank.pbfs.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
@@ -10,10 +11,9 @@ import com.wimank.pbfs.domain.usecase.SessionUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.openid.appauth.TokenResponse
-import javax.inject.Inject
 
 
-class MainActivityViewModel @Inject constructor(private val sessionUseCase: SessionUseCase) :
+class MainActivityViewModel @ViewModelInject constructor(private val sessionUseCase: SessionUseCase) :
     ViewModel() {
 
     val sessionState = liveData(Dispatchers.IO) {
