@@ -14,4 +14,6 @@ interface SessionRepository {
 
     suspend fun hasSession(): Boolean
 
+    suspend fun refreshToken(): SessionEntity
+
 }

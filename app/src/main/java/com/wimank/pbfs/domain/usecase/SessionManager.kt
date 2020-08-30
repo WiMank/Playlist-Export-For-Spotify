@@ -12,8 +12,13 @@ class SessionManager @Inject constructor(private val sessionRepository: SessionR
         }
     }
 
-    suspend fun checkAccessTokenExpire(): Boolean {
-        return sessionRepository.getSession().expiresIn < System.currentTimeMillis()
+    suspend fun checkSessionBeforeRequest(): Boolean {
+        if (sessionRepository.hasSession())
+            if (checkAccessTokenExpire()) {
+                writeSession(sessionRepository.refreshToken())
+                return true
+            }
+        return false
     }
 
     suspend fun writeSession(session: SessionEntity) {
@@ -26,6 +31,10 @@ class SessionManager @Inject constructor(private val sessionRepository: SessionR
 
     suspend fun clearSession() {
         sessionRepository.deleteSession()
+    }
+
+    private suspend fun checkAccessTokenExpire(): Boolean {
+        return sessionRepository.getSession().expiresIn < System.currentTimeMillis()
     }
 
 }

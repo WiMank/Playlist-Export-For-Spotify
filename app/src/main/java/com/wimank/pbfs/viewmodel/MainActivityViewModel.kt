@@ -13,8 +13,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.openid.appauth.TokenResponse
 
-class MainActivityViewModel @ViewModelInject constructor(private val sessionManager: SessionManager) :
-    ViewModel() {
+class MainActivityViewModel @ViewModelInject constructor(
+    private val sessionManager: SessionManager
+) : ViewModel() {
 
     val sessionState = liveData(Dispatchers.IO) {
         emit(checkSessionState())
