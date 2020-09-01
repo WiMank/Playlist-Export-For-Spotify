@@ -36,7 +36,11 @@ class SessionRepositoryImpl @Inject constructor(
     }
 
     override suspend fun refreshToken(): SessionEntity {
-        return apiRefreshToken.refreshToken(createRefreshTokenRequest()).run {
+        return apiRefreshToken.refreshToken(
+            REFRESH_TOKEN_GRANT_TYPE,
+            sessionDao.getCurrentSession().refreshToken,
+            CLIENT_ID
+        ).run {
             SessionEntity(
                 sessionId = SESSION_ID,
                 accessToken = accessToken ?: EMPTY_STRING,

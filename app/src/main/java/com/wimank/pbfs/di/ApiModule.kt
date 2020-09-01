@@ -7,7 +7,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 @Module
 @InstallIn(ApplicationComponent::class)
@@ -21,9 +23,11 @@ class ApiModule {
     //Special for refresh tokens request
     //Other base url endpoint
     @Provides
-    fun provideApiRefreshToken(): ApiRefreshToken {
+    fun provideApiRefreshToken(okHttpClient: OkHttpClient): ApiRefreshToken {
         return Retrofit.Builder()
             .baseUrl(BASE_TOKEN_ENDPOINT_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .client(okHttpClient)
             .build()
             .create(ApiRefreshToken::class.java)
     }

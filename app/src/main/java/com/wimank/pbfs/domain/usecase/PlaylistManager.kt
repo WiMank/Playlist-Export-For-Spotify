@@ -9,8 +9,12 @@ class PlaylistManager @Inject constructor(
 ) {
 
     suspend fun loadPlaylists() {
-        if (sessionManager.checkSessionBeforeRequest()) {
+        sessionManager.checkSessionBeforeRequest().run {
+            if (isNotEmpty()) {
+                // playlistRepository.loadNetworkPlaylists(this.bearer())
+            } else {
 
+            }
         }
     }
 }
