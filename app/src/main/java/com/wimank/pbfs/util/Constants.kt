@@ -24,4 +24,8 @@ const val SESSION_ID = 0L
 //Required for refresh token request.
 const val REFRESH_TOKEN_GRANT_TYPE = "refresh_token"
 
+//Bearer authentication header
 const val BEARER = "Bearer "
+
+//It's one minute :)
+const val ONE_MINUTE = 60000L

@@ -10,7 +10,7 @@ import javax.inject.Inject
 @Suppress("DEPRECATION")
 class NetworkManager @Inject constructor(@ActivityContext private val context: Context) {
 
-    private fun isNetworkAvailable(): Boolean {
+    fun isNetworkAvailable(): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
