@@ -2,7 +2,6 @@ package com.wimank.pbfs.repository
 
 import com.wimank.pbfs.CLIENT_ID
 import com.wimank.pbfs.rest.ApiRefreshToken
-import com.wimank.pbfs.rest.request.RefreshTokenRequest
 import com.wimank.pbfs.room.dao.SessionDao
 import com.wimank.pbfs.room.entity.SessionEntity
 import com.wimank.pbfs.util.EMPTY_STRING
@@ -45,18 +44,10 @@ class SessionRepositoryImpl @Inject constructor(
                 sessionId = SESSION_ID,
                 accessToken = accessToken ?: EMPTY_STRING,
                 tokenType = tokenType ?: EMPTY_STRING,
-                expiresIn = expiresIn ?: 0L,
+                expiresIn = (expiresIn?.times(1000)?.plus(System.currentTimeMillis()) ?: 0L),
                 refreshToken = refreshToken ?: EMPTY_STRING,
                 scope = scope ?: EMPTY_STRING
             )
         }
-    }
-
-    private suspend fun createRefreshTokenRequest(): RefreshTokenRequest {
-        return RefreshTokenRequest(
-            grantType = REFRESH_TOKEN_GRANT_TYPE,
-            refreshToken = sessionDao.getCurrentSession().refreshToken,
-            clientId = CLIENT_ID
-        )
     }
 }

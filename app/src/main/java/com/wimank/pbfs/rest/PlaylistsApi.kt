@@ -1,9 +1,11 @@
 package com.wimank.pbfs.rest
 
 import com.wimank.pbfs.rest.response.NetworkPlaylists
+import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
+import retrofit2.http.Url
 
 interface PlaylistsApi {
 
@@ -13,5 +15,8 @@ interface PlaylistsApi {
         @Query("limit") limit: Int,
         @Query("offset") offset: Int,
     ): NetworkPlaylists
+
+    @GET
+    suspend fun loadPlaylistsImage(@Url imageUrl: String): ResponseBody
 
 }

@@ -1,7 +1,6 @@
 package com.wimank.pbfs.repository
 
 import com.wimank.pbfs.domain.model.Playlist
-import com.wimank.pbfs.rest.response.NetworkPlaylists
 import kotlinx.coroutines.flow.Flow
 
 interface PlaylistRepository {
@@ -10,8 +9,8 @@ interface PlaylistRepository {
         token: String,
         limit: Int = 50,
         offset: Int = 0
-    ): NetworkPlaylists
+    ): Flow<List<Playlist>>
 
-    suspend fun loadLocalPlaylists(): Flow<List<Playlist>>
+    suspend fun loadLocalPlaylists(): List<Playlist>
 
 }

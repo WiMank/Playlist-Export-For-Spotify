@@ -10,7 +10,7 @@ data class RefreshTokenResponse(
     val accessToken: String?,
 
     @Json(name = "expires_in")
-    val expiresIn: Long?,
+    val expiresIn: Int?,
 
     @Json(name = "refresh_token")
     val refreshToken: String?,

@@ -44,6 +44,6 @@ class SessionManager @Inject constructor(private val sessionRepository: SessionR
     }
 
     private suspend fun checkAccessTokenNotExpired(): Boolean {
-        return sessionRepository.getSession().expiresIn < System.currentTimeMillis()
+        return sessionRepository.getSession().expiresIn > System.currentTimeMillis()
     }
 }

@@ -15,30 +15,45 @@ class PlaylistViewModel @ViewModelInject constructor(
     private val networkManager: NetworkManager
 ) : ViewModel() {
 
+    private var updateTime = 0L
+
     init {
-        startLoadPlaylists()
+        checkConditionsForRequest()
     }
 
-    private fun startLoadPlaylists() {
-        try {
-            if (canUpdate()) {
-                if (networkManager.isNetworkAvailable()) {
-                    viewModelScope.launch(context = Dispatchers.IO) {
-                        playlistManager.loadNetworkPlaylists()
-                    }
-                } else {
-                    //TODO: загрузить локальные данные
-                }
+    private fun checkConditionsForRequest() {
+        if (networkManager.isNetworkAvailable()) {
+            if (canUpdate(updateTime)) {
+                startLoadPlaylists()
+                newUpdateTime()
             } else {
                 //TODO: показать снэкбар о частоте обновления
             }
-        } catch (ex: Exception) {
-            Timber.e(ex)
+        } else {
+            //TODO: офлайн режим
         }
     }
 
-    private fun canUpdate(): Boolean {
-        val updateTime = System.currentTimeMillis() + ONE_MINUTE
+    private fun startLoadPlaylists() {
+        viewModelScope.launch(context = Dispatchers.IO) {
+            try {
+                playlistManager.loadNetworkPlaylists()
+            } catch (ex: Exception) {
+                clearUpdateTime()
+                Timber.e(ex)
+            }
+        }
+    }
+
+    private fun canUpdate(updateTime: Long = 0L): Boolean {
         return updateTime <= System.currentTimeMillis()
+    }
+
+    private fun newUpdateTime() {
+        updateTime = System.currentTimeMillis() + ONE_MINUTE
+    }
+
+    private fun clearUpdateTime() {
+        updateTime = 0L
     }
 }

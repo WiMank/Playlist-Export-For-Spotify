@@ -8,32 +8,40 @@ data class NetworkPlaylists(
     val href: String,
     val items: List<Item>,
     val limit: Int,
-    val next: Any,
+    val next: String?,
     val offset: Int,
-    val previous: Any,
+    val previous: String?,
     val total: Int
 ) {
     @JsonClass(generateAdapter = true)
     data class Item(
         val collaborative: Boolean,
+        val description: String?,
         @Json(name = "external_urls")
         val externalUrls: ExternalUrls,
         val href: String,
         val id: String,
-        val images: List<Any>,
+        val images: List<PlaylistImage>?,
         val name: String,
         val owner: Owner,
         @Json(name = "public")
-        val isPublic: Boolean,
+        val isPublic: Boolean?,
         @Json(name = "snapshot_id")
         val snapshotId: String,
-        val tracks: Tracks,
+        val tracks: Tracks?,
         val type: String,
         val uri: String
     ) {
         @JsonClass(generateAdapter = true)
         data class ExternalUrls(
             val spotify: String
+        )
+
+        @JsonClass(generateAdapter = true)
+        data class PlaylistImage(
+            val height: Any?,
+            val url: String?,
+            val width: Any?
         )
 
         @JsonClass(generateAdapter = true)
