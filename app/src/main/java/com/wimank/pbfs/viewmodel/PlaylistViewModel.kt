@@ -1,12 +1,15 @@
 package com.wimank.pbfs.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.wimank.pbfs.domain.model.Playlist
 import com.wimank.pbfs.domain.usecase.PlaylistManager
 import com.wimank.pbfs.util.NetworkManager
 import com.wimank.pbfs.util.ONE_MINUTE
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -16,9 +19,12 @@ class PlaylistViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private var updateTime = 0L
+    val playListData = MutableLiveData<List<Playlist>>()
+
 
     init {
-        checkConditionsForRequest()
+        //checkConditionsForRequest()
+        loadLocalPlaylists()
     }
 
     private fun checkConditionsForRequest() {
@@ -37,11 +43,19 @@ class PlaylistViewModel @ViewModelInject constructor(
     private fun startLoadPlaylists() {
         viewModelScope.launch(context = Dispatchers.IO) {
             try {
-                playlistManager.loadNetworkPlaylists()
+                playlistManager.loadNetworkPlaylists().collect {
+                    playListData.postValue(it)
+                }
             } catch (ex: Exception) {
                 clearUpdateTime()
                 Timber.e(ex)
             }
+        }
+    }
+
+    private fun loadLocalPlaylists() {
+        viewModelScope.launch(context = Dispatchers.IO) {
+            playListData.postValue(playlistManager.loadLocalPlaylists())
         }
     }
 

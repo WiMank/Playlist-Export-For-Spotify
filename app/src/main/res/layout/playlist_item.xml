@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="playlistItem"
+            type="com.wimank.pbfs.domain.model.Playlist" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/playlist_image"
+            loadImage="@{playlistItem.image}"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/playlist_name"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/playlist_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{playlistItem.name}"
+            app:layout_constraintBottom_toBottomOf="@+id/playlist_image"
+            app:layout_constraintEnd_toStartOf="@+id/collaborative_pl"
+            app:layout_constraintStart_toEndOf="@+id/playlist_image"
+            app:layout_constraintTop_toTopOf="@+id/playlist_image"
+            app:layout_goneMarginEnd="16dp"
+            tools:text="PLAYLIST" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/collaborative_pl"
+            android:layout_width="@dimen/additional_image_pl"
+            android:layout_height="@dimen/additional_image_pl"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_collaborative"
+            android:visibility="@{playlistItem.isCollaborative ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/public_pl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/public_pl"
+            android:layout_width="@dimen/additional_image_pl"
+            android:layout_height="@dimen/additional_image_pl"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@{playlistItem.isPublic ? @drawable/ic_public: @drawable/ic_private }"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/collaborative_pl"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

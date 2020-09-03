@@ -40,6 +40,12 @@ class PlaylistRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun loadLocalPlaylists(): List<Playlist> {
+        return playlistDao.getPlaylists().map {
+            playlistMapper.map(it)
+        }
+    }
+
     private suspend fun loadNext(token: String, nextUrl: String): NetworkPlaylists {
         val pageResp = playlistsApi.loadNextPlaylists(token, nextUrl)
         if (pageResp.next != null) {
@@ -52,11 +58,5 @@ class PlaylistRepositoryImpl @Inject constructor(
 
     private fun saveResponse(playlistsEntityList: List<PlaylistsEntity>) {
         playlistDao.insert(playlistsEntityList)
-    }
-
-    override suspend fun loadLocalPlaylists(): List<Playlist> {
-        return playlistDao.getPlaylists().map {
-            playlistMapper.map(it)
-        }
     }
 }

@@ -13,7 +13,7 @@ class PlaylistMapper @Inject constructor() : Mapper<PlaylistsEntity, Playlist> {
             image = input.playlistImage,
             id = input.playlistId,
             isCollaborative = input.isCollaborative,
-            isPublic = input.isCollaborative
+            isPublic = input.isPublic
         )
     }
 }
