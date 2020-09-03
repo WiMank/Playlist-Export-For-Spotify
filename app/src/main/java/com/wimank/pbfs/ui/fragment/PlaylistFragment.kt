@@ -10,6 +10,7 @@ import com.wimank.pbfs.ui.adapter.PlaylistAdapter
 import com.wimank.pbfs.viewmodel.PlaylistViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
 
@@ -25,6 +26,11 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
             layoutManager = LinearLayoutManager(context)
             adapter = rvAdapter
         }
+
+        dataBinding.playlistSrl.setColorSchemeResources(
+            R.color.spotify_green,
+            R.color.spotify_black
+        )
 
         viewModel.playListData.observe(this) {
             rvAdapter.setData(it)

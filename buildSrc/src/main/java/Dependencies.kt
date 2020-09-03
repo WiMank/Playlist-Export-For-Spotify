@@ -19,6 +19,7 @@ import Version.navigationSafeArgsVersion
 import Version.okHttpVersion
 import Version.retrofitVersion
 import Version.roomVersion
+import Version.shimmerVersion
 import Version.spotifyAuthVersion
 import Version.timberVersion
 import Version.toolsGradleVersion
@@ -89,6 +90,8 @@ object Dependencies {
     const val appAuth = "net.openid:appauth:$appAuthVersion"
 
     const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataKtxVersion"
+
+    const val shimmer = "com.facebook.shimmer:shimmer:${shimmerVersion}"
 }
 
 object Version {
@@ -117,4 +120,5 @@ object Version {
     const val loggingInterceptorVersion = "4.8.1"
     const val appAuthVersion = "0.7.1"
     const val liveDataKtxVersion = "2.2.0"
+    const val shimmerVersion = "0.5.0"
 }

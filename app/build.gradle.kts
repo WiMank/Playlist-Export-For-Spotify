@@ -26,6 +26,7 @@ import Dependencies.retrofitConverterMoshi
 import Dependencies.room
 import Dependencies.roomCompiler
 import Dependencies.roomKtx
+import Dependencies.shimmer
 import Dependencies.spotifyAuth
 import Dependencies.timber
 import Dependencies.viewModelKtx
@@ -155,11 +156,7 @@ dependencies {
     //AppAuth
     implementation(appAuth)
 
-    //Временно
-    val arrow_version = "0.10.5"
-    implementation("io.arrow-kt:arrow-core:$arrow_version")
-    implementation("io.arrow-kt:arrow-syntax:$arrow_version")
-    kapt("io.arrow-kt:arrow-meta:$arrow_version")
-    debugImplementation("com.amitshekhar.android:debug-db:1.0.6")
+    //Shimmer
+    implementation(shimmer)
 
 }

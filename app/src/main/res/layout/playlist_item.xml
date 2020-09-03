@@ -12,7 +12,6 @@
             name="playlistItem"
             type="com.wimank.pbfs.domain.model.Playlist" />
 
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
