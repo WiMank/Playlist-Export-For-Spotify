@@ -10,10 +10,16 @@ import retrofit2.http.Url
 interface PlaylistsApi {
 
     @GET("me/playlists")
-    suspend fun loadPlaylistsList(
+    suspend fun loadPlaylists(
         @Header("Authorization") token: String,
         @Query("limit") limit: Int,
         @Query("offset") offset: Int,
+    ): NetworkPlaylists
+
+    @GET
+    suspend fun loadNextPlaylists(
+        @Header("Authorization") token: String,
+        @Url nextPlaylistUrl: String
     ): NetworkPlaylists
 
     @GET

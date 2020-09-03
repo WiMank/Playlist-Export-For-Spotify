@@ -19,17 +19,23 @@ class PlaylistMapper @Inject constructor() : Mapper<PlaylistsEntity, Playlist> {
 }
 
 class NetworkPlaylistMapper @Inject constructor() :
-    Mapper<NetworkPlaylists, List<PlaylistsEntity>> {
-    override fun map(input: NetworkPlaylists): List<PlaylistsEntity> {
-        return input.items.map {
-            PlaylistsEntity(
-                playlistId = it.id,
-                playlistName = it.name,
-                playlistImage = it.images?.get(0)?.url ?: EMPTY_STRING,
-                tracksUrl = it.tracks?.href ?: EMPTY_STRING,
-                isPublic = it.isPublic ?: false,
-                isCollaborative = it.collaborative
-            )
+    Mapper<List<NetworkPlaylists>, List<PlaylistsEntity>> {
+    override fun map(input: List<NetworkPlaylists>): List<PlaylistsEntity> {
+        val resultList = mutableListOf<PlaylistsEntity>()
+        val k = input.forEach {
+            it.items.forEach { items ->
+                resultList.add(
+                    PlaylistsEntity(
+                        playlistId = items.id,
+                        playlistName = items.name,
+                        playlistImage = items.images?.get(0)?.url ?: EMPTY_STRING,
+                        tracksUrl = items.tracks?.href ?: EMPTY_STRING,
+                        isPublic = items.isPublic ?: false,
+                        isCollaborative = items.collaborative
+                    )
+                )
+            }
         }
+        return resultList
     }
 }

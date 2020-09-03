@@ -5,6 +5,7 @@ import com.wimank.pbfs.domain.model.Playlist
 import com.wimank.pbfs.mapper.NetworkPlaylistMapper
 import com.wimank.pbfs.mapper.PlaylistMapper
 import com.wimank.pbfs.rest.PlaylistsApi
+import com.wimank.pbfs.rest.response.NetworkPlaylists
 import com.wimank.pbfs.room.dao.PlaylistDao
 import com.wimank.pbfs.room.entity.PlaylistsEntity
 import kotlinx.coroutines.flow.Flow
@@ -18,28 +19,35 @@ class PlaylistRepositoryImpl @Inject constructor(
     private val networkPlaylistMapper: NetworkPlaylistMapper
 ) : PlaylistRepository {
 
-    //TODO: Загрузка по страницам
+    private val listNetworkPlaylists = mutableListOf<NetworkPlaylists>()
+
     override suspend fun loadNetworkPlaylists(
         token: String,
         limit: Int,
         offset: Int
     ): Flow<List<Playlist>> {
-
-        saveResponse(
-            networkPlaylistMapper.map(
-                playlistsApi.loadPlaylistsList(
-                    token,
-                    limit,
-                    offset
-                )
-            )
-        )
-
+        playlistsApi.loadPlaylists(token, limit, offset).run {
+            listNetworkPlaylists.add(this)
+            if (next != null) {
+                loadNext(token, next)
+            }
+        }
+        saveResponse(networkPlaylistMapper.map(listNetworkPlaylists))
         return playlistDao.flowPlaylists().map { list ->
             list.map {
                 playlistMapper.map(it)
             }
         }
+    }
+
+    private suspend fun loadNext(token: String, nextUrl: String): NetworkPlaylists {
+        val pageResp = playlistsApi.loadNextPlaylists(token, nextUrl)
+        if (pageResp.next != null) {
+            listNetworkPlaylists.add(loadNext(token, pageResp.next))
+            return pageResp
+        }
+        listNetworkPlaylists.add(pageResp)
+        return pageResp
     }
 
     private fun saveResponse(playlistsEntityList: List<PlaylistsEntity>) {
