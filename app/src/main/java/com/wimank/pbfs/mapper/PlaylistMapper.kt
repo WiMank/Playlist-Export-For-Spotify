@@ -22,7 +22,7 @@ class NetworkPlaylistMapper @Inject constructor() :
     Mapper<List<NetworkPlaylists>, List<PlaylistsEntity>> {
     override fun map(input: List<NetworkPlaylists>): List<PlaylistsEntity> {
         val resultList = mutableListOf<PlaylistsEntity>()
-        val k = input.forEach {
+        input.forEach {
             it.items.forEach { items ->
                 resultList.add(
                     PlaylistsEntity(

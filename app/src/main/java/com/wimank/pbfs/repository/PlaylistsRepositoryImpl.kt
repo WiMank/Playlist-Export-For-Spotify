@@ -7,25 +7,19 @@ import com.wimank.pbfs.rest.PlaylistsApi
 import com.wimank.pbfs.rest.response.NetworkPlaylists
 import com.wimank.pbfs.room.dao.PlaylistDao
 import com.wimank.pbfs.room.entity.PlaylistsEntity
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class PlaylistRepositoryImpl @Inject constructor(
+class PlaylistsRepositoryImpl @Inject constructor(
     private val playlistDao: PlaylistDao,
     private val playlistsApi: PlaylistsApi,
     private val playlistMapper: PlaylistMapper,
     private val networkPlaylistMapper: NetworkPlaylistMapper
-) : PlaylistRepository {
+) : PlaylistsRepository {
 
     private val listNetworkPlaylists = mutableListOf<NetworkPlaylists>()
 
-    override suspend fun loadNetworkPlaylists(
-        token: String,
-        limit: Int,
-        offset: Int
-    ): Flow<List<Playlist>> {
-        listNetworkPlaylists.clear()
+    override suspend fun loadNetworkPlaylists(token: String, limit: Int, offset: Int) {
         playlistsApi.loadPlaylists(token, limit, offset).run {
             listNetworkPlaylists.add(this)
             if (next != null) {
@@ -33,10 +27,11 @@ class PlaylistRepositoryImpl @Inject constructor(
             }
         }
         saveResponse(networkPlaylistMapper.map(listNetworkPlaylists))
-        return playlistDao.flowPlaylists().map { list ->
-            list.map {
-                playlistMapper.map(it)
-            }
+    }
+
+    override suspend fun flowPlaylists() = playlistDao.flowPlaylists().map { list ->
+        list.map {
+            playlistMapper.map(it)
         }
     }
 
@@ -58,5 +53,6 @@ class PlaylistRepositoryImpl @Inject constructor(
 
     private suspend fun saveResponse(playlistsEntityList: List<PlaylistsEntity>) {
         playlistDao.clearAndInsertPlaylists(playlistsEntityList)
+        listNetworkPlaylists.clear()
     }
 }

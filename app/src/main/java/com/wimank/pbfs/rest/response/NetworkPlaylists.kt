@@ -61,8 +61,8 @@ data class NetworkPlaylists(
 
         @JsonClass(generateAdapter = true)
         data class Tracks(
-            val href: String,
-            val total: Int
+            val href: String?,
+            val total: Int?
         )
     }
 }

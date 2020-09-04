@@ -1,7 +1,7 @@
 package com.wimank.pbfs.domain.usecase
 
 import com.wimank.pbfs.domain.model.Playlist
-import com.wimank.pbfs.repository.PlaylistRepository
+import com.wimank.pbfs.repository.PlaylistsRepository
 import com.wimank.pbfs.util.AccessTokenException
 import com.wimank.pbfs.util.bearer
 import kotlinx.coroutines.flow.Flow
@@ -9,20 +9,21 @@ import javax.inject.Inject
 
 class PlaylistManager @Inject constructor(
     private val sessionManager: SessionManager,
-    private val playlistRepository: PlaylistRepository
+    private val playlistsRepository: PlaylistsRepository
 ) {
 
     suspend fun loadNetworkPlaylists(): Flow<List<Playlist>> {
         sessionManager.checkSessionBeforeRequest().run {
             if (isNotEmpty()) {
-                return playlistRepository.loadNetworkPlaylists(this.bearer())
+                playlistsRepository.loadNetworkPlaylists(this.bearer())
             } else {
                 throw AccessTokenException()
             }
         }
+        return playlistsRepository.flowPlaylists()
     }
 
     suspend fun loadLocalPlaylists(): List<Playlist> {
-        return playlistRepository.loadLocalPlaylists()
+        return playlistsRepository.loadLocalPlaylists()
     }
 }

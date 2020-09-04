@@ -1,7 +1,7 @@
 package com.wimank.pbfs.di
 
-import com.wimank.pbfs.repository.PlaylistRepository
-import com.wimank.pbfs.repository.PlaylistRepositoryImpl
+import com.wimank.pbfs.repository.PlaylistsRepository
+import com.wimank.pbfs.repository.PlaylistsRepositoryImpl
 import com.wimank.pbfs.repository.SessionRepository
 import com.wimank.pbfs.repository.SessionRepositoryImpl
 import dagger.Binds
@@ -20,6 +20,6 @@ interface RepositoryModule {
     fun bindSessionRepository(sessionRepositoryImpl: SessionRepositoryImpl): SessionRepository
 
     @Binds
-    fun bindPlaylistRepository(playlistRepositoryImpl: PlaylistRepositoryImpl): PlaylistRepository
+    fun bindPlaylistRepository(playlistRepositoryImpl: PlaylistsRepositoryImpl): PlaylistsRepository
 
 }
