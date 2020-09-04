@@ -99,5 +99,4 @@ class PlaylistViewModel @ViewModelInject constructor(
     private fun showRefresh(show: Boolean) {
         updateData.postValue(show)
     }
-
 }
