@@ -4,21 +4,31 @@ import androidx.recyclerview.widget.DiffUtil
 import com.wimank.pbfs.domain.model.Playlist
 
 class PlaylistDiffUtil(
-    private val oldList: List<Playlist>,
-    private val newList: List<Playlist>
+    private val oldListItem: List<PlayListItemType>,
+    private val newListItem: List<PlayListItemType>
 ) : DiffUtil.Callback() {
 
-    override fun getOldListSize() = oldList.size
+    override fun getOldListSize() = oldListItem.size
 
-    override fun getNewListSize() = newList.size
+    override fun getNewListSize() = newListItem.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].id == newList[newItemPosition].id
+        return oldListItem[oldItemPosition].getType() == newListItem[newItemPosition].getType()
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].name == newList[newItemPosition].name
-                &&
-                oldList[oldItemPosition].image == newList[newItemPosition].image
+        if (oldListItem[oldItemPosition] is Playlist && newListItem[oldItemPosition] is Playlist) {
+            val oldItem = oldListItem[oldItemPosition] as Playlist
+            val newItem = newListItem[oldItemPosition] as Playlist
+
+            if (oldItem.name == newItem.name && oldItem.image == newItem.image) {
+                return true
+            }
+
+        } else {
+            return false
+        }
+
+        return false
     }
 }

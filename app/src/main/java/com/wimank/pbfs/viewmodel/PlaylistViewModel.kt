@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wimank.pbfs.domain.model.Playlist
 import com.wimank.pbfs.domain.usecase.PlaylistManager
+import com.wimank.pbfs.util.Event
 import com.wimank.pbfs.util.NetworkManager
 import com.wimank.pbfs.util.ONE_MINUTE
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -22,24 +22,24 @@ class PlaylistViewModel @ViewModelInject constructor(
     private var updateTime = 0L
     val playListData = MutableLiveData<List<Playlist>>()
     val updateData = MutableLiveData(false)
+    val updateTimeoutSnackBar = MutableLiveData<Event<String>>()
+    val errorLoadPlaylists = MutableLiveData<Event<Unit>>()
 
     init {
-        //checkConditionsForRequest()
-        loadLocalPlaylists()
+        checkConditionsForRequest()
     }
 
     fun refreshData() {
-        //checkConditionsForRequest()
-        loadLocalPlaylists()
+        checkConditionsForRequest()
     }
 
     private fun checkConditionsForRequest() {
         if (networkManager.isNetworkAvailable()) {
-            if (canUpdate(updateTime)) {
+            if (canUpdate()) {
                 startLoadPlaylists()
                 newUpdateTime()
             } else {
-                //TODO: показать снэкбар о частоте обновления
+                updateTimeoutSnackBar.value = Event(currentTimeOutTime())
                 showRefresh(false)
             }
         } else {
@@ -57,6 +57,7 @@ class PlaylistViewModel @ViewModelInject constructor(
                 }
             } catch (ex: Exception) {
                 clearUpdateTime()
+                errorLoadPlaylists.postValue(Event(Unit))
                 Timber.e(ex)
             } finally {
                 showRefresh(false)
@@ -68,9 +69,9 @@ class PlaylistViewModel @ViewModelInject constructor(
         viewModelScope.launch(context = Dispatchers.IO) {
             try {
                 showRefresh(true)
-                delay(5000)
                 playListData.postValue(playlistManager.loadLocalPlaylists())
             } catch (ex: Exception) {
+                errorLoadPlaylists.postValue(Event(Unit))
                 Timber.e(ex)
             } finally {
                 showRefresh(false)
@@ -78,7 +79,10 @@ class PlaylistViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun canUpdate(updateTime: Long = 0L): Boolean {
+    private fun canUpdate(): Boolean {
+        if (updateTime == 0L) {
+            return true
+        }
         return updateTime <= System.currentTimeMillis()
     }
 
@@ -89,6 +93,8 @@ class PlaylistViewModel @ViewModelInject constructor(
     private fun clearUpdateTime() {
         updateTime = 0L
     }
+
+    private fun currentTimeOutTime() = ((updateTime - System.currentTimeMillis()) / 1000).toString()
 
     private fun showRefresh(show: Boolean) {
         updateData.postValue(show)

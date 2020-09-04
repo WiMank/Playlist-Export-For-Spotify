@@ -13,19 +13,19 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/playlists_cl"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/playlist_srl"
+            android:id="@+id/playlist_swipe_rl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:onRefreshListener="@{() -> viewModel.refreshData()}"
-            app:refreshing="@{viewModel.updateData}">
+            app:onRefreshListener="@{() -> viewModel.refreshData()}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/playlist_rv"
@@ -33,15 +33,6 @@
                 android:layout_height="match_parent" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-        <include
-            android:id="@+id/load_view"
-            layout="@layout/shimmer_progress_item"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:visibility="@{viewModel.updateData ? View.VISIBLE : View.GONE}"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

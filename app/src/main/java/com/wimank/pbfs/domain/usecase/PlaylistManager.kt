@@ -22,7 +22,6 @@ class PlaylistManager @Inject constructor(
         }
     }
 
-
     suspend fun loadLocalPlaylists(): List<Playlist> {
         return playlistRepository.loadLocalPlaylists()
     }
