@@ -25,6 +25,7 @@ class PlaylistRepositoryImpl @Inject constructor(
         limit: Int,
         offset: Int
     ): Flow<List<Playlist>> {
+        listNetworkPlaylists.clear()
         playlistsApi.loadPlaylists(token, limit, offset).run {
             listNetworkPlaylists.add(this)
             if (next != null) {
@@ -55,7 +56,7 @@ class PlaylistRepositoryImpl @Inject constructor(
         return pageResp
     }
 
-    private fun saveResponse(playlistsEntityList: List<PlaylistsEntity>) {
-        playlistDao.insert(playlistsEntityList)
+    private suspend fun saveResponse(playlistsEntityList: List<PlaylistsEntity>) {
+        playlistDao.clearAndInsertPlaylists(playlistsEntityList)
     }
 }

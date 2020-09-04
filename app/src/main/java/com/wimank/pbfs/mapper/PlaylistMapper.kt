@@ -28,7 +28,9 @@ class NetworkPlaylistMapper @Inject constructor() :
                     PlaylistsEntity(
                         playlistId = items.id,
                         playlistName = items.name,
-                        playlistImage = items.images?.get(0)?.url ?: EMPTY_STRING,
+                        playlistImage =
+                        if (items.images.isNullOrEmpty()) EMPTY_STRING else items.images[0].url
+                            ?: EMPTY_STRING,
                         tracksUrl = items.tracks?.href ?: EMPTY_STRING,
                         isPublic = items.isPublic ?: false,
                         isCollaborative = items.collaborative

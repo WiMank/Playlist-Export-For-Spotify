@@ -66,6 +66,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:src="@{playlistItem.isPublic ? @drawable/ic_public: @drawable/ic_private }"
+            android:visibility="@{playlistItem.isCollaborative ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/collaborative_pl"
