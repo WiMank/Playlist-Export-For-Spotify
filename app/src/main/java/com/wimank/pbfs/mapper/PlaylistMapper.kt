@@ -11,6 +11,7 @@ class PlaylistMapper @Inject constructor() : Mapper<PlaylistsEntity, Playlist> {
         return Playlist(
             name = input.playlistName,
             image = input.playlistImage,
+            tracksCount = input.tracksCount,
             id = input.playlistId,
             isCollaborative = input.isCollaborative,
             isPublic = input.isPublic
@@ -28,6 +29,7 @@ class NetworkPlaylistMapper @Inject constructor() :
                     PlaylistsEntity(
                         playlistId = items.id,
                         playlistName = items.name,
+                        tracksCount = items.tracks?.total ?: 0,
                         playlistImage =
                         if (items.images.isNullOrEmpty()) EMPTY_STRING else items.images[0].url
                             ?: EMPTY_STRING,

@@ -20,6 +20,9 @@ data class PlaylistsEntity(
     @ColumnInfo(name = "tracks_url")
     val tracksUrl: String,
 
+    @ColumnInfo(name = "tracks_count")
+    val tracksCount: Int,
+
     @ColumnInfo(name = "is_public")
     val isPublic: Boolean,
 
