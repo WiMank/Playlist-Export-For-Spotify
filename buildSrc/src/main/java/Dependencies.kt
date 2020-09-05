@@ -24,6 +24,7 @@ import Version.spotifyAuthVersion
 import Version.timberVersion
 import Version.toolsGradleVersion
 import Version.viewModelVersion
+import Version.workManagerVersion
 
 
 object Dependencies {
@@ -92,6 +93,8 @@ object Dependencies {
     const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataKtxVersion"
 
     const val shimmer = "com.facebook.shimmer:shimmer:${shimmerVersion}"
+
+    const val workManager = "androidx.work:work-runtime-ktx:$workManagerVersion"
 }
 
 object Version {
@@ -121,4 +124,5 @@ object Version {
     const val appAuthVersion = "0.7.1"
     const val liveDataKtxVersion = "2.2.0"
     const val shimmerVersion = "0.5.0"
+    const val workManagerVersion = "2.4.0"
 }

@@ -30,6 +30,7 @@ import Dependencies.shimmer
 import Dependencies.spotifyAuth
 import Dependencies.timber
 import Dependencies.viewModelKtx
+import Dependencies.workManager
 
 plugins {
     id(Plugins.androidApplication)
@@ -158,5 +159,8 @@ dependencies {
 
     //Shimmer
     implementation(shimmer)
+
+    //Work Manager
+    implementation(workManager)
 
 }
