@@ -5,6 +5,8 @@
     <string name="loading_error_occurred">Loading error occurred</string>
     <string name="load_playlists_complete">Load playlists complete</string>
     <string name="load_playlists_error">Load playlists error</string>
+    <string name="offline_mode">Offline mode</string>
+    <string name="no_internet_connection">No internet connection</string>
 
     <plurals name="tracks">
         <item quantity="zero">no tracks</item>

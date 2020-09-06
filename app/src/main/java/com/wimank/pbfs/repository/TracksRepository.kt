@@ -1,14 +1,11 @@
 package com.wimank.pbfs.repository
 
 import com.wimank.pbfs.domain.model.Track
-import kotlinx.coroutines.flow.Flow
 
 interface TracksRepository {
 
     suspend fun loadNetworkTracks(token: String, limit: Int = 100, offset: Int = 0)
 
-    suspend fun loadLocalTracks(playlistId: String): List<Track>
-
-    suspend fun flowTracks(): Flow<List<Track>>
+    suspend fun loadLocalTracks(): List<Track>
 
 }

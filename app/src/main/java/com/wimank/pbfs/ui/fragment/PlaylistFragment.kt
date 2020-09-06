@@ -8,10 +8,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.wimank.pbfs.R
 import com.wimank.pbfs.databinding.PlaylistFragmentBinding
 import com.wimank.pbfs.ui.adapter.PlaylistAdapter
-import com.wimank.pbfs.util.LoadComplete
-import com.wimank.pbfs.util.LoadError
-import com.wimank.pbfs.util.Timeout
-import com.wimank.pbfs.util.scroll
+import com.wimank.pbfs.util.*
 import com.wimank.pbfs.viewmodel.PlaylistViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -81,6 +78,9 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
                     is LoadError -> {
                         showSnackBar(getString(it.message))
                         rvAdapter.setData(rvAdapter.showError())
+                    }
+                    is OfflineMode -> {
+                        showSnackBar(getString(it.message))
                     }
                 }
             }

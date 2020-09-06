@@ -8,8 +8,6 @@ import com.wimank.pbfs.rest.response.NetworkTracks
 import com.wimank.pbfs.room.dao.PlaylistDao
 import com.wimank.pbfs.room.dao.TracksDao
 import com.wimank.pbfs.room.entity.TracksEntity
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class TracksRepositoryImpl @Inject constructor(
@@ -34,17 +32,9 @@ class TracksRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun loadLocalTracks(playlistId: String): List<Track> {
-        return tracksDao.getTracks(playlistId).map {
+    override suspend fun loadLocalTracks(): List<Track> {
+        return tracksDao.getTracks().map {
             tracksMapper.map(it)
-        }
-    }
-
-    override suspend fun flowTracks(): Flow<List<Track>> {
-        return tracksDao.flowTracks().map { list ->
-            list.map {
-                tracksMapper.map(it)
-            }
         }
     }
 

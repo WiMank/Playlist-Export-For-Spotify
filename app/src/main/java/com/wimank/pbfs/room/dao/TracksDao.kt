@@ -2,7 +2,6 @@ package com.wimank.pbfs.room.dao
 
 import androidx.room.*
 import com.wimank.pbfs.room.entity.TracksEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 abstract class TracksDao : BaseDao<TracksEntity> {
@@ -13,11 +12,8 @@ abstract class TracksDao : BaseDao<TracksEntity> {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insert(list: List<TracksEntity>)
 
-    @Query("SELECT * FROM tracks WHERE playlist_track = :playlistId")
-    abstract suspend fun getTracks(playlistId: String): List<TracksEntity>
-
     @Query("SELECT * FROM tracks")
-    abstract fun flowTracks(): Flow<List<TracksEntity>>
+    abstract suspend fun getTracks(): List<TracksEntity>
 
     @Transaction
     open suspend fun clearAndInsertTracks(list: List<TracksEntity>) {
