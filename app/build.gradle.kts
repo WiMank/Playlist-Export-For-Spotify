@@ -169,4 +169,6 @@ dependencies {
     //Work Manager
     implementation(workManager)
 
+    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
+
 }

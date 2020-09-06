@@ -22,6 +22,6 @@ class TracksManager @Inject constructor(
     }
 
     suspend fun loadLocalTracks(playlistId: String): List<Track> {
-        return tracksRepository.loadLocalTracks()
+        return tracksRepository.loadLocalTracks(playlistId)
     }
 }

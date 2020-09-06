@@ -50,7 +50,7 @@ data class NetworkTracks(
             val explicit: Boolean,
             @Json(name = "external_ids")
             val externalIds: ExternalIds,
-            @Json(name = "duration_ms")
+            @Json(name = "external_urls")
             val externalUrls: ExternalUrls,
             val href: String,
             val id: String,

@@ -21,6 +21,7 @@ class TracksRepositoryImpl @Inject constructor(
     private val listNetworkTracks = mutableListOf<NetworkTracks>()
 
     override suspend fun loadNetworkTracks(token: String, limit: Int, offset: Int) {
+        tracksDao.clearTracks()
         playlistDao.getPlaylists().forEach { entity ->
             tracksApi.loadTracks(token, entity.tracksUrl).run {
                 listNetworkTracks.add(this)
@@ -55,7 +56,7 @@ class TracksRepositoryImpl @Inject constructor(
     }
 
     private suspend fun saveResponse(tracks: List<TracksEntity>) {
-        tracksDao.clearAndInsertTracks(tracks)
+        tracksDao.insert(tracks)
         listNetworkTracks.clear()
     }
 }

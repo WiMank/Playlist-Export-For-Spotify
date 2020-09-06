@@ -23,8 +23,10 @@ class NetworkTracksMapper @Inject constructor() {
                         playlistName = playlistName,
                         url = item.track.href,
                         name = item.track.name,
-                        artists = item.track.artists.joinToString(separator = ", "),
-                        image = if (item.track.album.images.isNullOrEmpty()) EMPTY_STRING else item.track.album.images[0].url
+                        artists =
+                        item.track.artists.joinToString(separator = ",") { joinItem -> joinItem.name },
+                        image = if (item.track.album.images.isNullOrEmpty())
+                            EMPTY_STRING else item.track.album.images[0].url
                     )
                 )
             }
@@ -40,7 +42,8 @@ class TracksMapper @Inject constructor() : Mapper<TracksEntity, Track> {
             url = input.url,
             name = input.name,
             artists = input.artists,
-            image = input.image
+            image = input.image,
+            playlistName = input.playlistName
         )
     }
 }

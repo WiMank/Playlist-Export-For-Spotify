@@ -1,6 +1,9 @@
 package com.wimank.pbfs.room.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.wimank.pbfs.room.entity.TracksEntity
 
 @Dao
@@ -15,9 +18,4 @@ abstract class TracksDao : BaseDao<TracksEntity> {
     @Query("SELECT * FROM tracks WHERE playlist_id = :playlistId")
     abstract suspend fun getTracks(playlistId: String): List<TracksEntity>
 
-    @Transaction
-    open suspend fun clearAndInsertTracks(list: List<TracksEntity>) {
-        clearTracks()
-        insert(list)
-    }
 }
