@@ -4,11 +4,10 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.wimank.pbfs.R
 import com.wimank.pbfs.domain.model.Playlist
 import com.wimank.pbfs.domain.usecase.PlaylistManager
-import com.wimank.pbfs.util.Event
-import com.wimank.pbfs.util.NetworkManager
-import com.wimank.pbfs.util.ONE_MINUTE
+import com.wimank.pbfs.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -22,8 +21,7 @@ class PlaylistViewModel @ViewModelInject constructor(
     private var updateTime = 0L
     val playListData = MutableLiveData<List<Playlist>>()
     val updateData = MutableLiveData(false)
-    val updateTimeoutSnackBar = MutableLiveData<Event<String>>()
-    val errorLoadPlaylists = MutableLiveData<Event<Unit>>()
+    val event = MutableLiveData<Event<EventMessage>>()
 
     init {
         checkConditionsForRequest()
@@ -39,7 +37,7 @@ class PlaylistViewModel @ViewModelInject constructor(
                 startLoadPlaylists()
                 newUpdateTime()
             } else {
-                updateTimeoutSnackBar.value = Event(currentTimeOutTime())
+                event.value = Event(Timeout(currentTimeOutTime()))
                 showRefresh(false)
             }
         } else {
@@ -54,10 +52,11 @@ class PlaylistViewModel @ViewModelInject constructor(
                 playlistManager.loadNetworkPlaylists().collect {
                     playListData.postValue(it)
                     showRefresh(false)
+                    event.postValue(Event(LoadComplete(R.string.load_playlists_complete)))
                 }
             } catch (ex: Exception) {
                 clearUpdateTime()
-                errorLoadPlaylists.postValue(Event(Unit))
+                event.postValue(Event(LoadError(R.string.load_playlists_error)))
                 Timber.e(ex)
             } finally {
                 showRefresh(false)
@@ -71,7 +70,7 @@ class PlaylistViewModel @ViewModelInject constructor(
                 showRefresh(true)
                 playListData.postValue(playlistManager.loadLocalPlaylists())
             } catch (ex: Exception) {
-                errorLoadPlaylists.postValue(Event(Unit))
+                event.postValue(Event(LoadError(R.string.load_playlists_error)))
                 Timber.e(ex)
             } finally {
                 showRefresh(false)

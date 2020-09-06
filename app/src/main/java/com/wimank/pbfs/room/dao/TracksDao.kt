@@ -13,8 +13,8 @@ abstract class TracksDao : BaseDao<TracksEntity> {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insert(list: List<TracksEntity>)
 
-    @Query("SELECT * FROM tracks")
-    abstract suspend fun getTracks(): List<TracksEntity>
+    @Query("SELECT * FROM tracks WHERE playlist_track = :playlistId")
+    abstract suspend fun getTracks(playlistId: String): List<TracksEntity>
 
     @Query("SELECT * FROM tracks")
     abstract fun flowTracks(): Flow<List<TracksEntity>>

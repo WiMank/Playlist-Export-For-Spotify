@@ -8,6 +8,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.wimank.pbfs.R
 import com.wimank.pbfs.databinding.PlaylistFragmentBinding
 import com.wimank.pbfs.ui.adapter.PlaylistAdapter
+import com.wimank.pbfs.util.LoadComplete
+import com.wimank.pbfs.util.LoadError
+import com.wimank.pbfs.util.Timeout
 import com.wimank.pbfs.util.scroll
 import com.wimank.pbfs.viewmodel.PlaylistViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -66,16 +69,20 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
     }
 
     private fun observeSnackBarMessages() {
-        viewModel.updateTimeoutSnackBar.observe(this) {
-            it.getContentIfNotHandled()?.let { content ->
-                showSnackBar(getString(R.string.update_timeout_message, content))
-            }
-        }
-
-        viewModel.errorLoadPlaylists.observe(this) {
-            it.getContentIfNotHandled()?.let {
-                showSnackBar(getString(R.string.loading_error_occurred))
-                rvAdapter.setData(rvAdapter.showError())
+        viewModel.event.observe(this) { event ->
+            event.getContentIfNotHandled()?.let {
+                when (it) {
+                    is Timeout -> {
+                        showSnackBar(getString(R.string.update_timeout_message, it.time))
+                    }
+                    is LoadComplete -> {
+                        showSnackBar(getString(it.message))
+                    }
+                    is LoadError -> {
+                        showSnackBar(getString(it.message))
+                        rvAdapter.setData(rvAdapter.showError())
+                    }
+                }
             }
         }
     }

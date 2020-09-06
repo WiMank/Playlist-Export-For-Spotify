@@ -34,8 +34,8 @@ class TracksRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun loadLocalTracks(): List<Track> {
-        return tracksDao.getTracks().map {
+    override suspend fun loadLocalTracks(playlistId: String): List<Track> {
+        return tracksDao.getTracks(playlistId).map {
             tracksMapper.map(it)
         }
     }
