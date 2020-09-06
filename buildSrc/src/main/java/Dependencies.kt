@@ -5,6 +5,7 @@ import Version.constraintlayoutVersion
 import Version.coroutinesVersion
 import Version.daggerHiltLifecycleVersion
 import Version.daggerHiltVersion
+import Version.daggerHiltWorkVersion
 import Version.espressoVersion
 import Version.glideVersion
 import Version.junitVersion
@@ -53,6 +54,7 @@ object Dependencies {
         "com.google.dagger:hilt-android-gradle-plugin:$daggerHiltVersion"
     const val daggerHiltLifecycle =
         "androidx.hilt:hilt-lifecycle-viewmodel:$daggerHiltLifecycleVersion"
+    const val daggerHiltWork = "androidx.hilt:hilt-work:$daggerHiltWorkVersion"
     const val daggerHiltCompiler = "androidx.hilt:hilt-compiler:$daggerHiltLifecycleVersion"
 
     const val navigationComponent =
@@ -109,6 +111,7 @@ object Version {
     const val kotlinGradlePluginVersion = kotlinVersion
     const val daggerHiltVersion = "2.28.3-alpha"
     const val daggerHiltLifecycleVersion = "1.0.0-alpha02"
+    const val daggerHiltWorkVersion = "1.0.0-alpha02"
     const val navigationComponentVersion = "2.3.0"
     const val viewModelVersion = "2.1.0-beta01"
     const val coroutinesVersion = "1.3.9"

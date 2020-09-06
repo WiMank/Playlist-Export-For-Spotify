@@ -18,7 +18,7 @@ import com.wimank.pbfs.room.entity.UserEntity
         SessionEntity::class,
         TracksEntity::class
     ],
-    version = 1
+    version = 2
 )
 abstract class AppDataBase : RoomDatabase() {
 

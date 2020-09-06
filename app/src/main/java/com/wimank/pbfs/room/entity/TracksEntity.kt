@@ -11,7 +11,7 @@ import androidx.room.ForeignKey
         ForeignKey(
             entity = PlaylistsEntity::class,
             parentColumns = ["playlist_id"],
-            childColumns = ["playlist_track"],
+            childColumns = ["playlist_id"],
             onDelete = ForeignKey.CASCADE,
             onUpdate = ForeignKey.CASCADE
         )
@@ -20,8 +20,10 @@ import androidx.room.ForeignKey
 data class TracksEntity(
     @ColumnInfo(name = "track_id")
     val trackId: String,
-    @ColumnInfo(name = "playlist_track")
-    val playlistTrack: String,
+    @ColumnInfo(name = "playlist_id")
+    val playlistId: String,
+    @ColumnInfo(name = "playlist_name")
+    val playlistName: String,
     val url: String,
     val name: String,
     val artists: String,

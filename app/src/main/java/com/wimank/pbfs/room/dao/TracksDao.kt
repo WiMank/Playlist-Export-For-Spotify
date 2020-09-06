@@ -12,8 +12,8 @@ abstract class TracksDao : BaseDao<TracksEntity> {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insert(list: List<TracksEntity>)
 
-    @Query("SELECT * FROM tracks")
-    abstract suspend fun getTracks(): List<TracksEntity>
+    @Query("SELECT * FROM tracks WHERE playlist_id = :playlistId")
+    abstract suspend fun getTracks(playlistId: String): List<TracksEntity>
 
     @Transaction
     open suspend fun clearAndInsertTracks(list: List<TracksEntity>) {

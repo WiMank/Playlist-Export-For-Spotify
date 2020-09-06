@@ -6,6 +6,6 @@ interface TracksRepository {
 
     suspend fun loadNetworkTracks(token: String, limit: Int = 100, offset: Int = 0)
 
-    suspend fun loadLocalTracks(): List<Track>
+    suspend fun loadLocalTracks(playlistId: String): List<Track>
 
 }

@@ -8,14 +8,19 @@ import javax.inject.Inject
 
 class NetworkTracksMapper @Inject constructor() {
 
-    fun map(playlistId: String, input: List<NetworkTracks>): List<TracksEntity> {
+    fun map(
+        playlistName: String,
+        playlistId: String,
+        input: List<NetworkTracks>
+    ): List<TracksEntity> {
         val resultList = mutableListOf<TracksEntity>()
         input.forEach {
             it.items.map { item ->
                 resultList.add(
                     TracksEntity(
                         trackId = item.track.id,
-                        playlistTrack = playlistId,
+                        playlistId = playlistId,
+                        playlistName = playlistName,
                         url = item.track.href,
                         name = item.track.name,
                         artists = item.track.artists.joinToString(separator = ", "),
