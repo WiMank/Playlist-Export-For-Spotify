@@ -13,6 +13,7 @@ import Dependencies.glide
 import Dependencies.glideCompiler
 import Dependencies.hiltAndroidCompiler
 import Dependencies.junit
+import Dependencies.junitJupiter
 import Dependencies.kotlinStdlib
 import Dependencies.lifecycleExtensions
 import Dependencies.liveDataKtx
@@ -101,6 +102,7 @@ dependencies {
 
     //Test
     testImplementation(junit)
+    testImplementation(junitJupiter)
     androidTestImplementation(androidxJunit)
     androidTestImplementation(espressoCore)
 

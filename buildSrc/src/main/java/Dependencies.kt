@@ -40,6 +40,8 @@ object Dependencies {
 
     const val junit = "junit:junit:$junitVersion"
 
+    const val junitJupiter = "org.junit.jupiter:junit-jupiter"
+
     const val androidxJunit = "androidx.test.ext:junit:$androidJunitVersion"
 
     const val espressoCore = "androidx.test.espresso:espresso-core:$espressoVersion"
@@ -105,6 +107,7 @@ object Version {
     const val appcompatVersion = "1.2.0"
     const val constraintlayoutVersion = "1.1.3"
     const val junitVersion = "4.13"
+    const val junitJupiterVersion = "5.6.2"
     const val androidJunitVersion = "1.1.1"
     const val espressoVersion = "3.2.0"
     const val toolsGradleVersion = "4.0.1"
