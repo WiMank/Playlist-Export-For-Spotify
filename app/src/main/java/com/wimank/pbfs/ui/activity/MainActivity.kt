@@ -150,4 +150,16 @@ class MainActivity : AppCompatActivity(),
     override fun completeAuthentication() {
         uiRouter.navigateToPlaylistFragment()
     }
+
+    override fun startLoad() {
+        dataBinding.exFabMain.hide()
+    }
+
+    override fun stopLoad(listIsNotEmpty: Boolean) {
+        if (listIsNotEmpty) {
+            dataBinding.exFabMain.show()
+        } else {
+            dataBinding.exFabMain.hide()
+        }
+    }
 }

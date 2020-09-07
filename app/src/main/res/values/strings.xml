@@ -3,6 +3,7 @@
     <string name="preference_file_key">pbfs_prefs</string>
     <string name="update_timeout_message">Too many requests, wait a minute! Left: %s seconds</string>
     <string name="loading_error_occurred">Loading error occurred</string>
+    <string name="playlists_empty">No playlists. The list is empty</string>
     <string name="load_playlists_complete">Load playlists complete</string>
     <string name="load_playlists_error">Load playlists error</string>
     <string name="offline_mode">Offline mode</string>

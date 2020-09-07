@@ -45,6 +45,7 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
 
         viewModel.playListData.observe(this) {
             rvAdapter.setData(it)
+            backupFragmentCallback?.stopLoad(it.isNotEmpty())
         }
     }
 
@@ -59,6 +60,7 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
             if (it) {
                 rvAdapter.setData(rvAdapter.startLoading())
                 dataBinding.playlistRv.scroll(false)
+                backupFragmentCallback?.startLoad()
             } else {
                 dataBinding.playlistRv.scroll(true)
             }
@@ -78,6 +80,7 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
                     is LoadError -> {
                         showSnackBar(getString(it.message))
                         rvAdapter.setData(rvAdapter.showError())
+                        backupFragmentCallback?.stopLoad(false)
                     }
                     is OfflineMode -> {
                         showSnackBar(getString(it.message))
@@ -95,6 +98,9 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
         ).show()
     }
 
-    interface BackupFragmentCallback
+    interface BackupFragmentCallback {
+        fun startLoad()
+        fun stopLoad(listIsNotEmpty: Boolean)
+    }
 
 }
