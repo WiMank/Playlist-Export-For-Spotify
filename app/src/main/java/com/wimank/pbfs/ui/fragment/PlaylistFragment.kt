@@ -4,16 +4,12 @@ import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.WorkRequest
 import com.google.android.material.snackbar.Snackbar
 import com.wimank.pbfs.R
 import com.wimank.pbfs.databinding.PlaylistFragmentBinding
 import com.wimank.pbfs.ui.adapter.PlaylistAdapter
 import com.wimank.pbfs.util.*
 import com.wimank.pbfs.viewmodel.PlaylistViewModel
-import com.wimank.pbfs.work.ExportWorker
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,11 +45,6 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
 
         viewModel.playListData.observe(this) {
             rvAdapter.setData(it)
-
-
-            val uploadWorkRequest: WorkRequest = OneTimeWorkRequestBuilder<ExportWorker>().build()
-            WorkManager.getInstance(requireContext()).enqueue(uploadWorkRequest)
-
         }
     }
 
