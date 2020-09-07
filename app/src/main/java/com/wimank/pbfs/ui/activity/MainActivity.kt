@@ -7,6 +7,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.wimank.pbfs.*
 import com.wimank.pbfs.R
 import com.wimank.pbfs.databinding.ActivityMainBinding
@@ -14,12 +18,15 @@ import com.wimank.pbfs.ui.fragment.AuthenticationFragment
 import com.wimank.pbfs.ui.fragment.PlaylistFragment
 import com.wimank.pbfs.ui.utils.UiRouter
 import com.wimank.pbfs.util.AUTHORIZATION_ENDPOINT
+import com.wimank.pbfs.util.ConnectivityWatcher
 import com.wimank.pbfs.util.TOKEN_ENDPOINT
 import com.wimank.pbfs.viewmodel.AuthenticationViewModel
 import com.wimank.pbfs.viewmodel.MainActivityViewModel
+import com.wimank.pbfs.work.ExportWorker
 import dagger.hilt.android.AndroidEntryPoint
 import net.openid.appauth.*
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(),
@@ -30,17 +37,53 @@ class MainActivity : AppCompatActivity(),
     private val uiRouter: UiRouter by lazy { UiRouter(findNavController(R.id.main_nav_host)) }
     private val viewModel: MainActivityViewModel by viewModels()
     private val authViewModel: AuthenticationViewModel by viewModels()
+    private lateinit var dataBinding: ActivityMainBinding
+
+    @Inject
+    lateinit var connectivityWatcher: ConnectivityWatcher
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        dataBinding.viewModel = viewModel
+        dataBinding.lifecycleOwner = this
+        initView()
         startObserve()
+        connectivityWatcher()
+    }
+
+    private fun initView() {
+        dataBinding.exFabMain.setOnClickListener {
+            startWork()
+        }
     }
 
     private fun startObserve() {
-        viewModel.sessionState.observe(this, {
+        viewModel.sessionState.observe(this) {
             setupNavGraph(it)
-        })
+        }
+
+        viewModel.networkState.observe(this) {
+            dataBinding.exFabMain.isEnabled = it
+        }
+    }
+
+    private fun connectivityWatcher() {
+        connectivityWatcher.observe(this) {
+            dataBinding.exFabMain.isEnabled = it
+        }
+    }
+
+    private fun startWork() {
+        val exportWorkRequest = OneTimeWorkRequestBuilder<ExportWorker>().apply {
+            setConstraints(
+                Constraints.Builder()
+                    .setRequiredNetworkType(NetworkType.CONNECTED)
+                    .setRequiresCharging(true)
+                    .build()
+            )
+        }.build()
+        WorkManager.getInstance(this).enqueue(exportWorkRequest)
     }
 
     private fun setupNavGraph(authStart: Boolean) {

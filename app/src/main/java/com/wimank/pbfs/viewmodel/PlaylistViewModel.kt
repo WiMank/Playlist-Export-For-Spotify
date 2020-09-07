@@ -21,7 +21,6 @@ class PlaylistViewModel @ViewModelInject constructor(
     private var updateTime = 0L
     val playListData = MutableLiveData<List<Playlist>>()
     val updateData = MutableLiveData(false)
-    val offlineMode = MutableLiveData(false)
     val event = MutableLiveData<Event<EventMessage>>()
 
     init {
@@ -34,7 +33,6 @@ class PlaylistViewModel @ViewModelInject constructor(
 
     private fun checkConditionsForRequest() {
         if (networkManager.isNetworkAvailable()) {
-            offlineMode.value = false
             if (canUpdate()) {
                 startLoadPlaylists()
                 newUpdateTime()
@@ -45,7 +43,6 @@ class PlaylistViewModel @ViewModelInject constructor(
         } else {
             loadLocalPlaylists()
             event.value = Event(OfflineMode((R.string.no_internet_connection)))
-            offlineMode.value = true
         }
     }
 
@@ -55,12 +52,12 @@ class PlaylistViewModel @ViewModelInject constructor(
                 showRefresh(true)
                 playlistManager.loadNetworkPlaylists().collect {
                     playListData.postValue(it)
-                    showRefresh(false)
                     event.postValue(Event(LoadComplete(R.string.load_playlists_complete)))
+                    showRefresh(false)
                 }
             } catch (ex: Exception) {
-                clearUpdateTime()
                 event.postValue(Event(LoadError(R.string.load_playlists_error)))
+                clearUpdateTime()
                 Timber.e(ex)
             } finally {
                 showRefresh(false)

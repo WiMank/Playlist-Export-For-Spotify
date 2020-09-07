@@ -171,4 +171,5 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
 
+    implementation("com.google.android.material:material:1.2.1")
 }

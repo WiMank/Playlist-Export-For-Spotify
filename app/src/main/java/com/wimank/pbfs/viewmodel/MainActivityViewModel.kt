@@ -8,17 +8,23 @@ import com.wimank.pbfs.domain.model.Session
 import com.wimank.pbfs.domain.usecase.SessionManager
 import com.wimank.pbfs.mapper.SessionMapper
 import com.wimank.pbfs.util.EMPTY_STRING
+import com.wimank.pbfs.util.NetworkManager
 import com.wimank.pbfs.util.SESSION_ID
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.openid.appauth.TokenResponse
 
 class MainActivityViewModel @ViewModelInject constructor(
-    private val sessionManager: SessionManager
+    private val sessionManager: SessionManager,
+    private val networkManager: NetworkManager
 ) : ViewModel() {
 
     val sessionState = liveData(Dispatchers.IO) {
         emit(checkSessionState())
+    }
+
+    val networkState = liveData(Dispatchers.Default) {
+        emit(networkManager.isNetworkAvailable())
     }
 
     fun prepareAndWriteSession(tokenResponse: TokenResponse) {

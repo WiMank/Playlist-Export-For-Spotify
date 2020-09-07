@@ -4,11 +4,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import dagger.hilt.android.qualifiers.ActivityContext
-import javax.inject.Inject
 
 @Suppress("DEPRECATION")
-class NetworkManager @Inject constructor(@ActivityContext private val context: Context) {
+class NetworkManager(private val context: Context) {
 
     fun isNetworkAvailable(): Boolean {
         val connectivityManager =

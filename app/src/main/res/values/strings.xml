@@ -13,6 +13,7 @@
     <string name="write_playlists">I write playlists files</string>
     <string name="export_complete">Export complete</string>
     <string name="export_error">Export error</string>
+    <string name="export">export</string>
 
     <plurals name="tracks">
         <item quantity="zero">no tracks</item>
