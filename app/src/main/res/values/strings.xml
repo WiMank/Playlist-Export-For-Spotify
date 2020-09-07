@@ -7,6 +7,12 @@
     <string name="load_playlists_error">Load playlists error</string>
     <string name="offline_mode">Offline mode</string>
     <string name="no_internet_connection">No internet connection</string>
+    <string name="channel_name">Export notify</string>
+    <string name="channel_description">Shows export progress</string>
+    <string name="loading_tracks">Loading tracks</string>
+    <string name="write_playlists">I write playlists files</string>
+    <string name="export_complete">Export complete</string>
+    <string name="export_error">Export error</string>
 
     <plurals name="tracks">
         <item quantity="zero">no tracks</item>
