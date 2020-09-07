@@ -29,3 +29,16 @@ const val BEARER = "Bearer "
 
 //It's one minute :)
 const val ONE_MINUTE = 60000L
+
+const val HTML_EXT = ".html"
+
+const val TABLE_STYLE =
+    """table {font-family: arial, sans-serif;border-collapse: collapse;width: 100%;}"""
+
+const val TD_TH_STYLE = """td, th {border: 1px solid #dddddd;ext-align: left;padding: 8px;}"""
+
+const val ARTISTS_COLUMN = "Artist"
+const val TRACK_NAME_COLUMN = "Track Name"
+const val TITLE_FOR_PAGE = "Playlists"
+
+const val CHANNEL_ID = "Playlists export"

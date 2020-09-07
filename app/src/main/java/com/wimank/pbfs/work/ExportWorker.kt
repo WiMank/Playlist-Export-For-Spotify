@@ -14,19 +14,17 @@ import kotlinx.coroutines.coroutineScope
 class ExportWorker @WorkerInject constructor(
     private val tracksManager: TracksManager,
     private val playlistManager: PlaylistManager,
-    @Assisted appContext: Context,
+    @Assisted private val appContext: Context,
     @Assisted workerParams: WorkerParameters
 ) : CoroutineWorker(appContext, workerParams) {
 
     override suspend fun doWork(): Result = coroutineScope {
         val job = async(Dispatchers.IO) {
-
-            //val np = playlistManager.loadNetworkPlaylists()
-            //val nt = tracksManager.loadNetworkTracks()
-
-            //val lp = playlistManager.loadLocalPlaylists()
-            //val lt = tracksManager.loadLocalTracks(lp[0].id)
-
+            tracksManager.loadNetworkTracks()
+            val lp = playlistManager.loadLocalPlaylists()
+            lp.forEach {
+                HtmlBuilder(it, tracksManager.loadLocalTracks(it.id), appContext).createFile()
+            }
         }
 
         job.await()

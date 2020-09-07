@@ -1,52 +1,40 @@
 package com.wimank.pbfs.work
 
+import android.content.Context
 import com.wimank.pbfs.domain.model.Playlist
 import com.wimank.pbfs.domain.model.Track
+import com.wimank.pbfs.util.*
 import kotlinx.html.*
 import kotlinx.html.stream.appendHTML
-import timber.log.Timber
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileWriter
 
-class HtmlBuilder(private val playlists: Playlist, private val tracks: List<Track>) {
+class HtmlBuilder(
+    private val playlists: Playlist,
+    private val tracks: List<Track>,
+    private val context: Context
+) {
 
     fun createFile() {
         val text = buildString {
             appendHTML().html {
                 head {
-                    title("Playlists")
+                    title(TITLE_FOR_PAGE)
                     style {
                         unsafe {
-                            raw(
-                                """
-                                table {
-                                  font-family: arial, sans-serif;
-                                  border-collapse: collapse;
-                                  width: 100%;	
-                                }
-                            """
-                            )
-
-                            raw(
-                                """
-                                td, th {
-                                    border: 1px solid #dddddd;
-                                    text-align: left;
-                                    padding: 8px;
-                                }
-                            """
-                            )
+                            raw(TABLE_STYLE)
+                            raw(TD_TH_STYLE)
                         }
                     }
                 }
-
                 body {
                     h1 { +playlists.name }
-
                     table {
                         tr {
-                            th { +"Artist" }
-                            th { +"Track Name" }
+                            th { +ARTISTS_COLUMN }
+                            th { +TRACK_NAME_COLUMN }
                         }
-
                         tracks.forEach {
                             tr {
                                 td { +it.artists }
@@ -57,8 +45,12 @@ class HtmlBuilder(private val playlists: Playlist, private val tracks: List<Trac
                 }
             }
         }
+        writeFile(text)
+    }
 
-        Timber.d("HTML $text")
-
+    private fun writeFile(text: String) {
+        File(context.filesDir, playlists.name + HTML_EXT).run {
+            BufferedWriter(FileWriter(this)).use { it.write(text) }
+        }
     }
 }
