@@ -56,7 +56,7 @@ fun Activity.showSnackBarFileShare(view: View) {
     Snackbar.make(
         view,
         getString(R.string.export_complete),
-        Snackbar.LENGTH_SHORT
+        Snackbar.LENGTH_LONG
     ).setAction(getString(R.string.share_zip_file)) {
         ShareZipArchive(this).share()
     }.show()

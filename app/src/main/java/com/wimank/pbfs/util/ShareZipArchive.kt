@@ -20,6 +20,9 @@ class ShareZipArchive(private val context: Context) {
         startSend(fileUri)
     }
 
+    fun zipFileExist() =
+        File(context.filesDir.path + File.separator + ZIP_APP_FOLDER, ARCHIVE_NAME).exists()
+
     private fun prepareFile(): File {
         return File(context.filesDir.path + File.separator + ZIP_APP_FOLDER, ARCHIVE_NAME)
     }

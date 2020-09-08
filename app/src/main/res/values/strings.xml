@@ -18,6 +18,7 @@
     <string name="export">export</string>
     <string name="track_export_null">Can\'t track export status</string>
     <string name="share_zip_file">Share zip file?</string>
+    <string name="nothing_send">Nothing to send, export playlists first</string>
 
     <plurals name="tracks">
         <item quantity="zero">no tracks</item>

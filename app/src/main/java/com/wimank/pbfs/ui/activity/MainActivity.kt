@@ -185,7 +185,13 @@ class MainActivity : AppCompatActivity(),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.export_zip -> {
-                ShareZipArchive(this).share()
+                ShareZipArchive(this).run {
+                    if (zipFileExist()) {
+                        share()
+                    } else {
+                        showSnackBar(dataBinding.exFabMain, R.string.nothing_send)
+                    }
+                }
             }
         }
         return true
