@@ -210,6 +210,9 @@ class MainActivity : AppCompatActivity(),
                     }
                 }
             }
+            android.R.id.home -> {
+                uiRouter.navigateToUserProfileDialog()
+            }
         }
         return true
     }

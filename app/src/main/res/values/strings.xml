@@ -23,6 +23,8 @@
     <string name="auth_hello">Log into your Spotify account to get started</string>
     <string name="auth_complete">Authentication complete</string>
     <string name="hello">Hello!</string>
+    <string name="go_to_github">Go to GitHub</string>
+    <string name="logout">Logout</string>
 
     <plurals name="tracks">
         <item quantity="zero">no tracks</item>

@@ -53,9 +53,6 @@
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/ex_fab_main"
-            android:textColor="@color/text_color"
-            app:backgroundTint="@color/spotify_green"
-            app:iconTint="@color/icon_color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"

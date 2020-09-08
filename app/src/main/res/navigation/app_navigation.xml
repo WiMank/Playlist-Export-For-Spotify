@@ -2,12 +2,16 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="UnusedNavigation">
+    tools:ignore="InvalidNavigation,UnusedNavigation">
 
     <fragment
         android:id="@+id/playlistFragment"
         android:name="com.wimank.pbfs.ui.fragment.PlaylistFragment"
-        android:label="PlaylistFragment" />
+        android:label="PlaylistFragment">
+        <action
+            android:id="@+id/action_playlistFragment_to_userProfileDialog"
+            app:destination="@id/userProfileDialog" />
+    </fragment>
 
     <fragment
         android:id="@+id/authenticationFragment"
@@ -19,5 +23,10 @@
             app:popUpTo="@id/authenticationFragment"
             app:popUpToInclusive="true" />
     </fragment>
+
+    <dialog
+        android:id="@+id/userProfileDialog"
+        android:name="com.wimank.pbfs.ui.fragment.UserProfileDialog"
+        android:label="UserProfileDialog" />
 
 </navigation>
