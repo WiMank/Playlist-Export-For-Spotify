@@ -9,12 +9,24 @@
         <variable
             name="viewModel"
             type="com.wimank.pbfs.viewmodel.PlaylistViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/playlists_cl"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/empty_data_inc"
+            layout="@layout/empty_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{viewModel.emptyData ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/playlist_swipe_rl"
@@ -28,6 +40,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/playlist_rv"
+                android:visibility="@{viewModel.emptyData ? View.GONE : View.VISIBLE}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 

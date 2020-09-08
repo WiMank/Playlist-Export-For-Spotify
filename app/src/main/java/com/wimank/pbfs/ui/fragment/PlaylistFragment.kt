@@ -85,6 +85,9 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
                     is OfflineMode -> {
                         showSnackBar(getString(it.message))
                     }
+                    is EmptyList -> {
+                        showSnackBar(getString(it.message))
+                    }
                 }
             }
         }
@@ -102,5 +105,4 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
         fun startLoad()
         fun stopLoad(listIsNotEmpty: Boolean)
     }
-
 }

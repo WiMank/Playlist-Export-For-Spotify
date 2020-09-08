@@ -78,6 +78,7 @@ class PlaylistAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun showError(): List<ErrorStub> {
         var i = 0
         val list = mutableListOf<ErrorStub>()
+
         while (i < 15) {
             list.add(ErrorStub())
             i++

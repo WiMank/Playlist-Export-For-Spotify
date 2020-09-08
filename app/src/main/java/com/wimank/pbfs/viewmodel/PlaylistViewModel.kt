@@ -21,6 +21,7 @@ class PlaylistViewModel @ViewModelInject constructor(
     private var updateTime = 0L
     val playListData = MutableLiveData<List<Playlist>>()
     val updateData = MutableLiveData(false)
+    val emptyData = MutableLiveData(false)
     val event = MutableLiveData<Event<EventMessage>>()
 
     init {
@@ -52,7 +53,12 @@ class PlaylistViewModel @ViewModelInject constructor(
                 showRefresh(true)
                 playlistManager.loadNetworkPlaylists().collect {
                     playListData.postValue(it)
-                    event.postValue(Event(LoadComplete(R.string.load_playlists_complete)))
+                    if (it.isNotEmpty()) {
+                        event.postValue(Event(LoadComplete(R.string.load_playlists_complete)))
+                    } else {
+                        event.postValue(Event(EmptyList(R.string.playlists_empty)))
+                        emptyData.postValue(true)
+                    }
                     showRefresh(false)
                 }
             } catch (ex: Exception) {
