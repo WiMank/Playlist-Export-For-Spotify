@@ -3,6 +3,7 @@ package com.wimank.pbfs.di
 import com.wimank.pbfs.rest.ApiRefreshToken
 import com.wimank.pbfs.rest.PlaylistsApi
 import com.wimank.pbfs.rest.TracksApi
+import com.wimank.pbfs.rest.UserApi
 import com.wimank.pbfs.util.BASE_TOKEN_ENDPOINT_URL
 import dagger.Module
 import dagger.Provides
@@ -24,6 +25,11 @@ class ApiModule {
     @Provides
     fun provideTracksApi(retrofit: Retrofit): TracksApi {
         return retrofit.create(TracksApi::class.java)
+    }
+
+    @Provides
+    fun provideUserApi(retrofit: Retrofit): UserApi {
+        return retrofit.create(UserApi::class.java)
     }
 
     //Special for refresh tokens request
