@@ -135,8 +135,14 @@ class MainActivity : AppCompatActivity(),
         uiRouter.getNavController()
             .addOnDestinationChangedListener { _, destination, _ ->
                 when (destination.id) {
-                    R.id.authenticationFragment -> dataBinding.exFabMain.hide()
-                    else -> dataBinding.exFabMain.show()
+                    R.id.authenticationFragment -> {
+                        dataBinding.exFabMain.hide()
+                        dataBinding.mainAppBar.setExpanded(false, false)
+                    }
+                    else -> {
+                        dataBinding.exFabMain.show()
+                        dataBinding.mainAppBar.setExpanded(true, true)
+                    }
                 }
             }
     }

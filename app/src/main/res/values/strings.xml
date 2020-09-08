@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Playlist Backup For Spotify</string>
-    <string name="app_name_short">PBFS</string>
+    <string name="app_name">Playlist Export For Spotify</string>
+    <string name="app_name_label">Playlist Export</string>
+    <string name="app_name_short">PEFS</string>
     <string name="preference_file_key">pbfs_prefs</string>
     <string name="update_timeout_message">Too many requests, wait a minute! Left: %s seconds</string>
     <string name="loading_error_occurred">Loading error occurred</string>
@@ -19,6 +20,12 @@
     <string name="track_export_null">Can\'t track export status</string>
     <string name="share_zip_file">Share zip file?</string>
     <string name="nothing_send">Nothing to send, export playlists first</string>
+    <string name="authentication">Authentication</string>
+    <string name="go">GO!</string>
+
+    <string name="auth_hello">Log into your Spotify account to get started</string>
+    <string name="auth_complete">Authentication complete</string>
+    <string name="hello">Hello!</string>
 
     <plurals name="tracks">
         <item quantity="zero">no tracks</item>
