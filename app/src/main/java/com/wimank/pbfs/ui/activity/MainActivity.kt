@@ -128,6 +128,17 @@ class MainActivity : AppCompatActivity(),
             navGraph.startDestination = R.id.authenticationFragment
         }
         uiRouter.getNavController().graph = navGraph
+        initDestinationListener()
+    }
+
+    private fun initDestinationListener() {
+        uiRouter.getNavController()
+            .addOnDestinationChangedListener { _, destination, _ ->
+                when (destination.id) {
+                    R.id.authenticationFragment -> dataBinding.exFabMain.hide()
+                    else -> dataBinding.exFabMain.show()
+                }
+            }
     }
 
     private fun requestToken() {
