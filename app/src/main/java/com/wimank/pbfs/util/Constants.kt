@@ -40,3 +40,6 @@ const val TD_TH_STYLE = """td, th {border: 1px solid #dddddd;ext-align: left;pad
 const val ARTISTS_COLUMN = "Artist"
 const val TRACK_NAME_COLUMN = "Track Name"
 const val TITLE_FOR_PAGE = "Playlists"
+const val APP_FOLDER = "Playlists"
+const val ZIP_APP_FOLDER = "ZIP_Playlists"
+const val ARCHIVE_NAME = "spotify_playlists.zip"

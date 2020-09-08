@@ -49,7 +49,7 @@ class HtmlBuilder(
     }
 
     private fun writeFile(text: String) {
-        File(context.filesDir, playlists.name + HTML_EXT).run {
+        File(File(context.filesDir, APP_FOLDER), playlists.name + HTML_EXT).run {
             BufferedWriter(FileWriter(this)).use { it.write(text) }
         }
     }
