@@ -72,33 +72,29 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
             event.getContentIfNotHandled()?.let {
                 when (it) {
                     is Timeout -> {
-                        showSnackBar(getString(R.string.update_timeout_message, it.time))
+                        Snackbar.make(
+                            dataBinding.playlistsCl,
+                            getString(R.string.update_timeout_message, it.time),
+                            Snackbar.LENGTH_SHORT
+                        ).show()
                     }
                     is LoadComplete -> {
-                        showSnackBar(getString(it.message))
+                        showSnackBar(dataBinding.playlistsCl, it.message)
                     }
                     is LoadError -> {
-                        showSnackBar(getString(it.message))
+                        showSnackBar(dataBinding.playlistsCl, it.message)
                         rvAdapter.setData(rvAdapter.showError())
                         backupFragmentCallback?.stopLoad(false)
                     }
                     is OfflineMode -> {
-                        showSnackBar(getString(it.message))
+                        showSnackBar(dataBinding.playlistsCl, it.message)
                     }
                     is EmptyList -> {
-                        showSnackBar(getString(it.message))
+                        showSnackBar(dataBinding.playlistsCl, it.message)
                     }
                 }
             }
         }
-    }
-
-    private fun showSnackBar(message: String) {
-        Snackbar.make(
-            dataBinding.playlistsCl,
-            message,
-            Snackbar.LENGTH_SHORT
-        ).show()
     }
 
     interface BackupFragmentCallback {

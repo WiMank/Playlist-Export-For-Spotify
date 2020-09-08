@@ -24,6 +24,9 @@
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/main_toolbar"
+                app:menu="@menu/main_toolbar"
+                app:navigationIcon="@drawable/ic_menu_24px"
+                app:title="@string/app_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/colorPrimary"
@@ -56,8 +59,7 @@
             android:layout_margin="16dp"
             android:enabled="@{viewModel.networkState}"
             android:text="@string/export"
-            app:icon="@drawable/ic_import_export_24px"
-            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior" />
+            app:icon="@drawable/ic_import_export_24px" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

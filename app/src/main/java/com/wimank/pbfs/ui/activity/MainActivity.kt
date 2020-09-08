@@ -3,29 +3,26 @@ package com.wimank.pbfs.ui.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import androidx.work.Constraints
-import androidx.work.NetworkType
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import com.wimank.pbfs.*
 import com.wimank.pbfs.R
 import com.wimank.pbfs.databinding.ActivityMainBinding
 import com.wimank.pbfs.ui.fragment.AuthenticationFragment
 import com.wimank.pbfs.ui.fragment.PlaylistFragment
 import com.wimank.pbfs.ui.utils.UiRouter
-import com.wimank.pbfs.util.AUTHORIZATION_ENDPOINT
-import com.wimank.pbfs.util.ConnectivityWatcher
-import com.wimank.pbfs.util.TOKEN_ENDPOINT
+import com.wimank.pbfs.util.*
 import com.wimank.pbfs.viewmodel.AuthenticationViewModel
 import com.wimank.pbfs.viewmodel.MainActivityViewModel
 import com.wimank.pbfs.work.ExportWorker
 import dagger.hilt.android.AndroidEntryPoint
 import net.openid.appauth.*
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -38,6 +35,7 @@ class MainActivity : AppCompatActivity(),
     private val viewModel: MainActivityViewModel by viewModels()
     private val authViewModel: AuthenticationViewModel by viewModels()
     private lateinit var dataBinding: ActivityMainBinding
+    private val workManager: WorkManager by lazy { WorkManager.getInstance(this) }
 
     @Inject
     lateinit var connectivityWatcher: ConnectivityWatcher
@@ -53,8 +51,12 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun initView() {
-        dataBinding.exFabMain.setOnClickListener {
-            startWork()
+        dataBinding.exFabMain.apply {
+            setOnClickListener {
+                if (isExtended) {
+                    startWork()
+                }
+            }
         }
     }
 
@@ -83,7 +85,38 @@ class MainActivity : AppCompatActivity(),
                     .build()
             )
         }.build()
-        WorkManager.getInstance(this).enqueue(exportWorkRequest)
+
+        observeWork(exportWorkRequest.id)
+
+        workManager.enqueueUniqueWork(WORK_TAG, ExistingWorkPolicy.KEEP, exportWorkRequest)
+    }
+
+    private fun observeWork(id: UUID) {
+        workManager.getWorkInfoByIdLiveData(id).observe(this) {
+            when (it?.state) {
+                WorkInfo.State.SUCCEEDED -> {
+                    dataBinding.exFabMain.clearAnimationAndExtend()
+                    showSnackBar(dataBinding.exFabMain, R.string.export_complete)
+                }
+
+                WorkInfo.State.FAILED -> {
+                    dataBinding.exFabMain.clearAnimationAndExtend()
+                    showSnackBar(dataBinding.exFabMain, R.string.export_error)
+                }
+
+                WorkInfo.State.ENQUEUED -> {
+                    dataBinding.exFabMain.startExFabAnimation(this)
+                }
+
+                WorkInfo.State.RUNNING -> {
+                    dataBinding.exFabMain.startExFabAnimation(this)
+                }
+
+                else -> {
+                    showSnackBar(dataBinding.exFabMain, R.string.track_export_null)
+                }
+            }
+        }
     }
 
     private fun setupNavGraph(authStart: Boolean) {
@@ -141,6 +174,15 @@ class MainActivity : AppCompatActivity(),
                 }
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.export_zip -> {
+
+            }
+        }
+        return true
     }
 
     override fun startAuthentication() {
