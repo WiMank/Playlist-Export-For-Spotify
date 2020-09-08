@@ -24,16 +24,16 @@
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/main_toolbar"
-                app:menu="@menu/main_toolbar"
-                app:navigationIcon="@drawable/ic_menu_24px"
-                app:title="@string/app_name_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/colorPrimary"
                 android:minHeight="?attr/actionBarSize"
                 app:contentInsetStart="0dp"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
+                app:menu="@menu/main_toolbar"
+                app:navigationIcon="@drawable/ic_menu_24px"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="@string/app_name_label">
 
             </com.google.android.material.appbar.MaterialToolbar>
 
@@ -53,6 +53,9 @@
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/ex_fab_main"
+            android:textColor="@color/text_color"
+            app:backgroundTint="@color/spotify_green"
+            app:iconTint="@color/icon_color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
