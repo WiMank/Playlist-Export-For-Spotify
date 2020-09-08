@@ -3,6 +3,7 @@ package com.wimank.pbfs.ui.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +26,7 @@ import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(),
     PlaylistFragment.BackupFragmentCallback,
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity(),
         dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         dataBinding.viewModel = viewModel
         dataBinding.lifecycleOwner = this
+        setSupportActionBar(dataBinding.mainToolbar)
         initView()
         startObserve()
         connectivityWatcher()
@@ -176,10 +179,15 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_toolbar, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.export_zip -> {
-
+                ShareZipArchive(this).share()
             }
         }
         return true
