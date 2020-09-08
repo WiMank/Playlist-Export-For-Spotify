@@ -22,7 +22,7 @@ import com.wimank.pbfs.room.entity.UserEntity
 )
 abstract class AppDataBase : RoomDatabase() {
 
-    abstract fun getDbUserDao(): UserDao
+    abstract fun getUserDao(): UserDao
 
     abstract fun getPlaylistDao(): PlaylistDao
 

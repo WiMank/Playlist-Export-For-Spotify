@@ -6,6 +6,7 @@ import com.wimank.pbfs.room.AppDataBase
 import com.wimank.pbfs.room.dao.PlaylistDao
 import com.wimank.pbfs.room.dao.SessionDao
 import com.wimank.pbfs.room.dao.TracksDao
+import com.wimank.pbfs.room.dao.UserDao
 import com.wimank.pbfs.util.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
@@ -41,6 +42,12 @@ class RoomModule {
     @Singleton
     fun provideTracksDao(db: AppDataBase): TracksDao {
         return db.getTracksDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserDao(db: AppDataBase): UserDao {
+        return db.getUserDao()
     }
 
 }
