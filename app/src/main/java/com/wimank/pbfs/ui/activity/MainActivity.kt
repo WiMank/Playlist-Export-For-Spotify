@@ -88,10 +88,8 @@ class MainActivity : AppCompatActivity(),
                     .build()
             )
         }.build()
-
-        observeWork(exportWorkRequest.id)
-
         workManager.enqueueUniqueWork(WORK_TAG, ExistingWorkPolicy.KEEP, exportWorkRequest)
+        observeWork(exportWorkRequest.id)
     }
 
     private fun observeWork(id: UUID) {
@@ -99,7 +97,7 @@ class MainActivity : AppCompatActivity(),
             when (it?.state) {
                 WorkInfo.State.SUCCEEDED -> {
                     dataBinding.exFabMain.clearAnimationAndExtend()
-                    showSnackBar(dataBinding.exFabMain, R.string.export_complete)
+                    showSnackBarFileShare(dataBinding.exFabMain)
                 }
 
                 WorkInfo.State.FAILED -> {

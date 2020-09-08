@@ -17,6 +17,7 @@
     <string name="export_error">Export error</string>
     <string name="export">export</string>
     <string name="track_export_null">Can\'t track export status</string>
+    <string name="share_zip_file">Share zip file?</string>
 
     <plurals name="tracks">
         <item quantity="zero">no tracks</item>

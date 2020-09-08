@@ -52,6 +52,16 @@ fun Activity.showSnackBar(view: View, message: Int) {
     ).show()
 }
 
+fun Activity.showSnackBarFileShare(view: View) {
+    Snackbar.make(
+        view,
+        getString(R.string.export_complete),
+        Snackbar.LENGTH_SHORT
+    ).setAction(getString(R.string.share_zip_file)) {
+        ShareZipArchive(this).share()
+    }.show()
+}
+
 fun Fragment.showSnackBar(view: View, message: Int) {
     Snackbar.make(
         view,
