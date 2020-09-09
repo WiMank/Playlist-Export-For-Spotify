@@ -28,7 +28,6 @@
                 android:layout_height="wrap_content"
                 android:background="?android:attr/colorPrimary"
                 android:minHeight="?attr/actionBarSize"
-                app:contentInsetStart="0dp"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:menu="@menu/main_toolbar"
                 app:navigationIcon="@drawable/ic_menu_24px"

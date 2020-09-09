@@ -11,9 +11,11 @@ import Version.glideVersion
 import Version.junitVersion
 import Version.kotlinGradlePluginVersion
 import Version.kotlinVersion
+import Version.kotlinxHtmlVersion
 import Version.ktxVersion
 import Version.liveDataKtxVersion
 import Version.loggingInterceptorVersion
+import Version.materialVersion
 import Version.moshiVersion
 import Version.navigationComponentVersion
 import Version.navigationSafeArgsVersion
@@ -26,7 +28,7 @@ import Version.timberVersion
 import Version.toolsGradleVersion
 import Version.viewModelVersion
 import Version.workManagerVersion
-
+import Version.ztZipVersion
 
 object Dependencies {
     const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
@@ -99,6 +101,12 @@ object Dependencies {
     const val shimmer = "com.facebook.shimmer:shimmer:${shimmerVersion}"
 
     const val workManager = "androidx.work:work-runtime-ktx:$workManagerVersion"
+
+    const val kotlinxHtml = "org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion"
+
+    const val material = "com.google.android.material:material:$materialVersion"
+
+    const val ztZip = "org.zeroturnaround:zt-zip:$ztZipVersion"
 }
 
 object Version {
@@ -107,7 +115,6 @@ object Version {
     const val appcompatVersion = "1.2.0"
     const val constraintlayoutVersion = "1.1.3"
     const val junitVersion = "4.13"
-    const val junitJupiterVersion = "5.6.2"
     const val androidJunitVersion = "1.1.1"
     const val espressoVersion = "3.2.0"
     const val toolsGradleVersion = "4.0.1"
@@ -131,4 +138,7 @@ object Version {
     const val liveDataKtxVersion = "2.2.0"
     const val shimmerVersion = "0.5.0"
     const val workManagerVersion = "2.4.0"
+    const val kotlinxHtmlVersion = "0.7.2"
+    const val materialVersion = "1.2.1"
+    const val ztZipVersion = "1.14"
 }

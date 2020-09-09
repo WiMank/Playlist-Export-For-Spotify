@@ -3,7 +3,9 @@
     <dimen name="additional_image_pl">15dp</dimen>
     <dimen name="width_avatar">150dp</dimen>
     <dimen name="height_avatar">150dp</dimen>
-    <dimen name="crown">25dp</dimen>
+    <dimen name="auth_image_size">200dp</dimen>
+    <dimen name="empty_list">100dp</dimen>
+    <dimen name="recycler_view_image">75dp</dimen>
     <dimen name="avatar_corner_radius">75dp</dimen>
 
 </resources>

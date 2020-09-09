@@ -1,5 +1,6 @@
 package com.wimank.pbfs.domain.usecase
 
+import com.wimank.pbfs.domain.model.Session
 import com.wimank.pbfs.repository.SessionRepository
 import com.wimank.pbfs.room.entity.SessionEntity
 import com.wimank.pbfs.util.EMPTY_STRING
@@ -14,7 +15,7 @@ class SessionManager @Inject constructor(private val sessionRepository: SessionR
         }
     }
 
-    suspend fun flowSession(): Flow<List<SessionEntity>> {
+    suspend fun flowSession(): Flow<List<Session>> {
         return sessionRepository.flowSession()
     }
 

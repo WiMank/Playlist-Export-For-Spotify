@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.fragment.app.viewModels
 import com.wimank.pbfs.R
 import com.wimank.pbfs.databinding.AuthenticationFragmentBinding
+import com.wimank.pbfs.util.AuthError
+import com.wimank.pbfs.util.showSnackBar
 import com.wimank.pbfs.viewmodel.AuthenticationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +26,14 @@ class AuthenticationFragment : BaseFragment<AuthenticationFragmentBinding>() {
 
         dataBinding.ok.setOnClickListener {
             authenticationFragmentCallBack?.completeAuthentication()
+        }
+
+        viewModel.event.observe(this) {
+            it.getContentIfNotHandled()?.let { let ->
+                if (let is AuthError) {
+                    showSnackBar(dataBinding.root, let.message)
+                }
+            }
         }
     }
 

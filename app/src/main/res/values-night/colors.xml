@@ -3,7 +3,6 @@
     <color name="colorPrimary">#1DB954</color>
     <color name="colorPrimaryDark">#15833C</color>
     <color name="colorAccent">#1DB954</color>
-    <color name="textColorPrimary">#FFFFFF</color>
 
     <color name="spotify_green">#1DB954</color>
     <color name="spotify_black">#191414</color>
@@ -14,6 +13,5 @@
 
     <color name="icon_color">#FFFFFF</color>
     <color name="text_icon_color">#FFFFFF</color>
-    <color name="text_color">#FFFFFF</color>
 
 </resources>

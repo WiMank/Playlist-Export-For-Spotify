@@ -27,6 +27,7 @@
     <string name="logout">Logout</string>
     <string name="user_data_load_failed">Failed to load user data</string>
     <string name="sign_out">Sign out of your account</string>
+    <string name="authentication_error">Authentication error</string>
 
     <plurals name="tracks">
         <item quantity="zero">no tracks</item>

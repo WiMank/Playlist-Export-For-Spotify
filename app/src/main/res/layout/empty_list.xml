@@ -8,8 +8,8 @@
 
         <ImageView
             android:id="@+id/appCompatImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/empty_list"
+            android:layout_height="@dimen/empty_list"
             android:layout_marginTop="8dp"
             android:src="@drawable/ic_box"
             app:layout_constraintBottom_toTopOf="@+id/appCompatTextView2"
@@ -33,4 +33,5 @@
             app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

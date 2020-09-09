@@ -1,39 +1,3 @@
-import Dependencies.androidxJunit
-import Dependencies.appAuth
-import Dependencies.appcompat
-import Dependencies.constraintlayout
-import Dependencies.coreKtx
-import Dependencies.coroutines
-import Dependencies.daggerHilt
-import Dependencies.daggerHiltCompiler
-import Dependencies.daggerHiltLifecycle
-import Dependencies.daggerHiltWork
-import Dependencies.espressoCore
-import Dependencies.glide
-import Dependencies.glideCompiler
-import Dependencies.hiltAndroidCompiler
-import Dependencies.junit
-import Dependencies.junitJupiter
-import Dependencies.kotlinStdlib
-import Dependencies.lifecycleExtensions
-import Dependencies.liveDataKtx
-import Dependencies.loggingInterceptor
-import Dependencies.moshi
-import Dependencies.moshiCodegen
-import Dependencies.navigationComponent
-import Dependencies.navigationComponentKtx
-import Dependencies.okHttp
-import Dependencies.retrofit
-import Dependencies.retrofitConverterMoshi
-import Dependencies.room
-import Dependencies.roomCompiler
-import Dependencies.roomKtx
-import Dependencies.shimmer
-import Dependencies.spotifyAuth
-import Dependencies.timber
-import Dependencies.viewModelKtx
-import Dependencies.workManager
-
 plugins {
     id(Plugins.androidApplication)
     kotlin(Plugins.android)
@@ -94,85 +58,88 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(kotlinStdlib)
-    implementation(coreKtx)
+    implementation(Dependencies.kotlinStdlib)
+    implementation(Dependencies.coreKtx)
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
 
     //Test
-    testImplementation(junit)
-    testImplementation(junitJupiter)
-    androidTestImplementation(androidxJunit)
-    androidTestImplementation(espressoCore)
+    testImplementation(Dependencies.junit)
+    testImplementation(Dependencies.junitJupiter)
+    androidTestImplementation(Dependencies.androidxJunit)
+    androidTestImplementation(Dependencies.espressoCore)
 
     //View
-    implementation(appcompat)
-    implementation(constraintlayout)
+    implementation(Dependencies.appcompat)
+    implementation(Dependencies.constraintlayout)
 
     //Room
-    implementation(room)
-    implementation(roomKtx)
-    kapt(roomCompiler)
+    implementation(Dependencies.room)
+    implementation(Dependencies.roomKtx)
+    kapt(Dependencies.roomCompiler)
 
     //Dagger
-    implementation(daggerHilt)
-    kapt(hiltAndroidCompiler)
+    implementation(Dependencies.daggerHilt)
+    kapt(Dependencies.hiltAndroidCompiler)
 
     //Dagger Lifecycle
-    implementation(daggerHiltLifecycle)
-    kapt(daggerHiltCompiler)
+    implementation(Dependencies.daggerHiltLifecycle)
+    kapt(Dependencies.daggerHiltCompiler)
 
     //Dagger Work Manager
-    implementation(daggerHiltWork)
+    implementation(Dependencies.daggerHiltWork)
 
     //Navigation
-    implementation(navigationComponent)
-    implementation(navigationComponentKtx)
+    implementation(Dependencies.navigationComponent)
+    implementation(Dependencies.navigationComponentKtx)
 
     //ViewModel
-    implementation(viewModelKtx)
-    implementation(lifecycleExtensions)
-    implementation(liveDataKtx)
+    implementation(Dependencies.viewModelKtx)
+    implementation(Dependencies.lifecycleExtensions)
+    implementation(Dependencies.liveDataKtx)
 
     //Coroutines
-    implementation(coroutines)
+    implementation(Dependencies.coroutines)
 
     //Moshi
-    implementation(moshi)
-    kapt(moshiCodegen)
+    implementation(Dependencies.moshi)
+    kapt(Dependencies.moshiCodegen)
 
     //Retrofit
-    implementation(retrofit)
-    implementation(retrofitConverterMoshi)
+    implementation(Dependencies.retrofit)
+    implementation(Dependencies.retrofitConverterMoshi)
 
     //OkHttp
-    implementation(okHttp)
-    implementation(loggingInterceptor)
+    implementation(Dependencies.okHttp)
+    implementation(Dependencies.loggingInterceptor)
 
     //Glide
-    implementation(glide)
-    kapt(glideCompiler)
+    implementation(Dependencies.glide)
+    kapt(Dependencies.glideCompiler)
 
     //Timber
-    implementation(timber)
+    implementation(Dependencies.timber)
 
     //SpotifyAuth
-    implementation(spotifyAuth)
+    implementation(Dependencies.spotifyAuth)
 
     //AppAuth
-    implementation(appAuth)
+    implementation(Dependencies.appAuth)
 
     //Shimmer
-    implementation(shimmer)
+    implementation(Dependencies.shimmer)
 
     //Work Manager
-    implementation(workManager)
+    implementation(Dependencies.workManager)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
+    //KotlinxHtml
+    implementation(Dependencies.kotlinxHtml)
 
-    implementation("com.google.android.material:material:1.2.1")
+    //Material components
+    implementation(Dependencies.material)
 
-    implementation("org.zeroturnaround:zt-zip:1.14")
+    //ZtZip
+    implementation(Dependencies.ztZip)
 
 }
