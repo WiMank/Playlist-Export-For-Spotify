@@ -19,7 +19,6 @@ import com.wimank.pbfs.util.showSnackBar
 import com.wimank.pbfs.viewmodel.UserProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class UserProfileDialog : BottomSheetDialogFragment() {
 

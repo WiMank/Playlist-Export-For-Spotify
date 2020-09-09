@@ -6,4 +6,3 @@ import com.wimank.pbfs.databinding.ShimmerProgressItemBinding
 class ShimmerViewHolder(
     shimmerProgressItemBinding: ShimmerProgressItemBinding
 ) : RecyclerView.ViewHolder(shimmerProgressItemBinding.root)
-

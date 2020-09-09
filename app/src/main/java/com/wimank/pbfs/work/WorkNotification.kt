@@ -10,15 +10,14 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class WorkNotification @Inject constructor(@ApplicationContext private val context: Context) {
+
     private val notificationManager =
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     private var builder = NotificationCompat.Builder(context, CHANNEL_ID)
 
     private companion object {
         const val CHANNEL_ID = "Playlists export"
-        const val LOADING_TRACKS = 0
-        const val ERROR_LOADING_TRACKS = 0
-        const val COMPLETE = 0
+        const val NOTIFICATION_ID = 228996
     }
 
     init {
@@ -27,7 +26,7 @@ class WorkNotification @Inject constructor(@ApplicationContext private val conte
 
     fun showLoadTracks() {
         notificationManager.notify(
-            LOADING_TRACKS,
+            NOTIFICATION_ID,
             builder.apply {
                 setSmallIcon(R.drawable.ic_cloud_download_24px)
                 setContentTitle(context.getString(R.string.loading_tracks))
@@ -39,7 +38,7 @@ class WorkNotification @Inject constructor(@ApplicationContext private val conte
 
     fun showWriteTracks() {
         notificationManager.notify(
-            LOADING_TRACKS,
+            NOTIFICATION_ID,
             builder.apply {
                 setSmallIcon(R.drawable.ic_write)
                 setContentTitle(context.getString(R.string.write_playlists))
@@ -51,7 +50,7 @@ class WorkNotification @Inject constructor(@ApplicationContext private val conte
 
     fun showExportComplete() {
         notificationManager.notify(
-            COMPLETE,
+            NOTIFICATION_ID,
             builder.apply {
                 setSmallIcon(R.drawable.ic_ok)
                 setContentTitle(context.getString(R.string.export_complete))
@@ -63,7 +62,7 @@ class WorkNotification @Inject constructor(@ApplicationContext private val conte
 
     fun showExportError(cause: String) {
         notificationManager.notify(
-            COMPLETE,
+            NOTIFICATION_ID,
             builder.apply {
                 setSmallIcon(R.drawable.ic_error)
                 setContentTitle(context.getString(R.string.export_error))

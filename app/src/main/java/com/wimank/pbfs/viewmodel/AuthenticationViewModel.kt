@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wimank.pbfs.R
 import com.wimank.pbfs.domain.usecase.SessionManager
-import com.wimank.pbfs.util.AuthError
 import com.wimank.pbfs.util.Event
-import com.wimank.pbfs.util.EventMessage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -19,7 +17,7 @@ class AuthenticationViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     val authComplete = MutableLiveData(false)
-    val event = MutableLiveData<Event<EventMessage>>()
+    val authError = MutableLiveData<Event<Int>>()
 
     init {
         checkSession()
@@ -34,7 +32,7 @@ class AuthenticationViewModel @ViewModelInject constructor(
                     }
                 }
             } catch (e: Exception) {
-                event.postValue(Event(AuthError(R.string.authentication_error)))
+                authError.postValue(Event(R.string.authentication_error))
                 Timber.e(e)
             }
         }

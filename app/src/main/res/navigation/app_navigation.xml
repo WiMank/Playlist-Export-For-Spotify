@@ -20,6 +20,10 @@
         <action
             android:id="@+id/action_authenticationFragment_to_playlistFragment"
             app:destination="@id/playlistFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/authenticationFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -31,6 +35,10 @@
         <action
             android:id="@+id/action_userProfileDialog_to_authenticationFragment"
             app:destination="@id/authenticationFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/playlistFragment"
             app:popUpToInclusive="true" />
     </dialog>

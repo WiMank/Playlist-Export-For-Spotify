@@ -56,8 +56,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
     private fun initViewExFab() {
         dataBinding.exFabMain.apply {
             setOnClickListener {
-                if (isExtended)
-                    startWork()
+                startWork()
             }
         }
     }

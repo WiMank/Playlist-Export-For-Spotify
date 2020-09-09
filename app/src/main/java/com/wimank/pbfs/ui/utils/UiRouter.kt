@@ -7,7 +7,6 @@ import com.wimank.pbfs.ui.fragment.PlaylistFragmentDirections
 import com.wimank.pbfs.ui.fragment.UserProfileDialogDirections
 import timber.log.Timber
 
-
 class UiRouter(private val navController: NavController) {
 
     fun navigateToPlaylistFragment() {
@@ -26,10 +25,6 @@ class UiRouter(private val navController: NavController) {
         navController.navigateSafe(
             UserProfileDialogDirections.actionUserProfileDialogToAuthenticationFragment()
         )
-    }
-
-    fun popBackStack() {
-        navController.popBackStack()
     }
 
     fun getNavController() = navController

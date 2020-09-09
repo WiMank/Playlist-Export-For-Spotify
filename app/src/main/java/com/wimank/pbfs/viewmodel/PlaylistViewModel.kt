@@ -11,6 +11,7 @@ import com.wimank.pbfs.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import timber.log.Timber
 
 class PlaylistViewModel @ViewModelInject constructor(
@@ -67,6 +68,9 @@ class PlaylistViewModel @ViewModelInject constructor(
                 event.postValue(Event(LoadError(R.string.load_playlists_error)))
                 clearUpdateTime()
                 Timber.e(ex)
+            } catch (httpEx: HttpException) {
+                if (httpEx.code() == UNAUTHORIZED_CODE)
+                    event.postValue(Event(Logout(R.string.need_authentication)))
             } finally {
                 showRefresh(false)
             }

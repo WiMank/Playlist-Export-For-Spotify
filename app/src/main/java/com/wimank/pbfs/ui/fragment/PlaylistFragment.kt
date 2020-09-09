@@ -72,29 +72,41 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
             event.getContentIfNotHandled()?.let {
                 when (it) {
                     is Timeout -> {
-                        Snackbar.make(
-                            dataBinding.playlistsCl,
-                            getString(R.string.update_timeout_message, it.time),
-                            Snackbar.LENGTH_SHORT
-                        ).show()
+                        showTimeoutSnackBar(it.time)
                     }
                     is LoadComplete -> {
-                        showSnackBar(dataBinding.playlistsCl, it.message)
+                        showSnackBar(dataBinding.root, it.message)
                     }
                     is LoadError -> {
-                        showSnackBar(dataBinding.playlistsCl, it.message)
-                        rvAdapter.setData(rvAdapter.showError())
-                        backupFragmentCallback?.stopLoad(false)
+                        showSnackBar(dataBinding.root, it.message)
+                        showError()
                     }
                     is OfflineMode -> {
-                        showSnackBar(dataBinding.playlistsCl, it.message)
+                        showSnackBar(dataBinding.root, it.message)
                     }
                     is EmptyList -> {
-                        showSnackBar(dataBinding.playlistsCl, it.message)
+                        showSnackBar(dataBinding.root, it.message)
+                    }
+                    is Logout -> {
+                        showSnackBar(dataBinding.root, it.message)
+                        showError()
                     }
                 }
             }
         }
+    }
+
+    private fun showError() {
+        rvAdapter.setData(rvAdapter.showError())
+        backupFragmentCallback?.stopLoad(false)
+    }
+
+    private fun showTimeoutSnackBar(time: String) {
+        Snackbar.make(
+            dataBinding.root,
+            getString(R.string.update_timeout_message, time),
+            Snackbar.LENGTH_SHORT
+        ).show()
     }
 
     interface BackupFragmentCallback {

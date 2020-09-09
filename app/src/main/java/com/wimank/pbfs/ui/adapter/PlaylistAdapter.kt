@@ -68,7 +68,7 @@ class PlaylistAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun startLoading(): List<ShimmerStub> {
         var i = 0
         val list = mutableListOf<ShimmerStub>()
-        while (i < 15) {
+        while (i <= 15) {
             list.add(ShimmerStub())
             i++
         }
@@ -78,12 +78,10 @@ class PlaylistAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun showError(): List<ErrorStub> {
         var i = 0
         val list = mutableListOf<ErrorStub>()
-
-        while (i < 15) {
+        while (i <= 15) {
             list.add(ErrorStub())
             i++
         }
         return list
     }
-
 }

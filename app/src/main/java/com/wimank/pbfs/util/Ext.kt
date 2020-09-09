@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.snackbar.Snackbar
 import com.wimank.pbfs.R
 
-//Required for spotify api access
+//Required for spotify api access. Token + Bearer word
 fun String.bearer(): String {
     return BEARER.plus(this)
 }
@@ -44,7 +45,7 @@ fun ExtendedFloatingActionButton.clearAnimationAndExtend() {
     extend()
 }
 
-fun Activity.showSnackBar(view: View, message: Int) {
+fun Activity.showSnackBar(view: View, @StringRes message: Int) {
     Snackbar.make(
         view,
         getString(message),
@@ -62,7 +63,7 @@ fun Activity.showSnackBarFileShare(view: View) {
     }.show()
 }
 
-fun Fragment.showSnackBar(view: View, message: Int) {
+fun Fragment.showSnackBar(view: View, @StringRes message: Int) {
     Snackbar.make(
         view,
         getString(message),

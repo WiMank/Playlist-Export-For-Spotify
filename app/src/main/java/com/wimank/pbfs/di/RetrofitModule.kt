@@ -2,6 +2,7 @@ package com.wimank.pbfs.di
 
 import com.wimank.pbfs.BuildConfig
 import com.wimank.pbfs.util.BASE_SPOTIFY_URL
+import com.wimank.pbfs.util.OK_HTTP_TAG
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,7 +42,7 @@ class RetrofitModule {
     fun provideInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
-                Timber.tag("OkHttp").d(message)
+                Timber.tag(OK_HTTP_TAG).d(message)
             }
         }).apply {
             if (BuildConfig.DEBUG)

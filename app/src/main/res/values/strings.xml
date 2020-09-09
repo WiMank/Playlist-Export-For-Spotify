@@ -15,7 +15,7 @@
     <string name="export_error">Export error</string>
     <string name="export">export</string>
     <string name="track_export_null">Can\'t track export status</string>
-    <string name="share_zip_file">Share zip file?</string>
+    <string name="share_zip_file">Share zip file</string>
     <string name="nothing_send">Nothing to send, export playlists first</string>
     <string name="authentication">Authentication</string>
     <string name="go">GO!</string>
@@ -28,6 +28,8 @@
     <string name="user_data_load_failed">Failed to load user data</string>
     <string name="sign_out">Sign out of your account</string>
     <string name="authentication_error">Authentication error</string>
+    <string name="need_authentication">Authentication required! Sign in again!</string>
+    <string name="unknown_event">Unknown event</string>
 
     <plurals name="tracks">
         <item quantity="zero">no tracks</item>
