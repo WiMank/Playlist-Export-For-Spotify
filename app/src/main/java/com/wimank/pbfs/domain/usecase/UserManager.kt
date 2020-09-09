@@ -27,5 +27,6 @@ class UserManager @Inject constructor(
 
     suspend fun logout() {
         sessionManager.clearSession()
+        userRepository.clearProfile()
     }
 }

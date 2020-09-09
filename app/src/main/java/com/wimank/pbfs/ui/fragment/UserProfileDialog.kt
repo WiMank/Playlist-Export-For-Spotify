@@ -40,7 +40,7 @@ class UserProfileDialog : BottomSheetDialogFragment() {
             dismiss()
         }
 
-        dataBinding.githubTextView.setOnClickListener {
+        dataBinding.github.setOnClickListener {
             goToGithub()
         }
 

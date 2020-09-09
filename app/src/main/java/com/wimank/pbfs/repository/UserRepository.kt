@@ -8,5 +8,6 @@ interface UserRepository {
    suspend fun loadNetworkUser(token: String)
    suspend fun flowUser(): Flow<User>
    suspend fun canUpdateProfile(): Boolean
+   suspend fun clearProfile()
 
 }

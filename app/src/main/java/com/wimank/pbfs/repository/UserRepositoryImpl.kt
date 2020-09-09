@@ -37,6 +37,10 @@ class UserRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun clearProfile() {
+        userDao.clearUser()
+    }
+
     private suspend fun saveResponse(userEntity: UserEntity) {
         userDao.clearAndInsertUser(userEntity)
     }
