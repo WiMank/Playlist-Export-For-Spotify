@@ -3,6 +3,7 @@ package com.wimank.pbfs.domain.usecase
 import com.wimank.pbfs.repository.SessionRepository
 import com.wimank.pbfs.room.entity.SessionEntity
 import com.wimank.pbfs.util.EMPTY_STRING
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SessionManager @Inject constructor(private val sessionRepository: SessionRepository) {
@@ -13,8 +14,8 @@ class SessionManager @Inject constructor(private val sessionRepository: SessionR
         }
     }
 
-    suspend fun getSession(): SessionEntity {
-        return sessionRepository.getSession()
+    suspend fun flowSession(): Flow<List<SessionEntity>> {
+        return sessionRepository.flowSession()
     }
 
     suspend fun checkSessionBeforeRequest(): String {

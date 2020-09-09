@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragment.AuthenticationFragment">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/desc_text_v"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/appCompatTextView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/appCompatTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/appCompatImageView2"
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -66,7 +66,8 @@
             android:src="@drawable/icon_round"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+            tools:ignore="ContentDescription" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/start_auth"

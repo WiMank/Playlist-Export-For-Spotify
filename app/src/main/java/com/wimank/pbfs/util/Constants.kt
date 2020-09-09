@@ -46,3 +46,5 @@ const val ARCHIVE_NAME = "spotify_playlists.zip"
 const val WORK_TAG = "export_work"
 const val FILE_PROVIDER = "com.wimank.pbfs.fileprovider"
 const val ZIP_MIME_TYPE = "application/zip"
+const val ONE_HOUR = 3600000L
+const val URL_REPOSITORY = "https://github.com"

@@ -53,12 +53,14 @@ class PlaylistViewModel @ViewModelInject constructor(
                 showRefresh(true)
                 playlistManager.loadNetworkPlaylists().collect {
                     playListData.postValue(it)
+
                     if (it.isNotEmpty()) {
                         event.postValue(Event(LoadComplete(R.string.load_playlists_complete)))
                     } else {
                         event.postValue(Event(EmptyList(R.string.playlists_empty)))
                         emptyData.postValue(true)
                     }
+
                     showRefresh(false)
                 }
             } catch (ex: Exception) {

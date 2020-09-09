@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class NetworkUser(
-    val country: String,
+    val country: String?,
     @Json(name = "display_name")
     val displayName: String?,
     val email: String,
@@ -15,15 +15,15 @@ data class NetworkUser(
     val href: String,
     val id: String,
     val images: List<Image>?,
-    val product: String,
+    val product: String?,
     val type: String,
     val uri: String
 ) {
     @JsonClass(generateAdapter = true)
     data class Image(
-        val height: Int,
-        val url: String,
-        val width: Int
+        val height: Int?,
+        val url: String?,
+        val width: Int?
     )
 
     @JsonClass(generateAdapter = true)

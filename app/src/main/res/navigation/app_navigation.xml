@@ -27,6 +27,12 @@
     <dialog
         android:id="@+id/userProfileDialog"
         android:name="com.wimank.pbfs.ui.fragment.UserProfileDialog"
-        android:label="UserProfileDialog" />
+        android:label="UserProfileDialog">
+        <action
+            android:id="@+id/action_userProfileDialog_to_authenticationFragment"
+            app:destination="@id/authenticationFragment"
+            app:popUpTo="@id/playlistFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
 
 </navigation>

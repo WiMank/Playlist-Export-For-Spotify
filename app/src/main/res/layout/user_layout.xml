@@ -3,23 +3,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.wimank.pbfs.viewmodel.UserProfileViewModel" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/user_cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="@{viewModel.update ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/user_cardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
             app:cardCornerRadius="@dimen/avatar_corner_radius"
             app:cardPreventCornerOverlap="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/progressBar">
 
             <ImageView
                 android:id="@+id/avatar"
+                loadImage="@{viewModel.data.avatar}"
                 android:layout_width="@dimen/width_avatar"
                 android:layout_height="@dimen/height_avatar"
                 tools:ignore="ContentDescription"
@@ -33,25 +61,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
-            app:layout_constraintEnd_toStartOf="@+id/user_premium"
-            app:layout_constraintHorizontal_bias="0.5"
+            android:text="@{viewModel.data.name}"
+            app:layout_constraintEnd_toEndOf="@+id/user_cardView"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/user_cardView"
             app:layout_constraintTop_toBottomOf="@+id/user_cardView"
             tools:text="My Name" />
-
-        <ImageView
-            android:id="@+id/user_premium"
-            android:layout_width="@dimen/crown"
-            android:layout_height="@dimen/crown"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/user_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/user_name"
-            app:layout_constraintTop_toTopOf="@+id/user_name"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/ic_crown" />
 
         <ImageView
             android:id="@+id/github_image_view"
@@ -70,6 +85,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/go_to_github"
+            android:clickable="true"
+            android:focusable="true"
             app:layout_constraintBottom_toBottomOf="@+id/github_image_view"
             app:layout_constraintStart_toEndOf="@+id/github_image_view"
             app:layout_constraintTop_toTopOf="@+id/github_image_view" />
@@ -92,6 +109,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{()-> viewModel.logout()}"
             android:text="@string/logout"
             app:layout_constraintBottom_toBottomOf="@+id/logout_image_view"
             app:layout_constraintStart_toEndOf="@+id/logout_image_view"
@@ -101,10 +121,10 @@
             android:id="@+id/close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBar"
             app:srcCompat="@drawable/ic_close_24px"
             tools:ignore="ContentDescription" />
 

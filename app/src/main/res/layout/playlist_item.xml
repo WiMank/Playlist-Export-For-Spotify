@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/playlist_image"
             loadImage="@{playlistItem.image}"
             android:layout_width="75dp"
@@ -30,9 +30,10 @@
             app:layout_constraintEnd_toStartOf="@+id/playlist_name"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/playlist_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -47,7 +48,7 @@
             app:layout_goneMarginEnd="16dp"
             tools:text="PLAYLIST" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/collaborative_pl"
             android:layout_width="@dimen/additional_image_pl"
             android:layout_height="@dimen/additional_image_pl"
@@ -58,9 +59,10 @@
             app:layout_constraintBottom_toTopOf="@+id/public_pl"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
             tools:visibility="visible" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/public_pl"
             android:layout_width="@dimen/additional_image_pl"
             android:layout_height="@dimen/additional_image_pl"
@@ -71,9 +73,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/collaborative_pl"
+            tools:ignore="ContentDescription"
             tools:visibility="visible" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/total_tracks"
             setTrackCount="@{playlistItem.tracksCount}"
             android:layout_width="wrap_content"

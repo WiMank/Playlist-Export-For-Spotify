@@ -2,17 +2,25 @@ package com.wimank.pbfs.room.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.wimank.pbfs.domain.model.User
+import androidx.room.Transaction
 import com.wimank.pbfs.room.entity.UserEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface UserDao : BaseDao<UserEntity> {
+abstract class UserDao : BaseDao<UserEntity> {
 
     @Query("SELECT * FROM user")
-    suspend fun getUser(): User
+    abstract fun flowUser(): Flow<UserEntity>
 
-    @Query("SELECT * FROM user")
-    fun flowUser(): Flow<User>
+    @Query("DELETE FROM user")
+    abstract suspend fun clearUser()
 
+    @Query("SELECT update_time FROM user")
+    abstract suspend fun getUpdateTime(): Long?
+
+    @Transaction
+    open suspend fun clearAndInsertUser(userEntity: UserEntity) {
+        clearUser()
+        insert(userEntity)
+    }
 }

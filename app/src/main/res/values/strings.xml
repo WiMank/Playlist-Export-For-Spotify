@@ -25,6 +25,8 @@
     <string name="hello">Hello!</string>
     <string name="go_to_github">Go to GitHub</string>
     <string name="logout">Logout</string>
+    <string name="user_data_load_failed">Failed to load user data</string>
+    <string name="sign_out">Sign out of your account</string>
 
     <plurals name="tracks">
         <item quantity="zero">no tracks</item>

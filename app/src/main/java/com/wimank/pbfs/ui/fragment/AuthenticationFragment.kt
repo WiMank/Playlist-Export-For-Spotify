@@ -2,14 +2,16 @@ package com.wimank.pbfs.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.wimank.pbfs.R
 import com.wimank.pbfs.databinding.AuthenticationFragmentBinding
 import com.wimank.pbfs.viewmodel.AuthenticationViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthenticationFragment : BaseFragment<AuthenticationFragmentBinding>() {
 
-    private val viewModel: AuthenticationViewModel by activityViewModels()
+    private val viewModel: AuthenticationViewModel by viewModels()
     private var authenticationFragmentCallBack: AuthenticationFragmentCallBack? = null
 
     override fun getLayoutRes() = R.layout.authentication_fragment

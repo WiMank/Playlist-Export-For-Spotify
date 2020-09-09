@@ -1,5 +1,6 @@
 package com.wimank.pbfs.room.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -8,5 +9,6 @@ data class UserEntity(
     @PrimaryKey
     val name: String,
     val avatar: String,
-    val isPremium: Boolean
+    @ColumnInfo(name = "update_time")
+    val updateTime: Long,
 )

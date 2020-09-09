@@ -1,8 +1,10 @@
 package com.wimank.pbfs.domain.usecase
 
-import com.wimank.pbfs.domain.model.Track
+import com.wimank.pbfs.domain.model.User
 import com.wimank.pbfs.repository.UserRepository
 import com.wimank.pbfs.util.AccessTokenException
+import com.wimank.pbfs.util.bearer
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class UserManager @Inject constructor(
@@ -10,17 +12,20 @@ class UserManager @Inject constructor(
     private val userRepository: UserRepository
 ) {
 
-    suspend fun loadNetworkUser() {
-        sessionManager.checkSessionBeforeRequest().run {
-            if (isNotEmpty()) {
-                TODO("loadNetworkUser")
-            } else {
-                throw AccessTokenException()
+    suspend fun loadUser(): Flow<User> {
+        if (userRepository.canUpdateProfile()) {
+            sessionManager.checkSessionBeforeRequest().run {
+                if (isNotEmpty()) {
+                    userRepository.loadNetworkUser(bearer())
+                } else {
+                    throw AccessTokenException()
+                }
             }
         }
+        return userRepository.flowUser()
     }
 
-    suspend fun loadLocalUser(): List<Track> {
-        TODO("loadLocalUser")
+    suspend fun logout() {
+        sessionManager.clearSession()
     }
 }

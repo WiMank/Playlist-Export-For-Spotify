@@ -7,6 +7,7 @@ import com.wimank.pbfs.room.entity.SessionEntity
 import com.wimank.pbfs.util.EMPTY_STRING
 import com.wimank.pbfs.util.REFRESH_TOKEN_GRANT_TYPE
 import com.wimank.pbfs.util.SESSION_ID
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SessionRepositoryImpl @Inject constructor(
@@ -28,6 +29,10 @@ class SessionRepositoryImpl @Inject constructor(
 
     override suspend fun getSession(): SessionEntity {
         return sessionDao.getCurrentSession()
+    }
+
+    override suspend fun flowSession(): Flow<List<SessionEntity>> {
+        return sessionDao.flowCurrentSession()
     }
 
     override suspend fun hasSession(): Boolean {

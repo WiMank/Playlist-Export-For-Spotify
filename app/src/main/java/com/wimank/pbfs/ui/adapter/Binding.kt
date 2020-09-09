@@ -1,14 +1,14 @@
 package com.wimank.pbfs.ui.adapter
 
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.AppCompatTextView
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.wimank.pbfs.R
 import com.wimank.pbfs.di.GlideApp
 
 
 @BindingAdapter("loadImage")
-fun loadImage(imageView: AppCompatImageView, url: String) {
+fun loadImage(imageView: ImageView, url: String?) {
     GlideApp
         .with(imageView.context)
         .load(url)
@@ -19,6 +19,6 @@ fun loadImage(imageView: AppCompatImageView, url: String) {
 }
 
 @BindingAdapter("setTrackCount")
-fun setTrackCount(textView: AppCompatTextView, tracks: Int) {
+fun setTrackCount(textView: TextView, tracks: Int) {
     textView.text = textView.resources.getQuantityString(R.plurals.tracks, tracks, tracks)
 }

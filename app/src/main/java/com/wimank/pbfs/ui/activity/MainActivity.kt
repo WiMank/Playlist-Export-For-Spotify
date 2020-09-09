@@ -15,9 +15,9 @@ import com.wimank.pbfs.R
 import com.wimank.pbfs.databinding.ActivityMainBinding
 import com.wimank.pbfs.ui.fragment.AuthenticationFragment
 import com.wimank.pbfs.ui.fragment.PlaylistFragment
+import com.wimank.pbfs.ui.fragment.UserProfileDialog
 import com.wimank.pbfs.ui.utils.UiRouter
 import com.wimank.pbfs.util.*
-import com.wimank.pbfs.viewmodel.AuthenticationViewModel
 import com.wimank.pbfs.viewmodel.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import net.openid.appauth.*
@@ -28,12 +28,12 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(),
     PlaylistFragment.BackupFragmentCallback,
-    AuthenticationFragment.AuthenticationFragmentCallBack {
+    AuthenticationFragment.AuthenticationFragmentCallBack,
+    UserProfileDialog.UserProfileDialogCallback {
 
     private val authService by lazy { AuthorizationService(this) }
     private val uiRouter: UiRouter by lazy { UiRouter(findNavController(R.id.main_nav_host)) }
     private val viewModel: MainActivityViewModel by viewModels()
-    private val authViewModel: AuthenticationViewModel by viewModels()
     private val workManager: WorkManager by lazy { WorkManager.getInstance(this) }
 
     @Inject
@@ -184,7 +184,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
                 authService.performTokenRequest(it) { response, ex ->
                     if (response != null) {
                         viewModel.prepareAndWriteSession(response)
-                        authViewModel.showCompleteActionForAuth()
                     } else {
                         // authorization failed, check ex for more details
                         Timber.e(ex)
@@ -235,5 +234,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
         } else {
             dataBinding.exFabMain.hide()
         }
+    }
+
+    override fun logout() {
+        uiRouter.navigateToAuthenticationFragment()
     }
 }
