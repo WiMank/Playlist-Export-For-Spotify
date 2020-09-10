@@ -33,26 +33,39 @@ class PlaylistViewModel @ViewModelInject constructor(
         checkConditionsForRequest()
     }
 
+    /**
+     * Checking the conditions for a request.
+     */
     private fun checkConditionsForRequest() {
+        //checking for network availability
         if (networkManager.isNetworkAvailable()) {
+            //checking the elapsed time after the last request
             if (canUpdate()) {
                 startLoadPlaylists()
                 newUpdateTime()
             } else {
+                //show snackbar with the remaining time
                 event.value = Event(Timeout(currentTimeOutTime()))
                 showRefresh(false)
             }
         } else {
+            //offline mode
             loadLocalPlaylists()
             event.value = Event(OfflineMode((R.string.no_internet_connection)))
         }
     }
 
+    /**
+     * Start load playlists
+     */
     private fun startLoadPlaylists() {
         viewModelScope.launch(context = Dispatchers.IO) {
             try {
                 showRefresh(true)
+
+                //wait data
                 playlistManager.loadNetworkPlaylists().collect {
+                    //set data
                     playListData.postValue(it)
 
                     if (it.isNotEmpty()) {
@@ -77,6 +90,9 @@ class PlaylistViewModel @ViewModelInject constructor(
         }
     }
 
+    /**
+     * Loading playlists from the database.
+     */
     private fun loadLocalPlaylists() {
         viewModelScope.launch(context = Dispatchers.IO) {
             try {
@@ -91,6 +107,9 @@ class PlaylistViewModel @ViewModelInject constructor(
         }
     }
 
+    /**
+     * Checking whether data can be updated.
+     */
     private fun canUpdate(): Boolean {
         if (updateTime == 0L) {
             return true
@@ -98,16 +117,28 @@ class PlaylistViewModel @ViewModelInject constructor(
         return updateTime <= System.currentTimeMillis()
     }
 
+    /**
+     * New time for update request.
+     */
     private fun newUpdateTime() {
         updateTime = System.currentTimeMillis() + ONE_MINUTE
     }
 
+    /**
+     * Clear update time.
+     */
     private fun clearUpdateTime() {
         updateTime = 0L
     }
 
+    /**
+     * @return time until data update
+     */
     private fun currentTimeOutTime() = ((updateTime - System.currentTimeMillis()) / 1000).toString()
 
+    /**
+     * To show or hide the animation updates.
+     */
     private fun showRefresh(show: Boolean) {
         updateData.postValue(show)
     }

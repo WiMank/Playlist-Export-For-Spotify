@@ -32,24 +32,46 @@ const val ONE_MINUTE = 60000L
 
 const val HTML_EXT = ".html"
 
+//Html page style
 const val TABLE_STYLE =
     """table {font-family: arial, sans-serif;border-collapse: collapse;width: 100%;}"""
-
 const val TD_TH_STYLE = """td, th {border: 1px solid #dddddd;ext-align: left;padding: 8px;}"""
-
 const val ARTISTS_COLUMN = "Artist"
 const val TRACK_NAME_COLUMN = "Track Name"
 const val TITLE_FOR_PAGE = "Playlists"
+
+//Folder for storing html files
 const val APP_FOLDER = "Playlists"
+
+//Folder for storing an archive of html files
 const val ZIP_APP_FOLDER = "ZIP_Playlists"
+
+//Archive file name
 const val ARCHIVE_NAME = "spotify_playlists.zip"
+
+//Tag for ExportWorker
 const val WORK_TAG = "export_work"
+
 const val FILE_PROVIDER = "com.wimank.pbfs.fileprovider"
+
+//Mime type for file provider
 const val ZIP_MIME_TYPE = "application/zip"
+
+//It's one hour :)
 const val ONE_HOUR = 3600000L
+
+//App github repository
 const val URL_REPOSITORY = "https://github.com/WiMank/Playlist-Backup-For-Spotify"
+
+//Http unauthorized code
 const val UNAUTHORIZED_CODE = 401
+
+//Limits for spotify api
 const val PLAYLISTS_LIMIT = 50
 const val TRACKS_LIMIT = 50
+
+//Start page for request
 const val START_OFFSET = 0
+
+//OkHttp log tag interceptor
 const val OK_HTTP_TAG = "OkHttp"

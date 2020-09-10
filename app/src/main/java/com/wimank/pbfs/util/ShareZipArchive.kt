@@ -8,6 +8,9 @@ import androidx.core.content.FileProvider
 import timber.log.Timber
 import java.io.File
 
+/**
+ * Archiving html playlist files.
+ */
 class ShareZipArchive(private val context: Context) {
 
     fun share() {

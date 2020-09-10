@@ -26,6 +26,7 @@ class AuthenticationViewModel @ViewModelInject constructor(
     private fun checkSession() {
         viewModelScope.launch(context = Dispatchers.IO) {
             try {
+                //waiting for the session update
                 sessionManager.flowSession().collect {
                     it.forEach { list ->
                         authComplete.postValue(list.accessToken.isNotEmpty() && (list.refreshToken.isNotEmpty()))

@@ -1,5 +1,8 @@
 package com.wimank.pbfs.util
 
+/**
+ * Events in the app.
+ */
 sealed class EventMessage
 data class Timeout(val time: String) : EventMessage()
 data class LoadComplete(val message: Int) : EventMessage()
