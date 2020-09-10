@@ -43,6 +43,7 @@ class UserProfileDialog : BottomSheetDialogFragment() {
             goToGithub()
         }
 
+        //observe events
         viewModel.event.observe(this) { event ->
             event.getContentIfNotHandled()?.let {
                 if (it is LoadError) {
@@ -64,6 +65,9 @@ class UserProfileDialog : BottomSheetDialogFragment() {
             userProfileDialogCallback = context
     }
 
+    /**
+     * Go to the repository of this app.
+     */
     private fun goToGithub() {
         Intent(Intent.ACTION_VIEW).apply {
             data = Uri.parse(URL_REPOSITORY)
@@ -71,7 +75,13 @@ class UserProfileDialog : BottomSheetDialogFragment() {
         }
     }
 
+    /**
+     * [UserProfileDialog] callback.
+     */
     interface UserProfileDialogCallback {
+        /**
+         * Called when the logout button is clicked.
+         */
         fun logout()
     }
 }

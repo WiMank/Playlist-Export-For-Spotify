@@ -7,6 +7,9 @@ import com.wimank.pbfs.ui.fragment.PlaylistFragmentDirections
 import com.wimank.pbfs.ui.fragment.UserProfileDialogDirections
 import timber.log.Timber
 
+/**
+ * Navigation in the app.
+ */
 class UiRouter(private val navController: NavController) {
 
     fun navigateToPlaylistFragment() {
@@ -29,6 +32,10 @@ class UiRouter(private val navController: NavController) {
 
     fun getNavController() = navController
 
+    /**
+     * Safe call to the navigate method.
+     * Catches an [IllegalArgumentException].
+     */
     private fun NavController.navigateSafe(navDirections: NavDirections? = null) {
         try {
             navDirections?.let {
