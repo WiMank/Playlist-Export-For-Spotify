@@ -8,6 +8,7 @@ import Version.daggerHiltVersion
 import Version.daggerHiltWorkVersion
 import Version.espressoVersion
 import Version.glideVersion
+import Version.junitJupiterVersion
 import Version.junitVersion
 import Version.kotlinGradlePluginVersion
 import Version.kotlinVersion
@@ -42,7 +43,7 @@ object Dependencies {
 
     const val junit = "junit:junit:$junitVersion"
 
-    const val junitJupiter = "org.junit.jupiter:junit-jupiter"
+    const val junitJupiter = "org.junit.jupiter:junit-jupiter:$junitJupiterVersion"
 
     const val androidxJunit = "androidx.test.ext:junit:$androidJunitVersion"
 
@@ -116,6 +117,7 @@ object Version {
     const val constraintlayoutVersion = "1.1.3"
     const val junitVersion = "4.13"
     const val androidJunitVersion = "1.1.1"
+    const val junitJupiterVersion = "5.6.2"
     const val espressoVersion = "3.2.0"
     const val toolsGradleVersion = "4.0.1"
     const val kotlinGradlePluginVersion = kotlinVersion
