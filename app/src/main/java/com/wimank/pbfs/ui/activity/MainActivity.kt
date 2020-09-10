@@ -62,28 +62,36 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
     }
 
     private fun startObserve() {
+        //Checking the session status
         viewModel.sessionState.observe(this) {
             setupNavGraph(it)
         }
 
+        //Enable or disable exfab depending on the network status
         viewModel.networkState.observe(this) {
             dataBinding.exFabMain.isEnabled = it
         }
     }
 
     private fun connectivityWatcher() {
+        //Observe the network status and change the button status
         connectivityWatcher.observe(this) {
             dataBinding.exFabMain.isEnabled = it
         }
     }
 
     private fun observeWorkStatus() {
+        //LiveData, which contains the working ID for monitoring
         viewModel.workId.observe(this) {
             observeWork(it)
         }
     }
 
+    /**
+     * Start export tracks.
+     * */
     private fun startWork() {
+        //Start worker
         workManager.enqueueUniqueWork(
             WORK_TAG,
             ExistingWorkPolicy.KEEP,
@@ -91,6 +99,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
         )
     }
 
+    /**
+     * Observe the export work status.
+     * */
     private fun observeWork(id: UUID) {
         workManager.getWorkInfoByIdLiveData(id).observe(this) {
             when (it?.state) {
@@ -119,6 +130,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
         }
     }
 
+    /**
+     * Setting up start destination.
+     * @param [authStart] define start fragment.
+     */
     private fun setupNavGraph(authStart: Boolean) {
         val navGraph = uiRouter.getNavController().navInflater.inflate(R.navigation.app_navigation)
         if (authStart) {
@@ -136,9 +151,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
                 when (destination.id) {
                     R.id.authenticationFragment -> {
                         dataBinding.exFabMain.hide()
+                        //Hide appbar
                         dataBinding.mainAppBar.setExpanded(false, false)
                     }
                     else -> {
+                        //Show appbar
                         dataBinding.exFabMain.show()
                         dataBinding.mainAppBar.setExpanded(true, true)
                     }
@@ -146,10 +163,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
             }
     }
 
+    /**
+     * Start Spotify OAuth.
+     */
     private fun requestToken() {
         startActivityForResult(buildAuthIntent(), AUTH_REQUEST_CODE)
     }
 
+    /**
+     * Create authorization intent.
+     */
     private fun buildAuthIntent(): Intent {
         return authService.getAuthorizationRequestIntent(
             prepareAuthRequestBuilder()
@@ -158,19 +181,26 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
         )
     }
 
-    private fun prepareServiceConfig(): AuthorizationServiceConfiguration {
-        return AuthorizationServiceConfiguration(
-            Uri.parse(AUTHORIZATION_ENDPOINT),  // authorization endpoint
-            Uri.parse(TOKEN_ENDPOINT) // token endpoint
-        )
-    }
-
+    /**
+     * Create AuthRequest.
+     */
     private fun prepareAuthRequestBuilder(): AuthorizationRequest.Builder {
         return AuthorizationRequest.Builder(
             prepareServiceConfig(),  // the authorization service configuration
             CLIENT_ID,  // the client ID, typically pre-registered and static
             ResponseTypeValues.CODE,  // the response_type value: we want a code
             Uri.parse(REDIRECT_URI) // the redirect URI to which the auth response is sent
+        )
+    }
+
+    /**
+     * Create Service Configuration.
+     * Set authorization endpoint and token endpoint.
+     */
+    private fun prepareServiceConfig(): AuthorizationServiceConfiguration {
+        return AuthorizationServiceConfiguration(
+            Uri.parse(AUTHORIZATION_ENDPOINT),  // authorization endpoint
+            Uri.parse(TOKEN_ENDPOINT) // token endpoint
         )
     }
 
@@ -182,6 +212,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
             resp?.createTokenExchangeRequest()?.let {
                 authService.performTokenRequest(it) { response, ex ->
                     if (response != null) {
+                        //authorization success, save session
                         viewModel.prepareAndWriteSession(response)
                     } else {
                         // authorization failed, check ex for more details
@@ -235,6 +266,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
         }
     }
 
+    /**
+     * End session for the current user and show [AuthenticationFragment].
+     */
     override fun logout() {
         uiRouter.navigateToAuthenticationFragment()
     }

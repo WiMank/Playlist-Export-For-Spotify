@@ -1,11 +1,13 @@
 package com.wimank.pbfs.room.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Update
 
+/**
+ * Simple dao with base operation [insert] and [update].
+ */
 @Dao
 interface BaseDao<in T> {
 
@@ -14,8 +16,5 @@ interface BaseDao<in T> {
 
     @Update(onConflict = REPLACE)
     suspend fun update(updateData: T)
-
-    @Delete
-    suspend fun delete(deleteData: T)
 
 }
