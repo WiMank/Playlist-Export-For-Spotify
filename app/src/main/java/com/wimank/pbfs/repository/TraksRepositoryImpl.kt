@@ -18,9 +18,11 @@ class TracksRepositoryImpl @Inject constructor(
     private val tracksMapper: TracksMapper
 ) : TracksRepository {
 
+    //All tracks saved here
     private val listNetworkTracks = mutableListOf<NetworkTracks>()
 
     override suspend fun loadNetworkTracks(token: String, limit: Int, offset: Int) {
+        //Clear old tracks
         tracksDao.clearTracks()
         playlistDao.getPlaylists().forEach { entity ->
             tracksApi.loadTracks(token, entity.tracksUrl).run {
@@ -45,8 +47,12 @@ class TracksRepositoryImpl @Inject constructor(
         }
     }
 
+    /**
+     * Recursive method to load all tracks
+     */
     private suspend fun loadNext(token: String, nextUrl: String): NetworkTracks {
         val pageResp = tracksApi.loadTracks(token, nextUrl)
+        //If next url not null, load next page
         if (pageResp.next != null) {
             listNetworkTracks.add(loadNext(token, pageResp.next))
             return pageResp
@@ -55,6 +61,9 @@ class TracksRepositoryImpl @Inject constructor(
         return pageResp
     }
 
+    /**
+     * Save new tracks to database
+     */
     private suspend fun saveResponse(tracks: List<TracksEntity>) {
         tracksDao.insert(tracks)
         listNetworkTracks.clear()

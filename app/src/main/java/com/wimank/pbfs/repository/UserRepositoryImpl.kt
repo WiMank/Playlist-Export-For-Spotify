@@ -41,6 +41,9 @@ class UserRepositoryImpl @Inject constructor(
         userDao.clearUser()
     }
 
+    /**
+     * Save user data in database
+     */
     private suspend fun saveResponse(userEntity: UserEntity) {
         userDao.clearAndInsertUser(userEntity)
     }

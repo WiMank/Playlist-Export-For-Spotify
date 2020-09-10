@@ -43,7 +43,7 @@ class PlaylistsRepositoryImpl @Inject constructor(
     }
 
     /**
-     * Recursive method to load all playlists.
+     * Recursive method to load all playlists
      */
     private suspend fun loadNext(token: String, nextUrl: String): NetworkPlaylists {
         val pageResp = playlistsApi.loadNextPlaylists(token, nextUrl)
