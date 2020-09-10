@@ -11,6 +11,9 @@ import com.wimank.pbfs.domain.model.Playlist
 import com.wimank.pbfs.ui.adapter.PlayListItemType.Companion.PLAYLIST
 import com.wimank.pbfs.ui.adapter.PlayListItemType.Companion.SHIMMER
 
+/**
+ * Adapter for displaying playlists.
+ */
 class PlaylistAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val dataList = mutableListOf<PlayListItemType>()
@@ -65,6 +68,9 @@ class PlaylistAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
+    /**
+     * Create [ShimmerStub] list for show loading animation.
+     */
     fun startLoading(): List<ShimmerStub> {
         var i = 0
         val list = mutableListOf<ShimmerStub>()
@@ -75,6 +81,9 @@ class PlaylistAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return list
     }
 
+    /**
+     * Create [ErrorStub] list for show error status.
+     */
     fun showError(): List<ErrorStub> {
         var i = 0
         val list = mutableListOf<ErrorStub>()

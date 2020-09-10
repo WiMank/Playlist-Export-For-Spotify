@@ -43,12 +43,17 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
             adapter = rvAdapter
         }
 
+        //observe data
         viewModel.playListData.observe(this) {
             rvAdapter.setData(it)
+            //hide or show exFabMain in MainActivity
             backupFragmentCallback?.stopLoad(it.isNotEmpty())
         }
     }
 
+    /**
+     * Set up SwipeRefreshLayout and observe update state.
+     */
     private fun initSwipeRefresh() {
         dataBinding.playlistSwipeRl.setColorSchemeResources(
             R.color.spotify_green,
@@ -59,14 +64,20 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
             dataBinding.playlistSwipeRl.isRefreshing = it
             if (it) {
                 rvAdapter.setData(rvAdapter.startLoading())
+                //disable scroll for recycler view
                 dataBinding.playlistRv.scroll(false)
+                //hide exFabMain
                 backupFragmentCallback?.startLoad()
             } else {
+                //enable scroll for recycler view
                 dataBinding.playlistRv.scroll(true)
             }
         }
     }
 
+    /**
+     * Observe events from [PlaylistViewModel].
+     */
     private fun observeSnackBarMessages() {
         viewModel.event.observe(this) { event ->
             event.getContentIfNotHandled()?.let {
@@ -101,6 +112,9 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
         backupFragmentCallback?.stopLoad(false)
     }
 
+    /**
+     * Message about the frequency of data updates.
+     */
     private fun showTimeoutSnackBar(time: String) {
         Snackbar.make(
             dataBinding.root,
@@ -109,8 +123,19 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
         ).show()
     }
 
+    /**
+     * [PlaylistFragment] callback.
+     */
     interface BackupFragmentCallback {
+        /**
+         * Start loading playlists.
+         */
         fun startLoad()
+
+        /**
+         * Stop loading playlists.
+         * @param [listIsNotEmpty] reports on the availability of data.
+         */
         fun stopLoad(listIsNotEmpty: Boolean)
     }
 }

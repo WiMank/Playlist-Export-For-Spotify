@@ -9,6 +9,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
+/**
+ * Base class for fragments with Data Binding.
+ */
 abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
 
     internal lateinit var dataBinding: DB
@@ -32,8 +35,14 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
     @LayoutRes
     abstract fun getLayoutRes(): Int
 
+    /**
+     * Method called after data binding. Replaces onCreateView.
+     */
     abstract fun iniView(savedInstanceState: Bundle?)
 
+    /**
+     * Initializing the viewmodel in the fragment layout.
+     */
     abstract fun setBindingViewModel()
 
 }

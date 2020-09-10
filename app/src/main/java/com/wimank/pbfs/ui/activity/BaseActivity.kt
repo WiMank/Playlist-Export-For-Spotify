@@ -8,7 +8,7 @@ import androidx.databinding.ViewDataBinding
 
 /**
  * Base class for activities with Data Binding.
- * */
+ */
 abstract class BaseActivity<DB : ViewDataBinding> : AppCompatActivity() {
 
     internal lateinit var dataBinding: DB
@@ -26,11 +26,11 @@ abstract class BaseActivity<DB : ViewDataBinding> : AppCompatActivity() {
 
     /**
      * Method called after data binding. Replaces onCreate.
-     * */
+     */
     abstract fun iniView(savedInstanceState: Bundle?)
 
     /**
      * Initializing the viewmodel in the activity layout.
-     * */
+     */
     abstract fun setBindingViewModel()
 }
