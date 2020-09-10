@@ -5,6 +5,10 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Url
 
+/**
+ * Web API endpoint where full details of the playlist’s tracks can be retrieved,
+ * along with the total number of tracks in the playlist.
+ */
 interface TracksApi {
 
     @GET

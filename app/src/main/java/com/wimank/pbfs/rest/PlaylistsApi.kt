@@ -6,6 +6,10 @@ import retrofit2.http.Header
 import retrofit2.http.Query
 import retrofit2.http.Url
 
+/**
+ * Method [loadPlaylists] get a List of Current User's Playlists.
+ * Method [loadNextPlaylists] is required for paginated loading.
+ */
 interface PlaylistsApi {
 
     @GET("me/playlists")
