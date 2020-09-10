@@ -42,7 +42,7 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     /**
-     * Save user data in database
+     * Save user data in database.
      */
     private suspend fun saveResponse(userEntity: UserEntity) {
         userDao.clearAndInsertUser(userEntity)

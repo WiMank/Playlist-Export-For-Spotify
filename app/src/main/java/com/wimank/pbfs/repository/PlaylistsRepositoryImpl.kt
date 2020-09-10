@@ -17,7 +17,7 @@ class PlaylistsRepositoryImpl @Inject constructor(
     private val networkPlaylistMapper: NetworkPlaylistMapper
 ) : PlaylistsRepository {
 
-    //All playlist saved here
+    //all playlist saved here
     private val listNetworkPlaylists = mutableListOf<NetworkPlaylists>()
 
     override suspend fun loadNetworkPlaylists(token: String, limit: Int, offset: Int) {
@@ -43,11 +43,11 @@ class PlaylistsRepositoryImpl @Inject constructor(
     }
 
     /**
-     * Recursive method to load all playlists
+     * Recursive method to load all playlists.
      */
     private suspend fun loadNext(token: String, nextUrl: String): NetworkPlaylists {
         val pageResp = playlistsApi.loadNextPlaylists(token, nextUrl)
-        //If next url not null, load next page
+        //if next url not null, load next page
         if (pageResp.next != null) {
             listNetworkPlaylists.add(loadNext(token, pageResp.next))
             return pageResp
@@ -57,10 +57,10 @@ class PlaylistsRepositoryImpl @Inject constructor(
     }
 
     /**
-     * Save new playlists to database
+     * Save new playlists to database.
      */
     private suspend fun saveResponse(playlistsEntityList: List<PlaylistsEntity>) {
-        //Clear and save new playlists
+        //clear and save new playlists
         playlistDao.clearAndInsertPlaylists(playlistsEntityList)
         listNetworkPlaylists.clear()
     }

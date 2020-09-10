@@ -24,7 +24,7 @@ class NetworkManager(private val context: Context) {
                 else -> false
             }
         } else {
-            //Deprecated
+            //deprecated
             val nwInfo = connectivityManager.activeNetworkInfo ?: return false
             return nwInfo.isConnected
         }

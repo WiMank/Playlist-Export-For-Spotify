@@ -35,7 +35,6 @@ class UserProfileViewModel @ViewModelInject constructor(
         viewModelScope.launch(context = Dispatchers.IO) {
             try {
                 update.postValue(true)
-
                 //wait data
                 userManager.loadUser().collect {
                     data.postValue(it)

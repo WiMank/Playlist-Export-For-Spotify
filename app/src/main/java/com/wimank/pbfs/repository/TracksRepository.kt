@@ -5,13 +5,13 @@ import com.wimank.pbfs.util.START_OFFSET
 import com.wimank.pbfs.util.TRACKS_LIMIT
 
 /**
- * Loads tracks from web or database
- * */
+ * Loads tracks from web or database.
+ */
 interface TracksRepository {
 
     /**
-     * Loads tracks from web
-     * */
+     * Loads tracks from web.
+     */
     suspend fun loadNetworkTracks(
         token: String,
         limit: Int = TRACKS_LIMIT,
@@ -19,8 +19,8 @@ interface TracksRepository {
     )
 
     /**
-     * Loads tracks from database
-     * */
+     * Loads tracks from database.
+     */
     suspend fun loadLocalTracks(playlistId: String): List<Track>
 
 }

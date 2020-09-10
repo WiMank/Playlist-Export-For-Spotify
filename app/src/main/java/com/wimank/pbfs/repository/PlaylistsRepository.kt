@@ -6,13 +6,13 @@ import com.wimank.pbfs.util.START_OFFSET
 import kotlinx.coroutines.flow.Flow
 
 /**
- * Loads playlists from web or database
- * */
+ * Loads playlists from web or database.
+ */
 interface PlaylistsRepository {
 
     /**
-     * Loads playlists from web
-     * */
+     * Loads playlists from web.
+     */
     suspend fun loadNetworkPlaylists(
         token: String,
         limit: Int = PLAYLISTS_LIMIT,
@@ -20,13 +20,13 @@ interface PlaylistsRepository {
     )
 
     /**
-     * Asynchronous data stream for playlists
-     * */
+     * Asynchronous data stream for playlists.
+     */
     suspend fun flowPlaylists(): Flow<List<Playlist>>
 
     /**
-     * Loads playlists from database
-     * */
+     * Loads playlists from database.
+     */
     suspend fun loadLocalPlaylists(): List<Playlist>
 
 }

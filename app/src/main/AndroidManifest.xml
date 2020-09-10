@@ -6,12 +6,15 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!--https://developer.android.com/training/basics/intents/package-visibility -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name_label"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:name=".App"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.MainActivity">

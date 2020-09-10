@@ -62,26 +62,26 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
     }
 
     private fun startObserve() {
-        //Checking the session status
+        //checking the session status
         viewModel.sessionState.observe(this) {
             setupNavGraph(it)
         }
 
-        //Enable or disable exfab depending on the network status
+        //enable or disable exfab depending on the network status
         viewModel.networkState.observe(this) {
             dataBinding.exFabMain.isEnabled = it
         }
     }
 
     private fun connectivityWatcher() {
-        //Observe the network status and change the button status
+        //observe the network status and change the button status
         connectivityWatcher.observe(this) {
             dataBinding.exFabMain.isEnabled = it
         }
     }
 
     private fun observeWorkStatus() {
-        //LiveData, which contains the working ID for monitoring
+        //liveData, which contains the working ID for monitoring
         viewModel.workId.observe(this) {
             observeWork(it)
         }
@@ -89,7 +89,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
 
     /**
      * Start export tracks.
-     * */
+     */
     private fun startWork() {
         //Start worker
         workManager.enqueueUniqueWork(
@@ -101,7 +101,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
 
     /**
      * Observe the export work status.
-     * */
+     */
     private fun observeWork(id: UUID) {
         workManager.getWorkInfoByIdLiveData(id).observe(this) {
             when (it?.state) {
@@ -151,11 +151,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
                 when (destination.id) {
                     R.id.authenticationFragment -> {
                         dataBinding.exFabMain.hide()
-                        //Hide appbar
+                        //hide appbar
                         dataBinding.mainAppBar.setExpanded(false, false)
                     }
                     else -> {
-                        //Show appbar
+                        //show appbar
                         dataBinding.exFabMain.show()
                         dataBinding.mainAppBar.setExpanded(true, true)
                     }

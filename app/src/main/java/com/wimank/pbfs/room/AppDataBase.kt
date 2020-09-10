@@ -13,7 +13,7 @@ import com.wimank.pbfs.room.entity.UserEntity
 
 /**
  * Application database, which stores data playlists, tracks, and current user.
- * */
+ */
 @Database(
     entities = [
         UserEntity::class,

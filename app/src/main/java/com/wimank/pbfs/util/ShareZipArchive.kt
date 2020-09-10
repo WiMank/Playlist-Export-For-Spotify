@@ -9,7 +9,7 @@ import timber.log.Timber
 import java.io.File
 
 /**
- * Archiving html playlist files.
+ * Share file with html playlists.
  */
 class ShareZipArchive(private val context: Context) {
 
