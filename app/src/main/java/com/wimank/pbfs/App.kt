@@ -19,6 +19,7 @@ class App : Application(), Configuration.Provider {
         super.onCreate()
         if (BuildConfig.DEBUG) {
             Timber.plant(DebugTree())
+            Timber.d("<===Timber is initialized===>")
         }
     }
 

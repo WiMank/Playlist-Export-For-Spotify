@@ -36,10 +36,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:refreshing="@{viewModel.updateData}"
             app:onRefreshListener="@{() -> viewModel.refreshData()}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/playlist_rv"
+                recyclerViewScroll="@{viewModel.updateData}"
                 android:visibility="@{viewModel.emptyData ? View.GONE : View.VISIBLE}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

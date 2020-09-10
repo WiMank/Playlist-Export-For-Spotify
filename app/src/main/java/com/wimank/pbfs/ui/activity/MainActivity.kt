@@ -66,11 +66,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
         viewModel.sessionState.observe(this) {
             setupNavGraph(it)
         }
-
-        //enable or disable exfab depending on the network status
-        viewModel.networkState.observe(this) {
-            dataBinding.exFabMain.isEnabled = it
-        }
     }
 
     private fun connectivityWatcher() {

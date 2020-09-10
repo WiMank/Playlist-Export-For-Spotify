@@ -61,16 +61,9 @@ class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
         )
 
         viewModel.updateData.observe(this) {
-            dataBinding.playlistSwipeRl.isRefreshing = it
             if (it) {
                 rvAdapter.setData(rvAdapter.startLoading())
-                //disable scroll for recycler view
-                dataBinding.playlistRv.scroll(false)
-                //hide exFabMain
                 backupFragmentCallback?.startLoad()
-            } else {
-                //enable scroll for recycler view
-                dataBinding.playlistRv.scroll(true)
             }
         }
     }
