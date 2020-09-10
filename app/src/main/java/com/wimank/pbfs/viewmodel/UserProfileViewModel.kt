@@ -28,10 +28,15 @@ class UserProfileViewModel @ViewModelInject constructor(
         startLoad()
     }
 
+    /**
+     * Loading user data.
+     */
     private fun startLoad() {
         viewModelScope.launch(context = Dispatchers.IO) {
             try {
                 update.postValue(true)
+
+                //wait data
                 userManager.loadUser().collect {
                     data.postValue(it)
                     update.postValue(false)
@@ -46,6 +51,9 @@ class UserProfileViewModel @ViewModelInject constructor(
         }
     }
 
+    /**
+     * Deleting user data.
+     */
     fun logout() {
         viewModelScope.launch(context = Dispatchers.IO) {
             userManager.logout()

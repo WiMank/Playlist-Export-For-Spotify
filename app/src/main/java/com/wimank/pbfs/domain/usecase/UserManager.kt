@@ -25,6 +25,9 @@ class UserManager @Inject constructor(
         return userRepository.flowUser()
     }
 
+    /**
+     * Deleting a session and user data.
+     */
     suspend fun logout() {
         sessionManager.clearSession()
         userRepository.clearProfile()

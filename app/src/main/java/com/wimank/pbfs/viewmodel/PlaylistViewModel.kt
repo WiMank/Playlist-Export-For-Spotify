@@ -56,7 +56,7 @@ class PlaylistViewModel @ViewModelInject constructor(
     }
 
     /**
-     * Start load playlists
+     * Start load playlists.
      */
     private fun startLoadPlaylists() {
         viewModelScope.launch(context = Dispatchers.IO) {
@@ -132,7 +132,7 @@ class PlaylistViewModel @ViewModelInject constructor(
     }
 
     /**
-     * @return time until data update
+     * @return time until data update.
      */
     private fun currentTimeOutTime() = ((updateTime - System.currentTimeMillis()) / 1000).toString()
 

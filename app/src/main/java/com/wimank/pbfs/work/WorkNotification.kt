@@ -9,6 +9,9 @@ import com.wimank.pbfs.R
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
+/**
+ * Operation status notifications for [ExportWorker].
+ */
 class WorkNotification @Inject constructor(@ApplicationContext private val context: Context) {
 
     private val notificationManager =
@@ -74,8 +77,8 @@ class WorkNotification @Inject constructor(@ApplicationContext private val conte
     }
 
     private fun createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
+        //create the NotificationChannel, but only on API 26+ because
+        //the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = context.getString(R.string.channel_name)
             val descriptionText = context.getString(R.string.channel_description)
@@ -86,7 +89,7 @@ class WorkNotification @Inject constructor(@ApplicationContext private val conte
                 enableVibration(false)
                 setSound(null, null)
             }
-            // Register the channel with the system
+            //register the channel with the system
             notificationManager.createNotificationChannel(channel)
         }
     }

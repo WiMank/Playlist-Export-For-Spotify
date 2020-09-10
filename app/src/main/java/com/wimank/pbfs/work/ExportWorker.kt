@@ -28,24 +28,25 @@ class ExportWorker @WorkerInject constructor(
     override suspend fun doWork(): Result = coroutineScope {
         try {
             val job = async(Dispatchers.IO) {
-                //Loading tracks notify
+                //loading tracks notify
                 workNotification.showLoadTracks()
 
-                //Load tracks
+                //load tracks
                 tracksManager.loadNetworkTracks()
 
-                //Writing tracks notify
+                //writing tracks notify
                 workNotification.showWriteTracks()
 
-                //Clear playlists folder and zip folder
+                //clear playlists folder and zip folder
                 clearAppFolders()
                 createAppFolders()
 
-                //Writing tracks in html file
+                //writing tracks in html file
                 playlistManager.loadLocalPlaylists().forEach {
                     HtmlBuilder(it, tracksManager.loadLocalTracks(it.id), appContext).createFile()
                 }
 
+                //zip all html files
                 ZipUtil.pack(
                     File(appContext.filesDir, APP_FOLDER),
                     File(appContext.filesDir, ZIP_APP_FOLDER + File.separator + ARCHIVE_NAME)
@@ -53,21 +54,21 @@ class ExportWorker @WorkerInject constructor(
 
             }
             job.await()
-            //Complete export notify
+            //complete export notify
             workNotification.showExportComplete()
             Result.success()
         } catch (e: Exception) {
-            //Error export notify
+            //error export notify
             workNotification.showExportError(e.message ?: EMPTY_STRING)
             Result.failure()
         }
     }
 
     private fun clearAppFolders() {
-        //Clear playlists folder
+        //clear playlists folder
         File(appContext.filesDir, APP_FOLDER).deleteRecursively()
 
-        //Clear zip folder
+        //clear zip folder
         File(appContext.filesDir, ZIP_APP_FOLDER).deleteRecursively()
     }
 

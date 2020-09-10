@@ -10,6 +10,9 @@ import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
 
+/**
+ * Creating html files for playlists.
+ **/
 class HtmlBuilder(
     private val playlists: Playlist,
     private val tracks: List<Track>,
