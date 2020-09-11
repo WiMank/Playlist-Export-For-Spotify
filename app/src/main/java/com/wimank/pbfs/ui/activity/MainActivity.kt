@@ -1,7 +1,6 @@
 package com.wimank.pbfs.ui.activity
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,9 +9,10 @@ import androidx.navigation.findNavController
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
-import com.wimank.pbfs.*
+import com.wimank.pbfs.AUTH_REQUEST_CODE
 import com.wimank.pbfs.R
 import com.wimank.pbfs.databinding.ActivityMainBinding
+import com.wimank.pbfs.di.AuthModule.Companion.AUTH_INTENT
 import com.wimank.pbfs.ui.fragment.AuthenticationFragment
 import com.wimank.pbfs.ui.fragment.PlaylistFragment
 import com.wimank.pbfs.ui.fragment.UserProfileDialog
@@ -20,10 +20,13 @@ import com.wimank.pbfs.ui.utils.UiRouter
 import com.wimank.pbfs.util.*
 import com.wimank.pbfs.viewmodel.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import net.openid.appauth.*
+import net.openid.appauth.AuthorizationException
+import net.openid.appauth.AuthorizationResponse
+import net.openid.appauth.AuthorizationService
 import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(),
@@ -31,10 +34,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
     AuthenticationFragment.AuthenticationFragmentCallBack,
     UserProfileDialog.UserProfileDialogCallback {
 
-    private val authService by lazy { AuthorizationService(this) }
     private val uiRouter: UiRouter by lazy { UiRouter(findNavController(R.id.main_nav_host)) }
     private val viewModel: MainActivityViewModel by viewModels()
     private val workManager: WorkManager by lazy { WorkManager.getInstance(this) }
+
+    @Inject
+    lateinit var authService: AuthorizationService
+
+    @Inject
+    @Named(AUTH_INTENT)
+    lateinit var authIntent: Intent
 
     @Inject
     lateinit var connectivityWatcher: ConnectivityWatcher
@@ -162,41 +171,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
      * Start Spotify OAuth.
      */
     private fun requestToken() {
-        startActivityForResult(buildAuthIntent(), AUTH_REQUEST_CODE)
-    }
-
-    /**
-     * Create authorization intent.
-     */
-    private fun buildAuthIntent(): Intent {
-        return authService.getAuthorizationRequestIntent(
-            prepareAuthRequestBuilder()
-                .setScopes(SPOTIFY_SCOPES.asIterable())
-                .build()
-        )
-    }
-
-    /**
-     * Create AuthRequest.
-     */
-    private fun prepareAuthRequestBuilder(): AuthorizationRequest.Builder {
-        return AuthorizationRequest.Builder(
-            prepareServiceConfig(),  // the authorization service configuration
-            CLIENT_ID,  // the client ID, typically pre-registered and static
-            ResponseTypeValues.CODE,  // the response_type value: we want a code
-            Uri.parse(REDIRECT_URI) // the redirect URI to which the auth response is sent
-        )
-    }
-
-    /**
-     * Create Service Configuration.
-     * Set authorization endpoint and token endpoint.
-     */
-    private fun prepareServiceConfig(): AuthorizationServiceConfiguration {
-        return AuthorizationServiceConfiguration(
-            Uri.parse(AUTHORIZATION_ENDPOINT),  // authorization endpoint
-            Uri.parse(TOKEN_ENDPOINT) // token endpoint
-        )
+        startActivityForResult(authIntent, AUTH_REQUEST_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
