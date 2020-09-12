@@ -2,9 +2,9 @@ name: Android CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ ci ]
   pull_request:
-    branches: [ master ]
+    branches: [ ci ]
 
 jobs:
   build:
@@ -22,7 +22,10 @@ jobs:
       run:  chmod +x gradlew
      
     - name: Build with Gradle
-      run: ./gradlew assembleDebug
+      run: ./gradlew assemble
+      env:
+        client_id: ${{ secrets.CLIENT_ID }}
+        redirect_uri: ${{ secrets.REDIRECT_URI }}
 
     - name: Upload artifact
       uses: actions/upload-artifact@v1
