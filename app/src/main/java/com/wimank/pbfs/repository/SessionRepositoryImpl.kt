@@ -1,6 +1,6 @@
 package com.wimank.pbfs.repository
 
-import com.wimank.pbfs.CLIENT_ID
+import com.wimank.pbfs.BuildConfig
 import com.wimank.pbfs.domain.model.Session
 import com.wimank.pbfs.mapper.SessionEntityMapper
 import com.wimank.pbfs.rest.ApiRefreshToken
@@ -49,7 +49,7 @@ class SessionRepositoryImpl @Inject constructor(
         return apiRefreshToken.refreshToken(
             REFRESH_TOKEN_GRANT_TYPE,
             sessionDao.getCurrentSession().refreshToken,
-            CLIENT_ID
+            BuildConfig.clientId
         ).run {
             SessionEntity(
                 sessionId = SESSION_ID,

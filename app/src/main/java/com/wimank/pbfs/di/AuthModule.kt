@@ -3,10 +3,9 @@ package com.wimank.pbfs.di
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import com.wimank.pbfs.CLIENT_ID
-import com.wimank.pbfs.REDIRECT_URI
-import com.wimank.pbfs.SPOTIFY_SCOPES
+import com.wimank.pbfs.BuildConfig
 import com.wimank.pbfs.util.AUTHORIZATION_ENDPOINT
+import com.wimank.pbfs.util.SPOTIFY_SCOPES
 import com.wimank.pbfs.util.TOKEN_ENDPOINT
 import dagger.Module
 import dagger.Provides
@@ -54,9 +53,9 @@ class AuthModule {
     fun prepareAuthRequestBuilder(serviceConfiguration: AuthorizationServiceConfiguration): AuthorizationRequest.Builder {
         return AuthorizationRequest.Builder(
             serviceConfiguration,  // the authorization service configuration
-            CLIENT_ID,  // the client ID, typically pre-registered and static
+            BuildConfig.clientId,  // the client ID, typically pre-registered and static
             ResponseTypeValues.CODE,  // the response_type value: we want a code
-            Uri.parse(REDIRECT_URI) // the redirect URI to which the auth response is sent
+            Uri.parse(BuildConfig.redirectUri) // the redirect URI to which the auth response is sent
         )
     }
 

@@ -9,7 +9,6 @@ import androidx.navigation.findNavController
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
-import com.wimank.pbfs.AUTH_REQUEST_CODE
 import com.wimank.pbfs.R
 import com.wimank.pbfs.databinding.ActivityMainBinding
 import com.wimank.pbfs.di.AuthModule.Companion.AUTH_INTENT
@@ -54,6 +53,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
         startObserve()
         connectivityWatcher()
         observeWorkStatus()
+
+
     }
 
     override fun getLayoutRes() = R.layout.activity_main

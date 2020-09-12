@@ -1,3 +1,7 @@
+import  com.android.build.gradle.internal.dsl.BuildType
+import java.io.FileInputStream
+import java.util.*
+
 plugins {
     id(Plugins.androidApplication)
     kotlin(Plugins.android)
@@ -5,6 +9,16 @@ plugins {
     kotlin(Plugins.kapt)
     id(Plugins.hiltPlugin)
     id(Plugins.safeargsKotlinPlugin)
+}
+
+val secretsPropertiesFile = rootProject.file("secrets.properties")
+val secretProperties = Properties()
+
+if (secretsPropertiesFile.exists()) {
+    secretProperties.load(FileInputStream(secretsPropertiesFile))
+} else {
+    secretProperties.setProperty("client_id", System.getenv("client_id"))
+    secretProperties.setProperty("redirect_uri", System.getenv("redirect_uri"))
 }
 
 android {
@@ -22,6 +36,8 @@ android {
 
     buildTypes {
         getByName("release") {
+            buildClientId()
+            buildRedirectUri()
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
@@ -30,6 +46,8 @@ android {
         }
 
         getByName("debug") {
+            buildClientId()
+            buildRedirectUri()
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
@@ -141,4 +159,20 @@ dependencies {
     //ZtZip
     implementation(Dependencies.ztZip)
 
+}
+
+fun BuildType.buildClientId() {
+    buildConfigField(
+        "String",
+        "clientId",
+        "\"${secretProperties.getProperty("client_id")}\""
+    )
+}
+
+fun BuildType.buildRedirectUri() {
+    buildConfigField(
+        "String",
+        "redirectUri",
+        "\"${secretProperties.getProperty("redirect_uri")}\""
+    )
 }

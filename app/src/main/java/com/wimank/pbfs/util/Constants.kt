@@ -75,3 +75,8 @@ const val START_OFFSET = 0
 
 //OkHttp log tag interceptor
 const val OK_HTTP_TAG = "OkHttp"
+
+const val AUTH_REQUEST_CODE = 3505
+
+val SPOTIFY_SCOPES =
+    arrayOf("user-read-email", "playlist-read-collaborative", "playlist-read-private")

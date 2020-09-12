@@ -91,3 +91,6 @@ lint/tmp/
 
 # Sectet file
 Secret.kt
+
+# secrets.properties file
+secrets.properties
