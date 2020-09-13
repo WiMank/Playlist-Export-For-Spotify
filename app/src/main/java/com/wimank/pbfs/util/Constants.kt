@@ -61,7 +61,7 @@ const val ZIP_MIME_TYPE = "application/zip"
 const val ONE_HOUR = 3600000L
 
 //App github repository
-const val URL_REPOSITORY = "https://github.com/WiMank/Playlist-Backup-For-Spotify"
+const val URL_REPOSITORY = "https://github.com/WiMank/Playlist-Export-For-Spotify"
 
 //Http unauthorized code
 const val UNAUTHORIZED_CODE = 401
