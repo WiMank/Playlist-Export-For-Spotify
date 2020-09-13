@@ -96,7 +96,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
      * Start export tracks.
      */
     private fun startWork() {
-        //Start worker
+        //start worker
         workManager.enqueueUniqueWork(
             WORK_TAG,
             ExistingWorkPolicy.KEEP,
