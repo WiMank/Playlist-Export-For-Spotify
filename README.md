@@ -14,6 +14,9 @@ Playlist Export For Spotify is a small demo application based on modern Android 
 </p>
 
 ## Download
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3da0b2b4662e4ec08722b73088a7d1fe)](https://app.codacy.com/manual/WiMank/Playlist-Export-For-Spotify?utm_source=github.com&utm_medium=referral&utm_content=WiMank/Playlist-Export-For-Spotify&utm_campaign=Badge_Grade_Dashboard)
+
 Go to the [Releases](https://github.com/WiMank/Playlist-Export-For-Spotify/releases) to download the latest APK.  
 
 ## Tech stack  
