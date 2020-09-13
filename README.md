@@ -13,10 +13,8 @@ Playlist Export For Spotify is a small demo application based on modern Android 
 <img src="/previews/scr.png"/>
 </p>
 
-
 ## Download
 Go to the [Releases](https://github.com/WiMank/Playlist-Export-For-Spotify/releases) to download the latest APK.  
-
 
 ## Tech stack  
 * [Room](https://developer.android.com/topic/libraries/architecture/room) - persistence library provides an abstraction layer over SQLite;  
@@ -34,8 +32,7 @@ Go to the [Releases](https://github.com/WiMank/Playlist-Export-For-Spotify/relea
 * [Material Components](https://github.com/material-components/material-components-android) - Material design components like ripple animation, cardView;  
 * [ZtZip](https://github.com/zeroturnaround/zt-zip) - library for working with zip archives;  
 * [Timber](https://github.com/JakeWharton/timber) - This is a logger with a small, extensible API which provides utility on top of Android's normal Log class.  
-
-    
+ 
 ## Architecture
 Playlist Export For Spotify is based on MVVM architecture.
 
