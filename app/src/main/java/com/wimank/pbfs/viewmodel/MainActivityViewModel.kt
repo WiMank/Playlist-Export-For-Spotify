@@ -1,7 +1,6 @@
 package com.wimank.pbfs.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
@@ -19,14 +18,11 @@ import com.wimank.pbfs.work.ExportWorker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.openid.appauth.TokenResponse
-import java.util.*
 
 class MainActivityViewModel @ViewModelInject constructor(
     private val sessionManager: SessionManager,
     private val networkManager: NetworkManager
 ) : ViewModel() {
-
-    val workId = MutableLiveData(UUID.randomUUID())
 
     val sessionState = liveData(Dispatchers.IO) {
         emit(checkSessionState())
@@ -36,6 +32,9 @@ class MainActivityViewModel @ViewModelInject constructor(
         emit(networkManager.isNetworkAvailable())
     }
 
+    /**
+     * Prepare and write session data to the database.
+     */
     fun prepareAndWriteSession(tokenResponse: TokenResponse) {
         writeSession(tokenResponse.run {
             Session(
@@ -49,17 +48,17 @@ class MainActivityViewModel @ViewModelInject constructor(
         })
     }
 
+    /**
+     * Create a task to export playlists.
+     */
     fun createExportWork(): OneTimeWorkRequest {
         return OneTimeWorkRequestBuilder<ExportWorker>().apply {
             setConstraints(
                 Constraints.Builder()
                     .setRequiredNetworkType(NetworkType.CONNECTED)
-                    .setRequiresCharging(true)
                     .build()
             )
-        }.build().apply {
-            workId.value = id
-        }
+        }.build()
     }
 
     private suspend fun checkSessionState(): Boolean {

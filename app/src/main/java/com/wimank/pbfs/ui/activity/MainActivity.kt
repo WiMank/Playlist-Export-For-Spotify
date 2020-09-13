@@ -23,7 +23,6 @@ import net.openid.appauth.AuthorizationException
 import net.openid.appauth.AuthorizationResponse
 import net.openid.appauth.AuthorizationService
 import timber.log.Timber
-import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -52,9 +51,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
         initViewExFab()
         startObserve()
         connectivityWatcher()
-        observeWorkStatus()
-
-
+        observeWork()
     }
 
     override fun getLayoutRes() = R.layout.activity_main
@@ -66,7 +63,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
     private fun initViewExFab() {
         dataBinding.exFabMain.apply {
             setOnClickListener {
-                startWork()
+                if (dataBinding.exFabMain.isExtended)
+                    startWork()
             }
         }
     }
@@ -85,18 +83,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
         }
     }
 
-    private fun observeWorkStatus() {
-        //liveData, which contains the working ID for monitoring
-        viewModel.workId.observe(this) {
-            observeWork(it)
-        }
-    }
-
     /**
      * Start export tracks.
      */
     private fun startWork() {
-        //start worker
+        //cancel work if it was enqueued
+        workManager.cancelUniqueWork(WORK_TAG)
+        //start new work
         workManager.enqueueUniqueWork(
             WORK_TAG,
             ExistingWorkPolicy.KEEP,
@@ -107,31 +100,31 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
     /**
      * Observe the export work status.
      */
-    private fun observeWork(id: UUID) {
-        workManager.getWorkInfoByIdLiveData(id).observe(this) {
-            when (it?.state) {
-                WorkInfo.State.SUCCEEDED -> {
-                    dataBinding.exFabMain.clearAnimationAndExtend()
-                    showSnackBarFileShare(dataBinding.exFabMain)
+    private fun observeWork() {
+        workManager.getWorkInfosForUniqueWorkLiveData(WORK_TAG).observe(this) {
+            if (it.isNotEmpty())
+                when (it.last()?.state) {
+                    WorkInfo.State.ENQUEUED -> {
+                        dataBinding.exFabMain.startExFabAnimation(this)
+                    }
+                    WorkInfo.State.RUNNING -> {
+                        dataBinding.exFabMain.startExFabAnimation(this)
+                    }
+                    WorkInfo.State.SUCCEEDED -> {
+                        dataBinding.exFabMain.clearAnimationAndExtend()
+                        showSnackBarFileShare(dataBinding.exFabMain)
+                        workManager.pruneWork()
+                    }
+                    WorkInfo.State.FAILED -> {
+                        dataBinding.exFabMain.clearAnimationAndExtend()
+                        showSnackBar(dataBinding.exFabMain, R.string.export_error)
+                        workManager.pruneWork()
+                    }
+                    else -> {
+                        dataBinding.exFabMain.clearAnimationAndExtend()
+                        showSnackBar(dataBinding.exFabMain, R.string.track_export_null)
+                    }
                 }
-
-                WorkInfo.State.FAILED -> {
-                    dataBinding.exFabMain.clearAnimationAndExtend()
-                    showSnackBar(dataBinding.exFabMain, R.string.export_error)
-                }
-
-                WorkInfo.State.ENQUEUED -> {
-                    dataBinding.exFabMain.startExFabAnimation(this)
-                }
-
-                WorkInfo.State.RUNNING -> {
-                    dataBinding.exFabMain.startExFabAnimation(this)
-                }
-
-                else -> {
-                    showSnackBar(dataBinding.exFabMain, R.string.track_export_null)
-                }
-            }
         }
     }
 

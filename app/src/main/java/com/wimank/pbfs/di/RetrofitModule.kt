@@ -12,6 +12,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -33,7 +34,13 @@ class RetrofitModule {
     fun provideOkHttp(
         interceptor: HttpLoggingInterceptor
     ): OkHttpClient {
-        return OkHttpClient().newBuilder().addInterceptor(interceptor).build()
+        return OkHttpClient()
+            .newBuilder()
+            .addInterceptor(interceptor)
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .build()
     }
 
     @Provides
