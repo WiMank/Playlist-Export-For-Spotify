@@ -24,7 +24,6 @@ import Version.okHttpVersion
 import Version.retrofitVersion
 import Version.roomVersion
 import Version.shimmerVersion
-import Version.spotifyAuthVersion
 import Version.timberVersion
 import Version.toolsGradleVersion
 import Version.viewModelVersion
@@ -89,8 +88,6 @@ object Dependencies {
 
     const val timber = "com.jakewharton.timber:timber:$timberVersion"
 
-    const val spotifyAuth = "com.spotify.android:auth:$spotifyAuthVersion"
-
     const val room = "androidx.room:room-runtime:$roomVersion"
     const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
     const val roomKtx = "androidx.room:room-ktx:$roomVersion"
@@ -132,7 +129,6 @@ object Version {
     const val glideVersion = "4.11.0"
     const val timberVersion = "4.7.1"
     const val navigationSafeArgsVersion = "2.3.0"
-    const val spotifyAuthVersion = "1.2.3"
     const val roomVersion = "2.2.5"
     const val okHttpVersion = "4.8.1"
     const val loggingInterceptorVersion = "4.8.1"

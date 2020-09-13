@@ -138,9 +138,6 @@ dependencies {
     //Timber
     implementation(Dependencies.timber)
 
-    //SpotifyAuth
-    implementation(Dependencies.spotifyAuth)
-
     //AppAuth
     implementation(Dependencies.appAuth)
 
