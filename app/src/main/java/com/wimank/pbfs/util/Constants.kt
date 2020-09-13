@@ -76,7 +76,15 @@ const val START_OFFSET = 0
 //OkHttp log tag interceptor
 const val OK_HTTP_TAG = "OkHttp"
 
+//Code for MainActivity method onActivityResult()
 const val AUTH_REQUEST_CODE = 3505
 
+//OAuth scopes for Spotify Api
 val SPOTIFY_SCOPES =
     arrayOf("user-read-email", "playlist-read-collaborative", "playlist-read-private")
+
+//Key for cancel intent
+const val KEY_CANCEL = "export_cancel"
+
+//Value for cancel intent
+const val VALUE_CANCEL = "cancel"

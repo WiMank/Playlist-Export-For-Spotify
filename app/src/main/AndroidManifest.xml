@@ -54,6 +54,10 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
+        <receiver
+            android:name=".work.CancelWorkBroadcastReceiver"
+            android:exported="false" />
+
     </application>
 
 </manifest>

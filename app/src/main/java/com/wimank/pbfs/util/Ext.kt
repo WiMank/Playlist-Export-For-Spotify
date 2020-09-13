@@ -1,10 +1,10 @@
 package com.wimank.pbfs.util
 
+import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.view.View
-import android.view.animation.AnimationUtils
 import androidx.annotation.StringRes
+import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,25 +24,24 @@ fun RecyclerView.scroll(value: Boolean) {
     }
 }
 
-//Export process animation for FAB
-fun ExtendedFloatingActionButton.startExFabAnimation(context: Context) {
+//Shrink exfab and disable
+fun ExtendedFloatingActionButton.startExFabLoadState() {
     if (isExtended)
         shrink(object : ExtendedFloatingActionButton.OnChangedCallback() {
             override fun onShrunken(extendedFab: ExtendedFloatingActionButton?) {
-                startAnimation(
-                    AnimationUtils.loadAnimation(
-                        context,
-                        R.anim.rotate
-                    )
-                )
+                isEnabled = false
             }
         })
 }
 
-//Clear animation and extend FAB
-fun ExtendedFloatingActionButton.clearAnimationAndExtend() {
-    clearAnimation()
-    extend()
+//Extend exfab and enable
+fun ExtendedFloatingActionButton.stopExFabLoadState() {
+    if (!isExtended)
+        extend(object : ExtendedFloatingActionButton.OnChangedCallback() {
+            override fun onExtended(extendedFab: ExtendedFloatingActionButton?) {
+                isEnabled = true
+            }
+        })
 }
 
 fun Activity.showSnackBar(view: View, @StringRes message: Int) {
@@ -69,4 +68,10 @@ fun Fragment.showSnackBar(view: View, @StringRes message: Int) {
         getString(message),
         Snackbar.LENGTH_SHORT
     ).show()
+}
+
+//Removing all buttons from a notification
+@SuppressLint("RestrictedApi")
+fun NotificationCompat.Builder.clearActions() {
+    mActions.clear()
 }

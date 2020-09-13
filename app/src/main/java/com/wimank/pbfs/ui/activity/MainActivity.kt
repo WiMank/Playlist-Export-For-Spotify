@@ -102,29 +102,34 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
      */
     private fun observeWork() {
         workManager.getWorkInfosForUniqueWorkLiveData(WORK_TAG).observe(this) {
-            if (it.isNotEmpty())
+            if (it.isNotEmpty()) {
                 when (it.last()?.state) {
                     WorkInfo.State.ENQUEUED -> {
-                        dataBinding.exFabMain.startExFabAnimation(this)
+                        showSnackBar(dataBinding.exFabMain, R.string.export_planned)
                     }
                     WorkInfo.State.RUNNING -> {
-                        dataBinding.exFabMain.startExFabAnimation(this)
+                        dataBinding.exFabMain.startExFabLoadState()
                     }
                     WorkInfo.State.SUCCEEDED -> {
-                        dataBinding.exFabMain.clearAnimationAndExtend()
+                        dataBinding.exFabMain.stopExFabLoadState()
                         showSnackBarFileShare(dataBinding.exFabMain)
                         workManager.pruneWork()
                     }
                     WorkInfo.State.FAILED -> {
-                        dataBinding.exFabMain.clearAnimationAndExtend()
+                        dataBinding.exFabMain.stopExFabLoadState()
                         showSnackBar(dataBinding.exFabMain, R.string.export_error)
                         workManager.pruneWork()
                     }
-                    else -> {
-                        dataBinding.exFabMain.clearAnimationAndExtend()
-                        showSnackBar(dataBinding.exFabMain, R.string.track_export_null)
+                    WorkInfo.State.CANCELLED -> {
+                        dataBinding.exFabMain.stopExFabLoadState()
+                        showSnackBar(dataBinding.exFabMain, R.string.export_cancelled)
+                        workManager.pruneWork()
+                    }
+                    WorkInfo.State.BLOCKED -> {
+                        showSnackBar(dataBinding.exFabMain, R.string.export_conditions)
                     }
                 }
+            }
         }
     }
 

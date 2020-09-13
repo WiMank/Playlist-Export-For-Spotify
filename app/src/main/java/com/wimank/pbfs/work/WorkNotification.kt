@@ -2,12 +2,18 @@ package com.wimank.pbfs.work
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.wimank.pbfs.R
+import com.wimank.pbfs.util.KEY_CANCEL
+import com.wimank.pbfs.util.VALUE_CANCEL
+import com.wimank.pbfs.util.clearActions
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
+
 
 /**
  * Operation status notifications for [ExportWorker].
@@ -16,11 +22,20 @@ class WorkNotification @Inject constructor(@ApplicationContext private val conte
 
     private val notificationManager =
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
     private var builder = NotificationCompat.Builder(context, CHANNEL_ID)
+
+    private val cancelIntent = Intent(context, CancelWorkBroadcastReceiver::class.java).apply {
+        action = ACTION_CANCEL
+        putExtra(KEY_CANCEL, VALUE_CANCEL)
+    }
+
+    private val cancelPendingIntent = PendingIntent.getBroadcast(context, 0, cancelIntent, 0)
 
     private companion object {
         const val CHANNEL_ID = "Playlists export"
         const val NOTIFICATION_ID = 228996
+        const val ACTION_CANCEL = "action_cancel"
     }
 
     init {
@@ -35,6 +50,11 @@ class WorkNotification @Inject constructor(@ApplicationContext private val conte
                 setContentTitle(context.getString(R.string.loading_tracks))
                 setProgress(0, 0, true)
                 priority = NotificationCompat.PRIORITY_DEFAULT
+                addAction(
+                    R.drawable.ic_close_24px,
+                    context.getString(R.string.cancel),
+                    cancelPendingIntent
+                )
             }.build()
         )
     }
@@ -47,6 +67,11 @@ class WorkNotification @Inject constructor(@ApplicationContext private val conte
                 setContentTitle(context.getString(R.string.write_playlists))
                 setProgress(0, 0, true)
                 priority = NotificationCompat.PRIORITY_DEFAULT
+                addAction(
+                    R.drawable.ic_close_24px,
+                    context.getString(R.string.cancel),
+                    cancelPendingIntent
+                )
             }.build()
         )
     }
@@ -59,6 +84,7 @@ class WorkNotification @Inject constructor(@ApplicationContext private val conte
                 setContentTitle(context.getString(R.string.export_complete))
                 setProgress(0, 0, false)
                 priority = NotificationCompat.PRIORITY_DEFAULT
+                clearActions()
             }.build()
         )
     }
@@ -72,6 +98,7 @@ class WorkNotification @Inject constructor(@ApplicationContext private val conte
                 setProgress(0, 0, false)
                 setStyle(NotificationCompat.BigTextStyle().bigText(cause))
                 priority = NotificationCompat.PRIORITY_DEFAULT
+                clearActions()
             }.build()
         )
     }

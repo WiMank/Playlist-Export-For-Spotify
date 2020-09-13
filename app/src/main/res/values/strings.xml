@@ -12,6 +12,9 @@
     <string name="write_playlists">I write playlists files</string>
     <string name="export_complete">Export complete</string>
     <string name="export_error">Export error</string>
+    <string name="export_planned">The export operation was planned!</string>
+    <string name="export_cancelled">The export task has been canceled</string>
+    <string name="export_conditions">Conditions for starting the task are not met, we are waiting…</string>
     <string name="export">export</string>
     <string name="track_export_null">Can\'t track export status</string>
     <string name="share_zip_file">Share zip file</string>
@@ -28,6 +31,7 @@
     <string name="sign_out">Sign out of your account</string>
     <string name="authentication_error">Authentication error</string>
     <string name="need_authentication">Authentication required! Sign in again!</string>
+    <string name="cancel">Cancel</string>
 
     <plurals name="tracks">
         <item quantity="zero">no tracks</item>
