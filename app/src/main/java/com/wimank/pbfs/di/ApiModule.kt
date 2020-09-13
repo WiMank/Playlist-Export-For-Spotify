@@ -32,8 +32,9 @@ class ApiModule {
         return retrofit.create(UserApi::class.java)
     }
 
-    //Special for refresh tokens request
-    //Other base url endpoint
+    /** Special for refresh tokens request.
+     * Other base url endpoint.
+     */
     @Provides
     fun provideApiRefreshToken(okHttpClient: OkHttpClient): ApiRefreshToken {
         return Retrofit.Builder()
