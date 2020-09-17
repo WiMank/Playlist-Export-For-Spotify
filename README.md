@@ -25,6 +25,7 @@ Go to the [Releases](https://github.com/WiMank/Playlist-Export-For-Spotify/relea
 * [Dagger Hilt](https://dagger.dev/hilt/) - provides a standard way to incorporate Dagger dependency injection into an Android application;  
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - designed to store and manage UI-related data in a lifecycle conscious way;  
 * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - observable data holder class;  
+* [Navigation](https://developer.android.com/guide/navigation) - navigation refers to the interactions that allow users to navigate across, into, and back out from the different pieces of content within your app;  
 * [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - asynchronous or non-blocking programming is the new reality;  
 * [AppAuth](https://github.com/openid/AppAuth-Android) - client SDK for communicating with OAuth 2.0 and OpenID Connect providers;  
 * [Shimmer](https://github.com/facebook/shimmer-android) - android library that provides an easy way to add a shimmer effect to any view in your Android app;  
