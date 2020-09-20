@@ -66,7 +66,6 @@ class ExportWorker @WorkerInject constructor(
     private fun clearAppFolders() {
         //clear playlists folder
         File(appContext.filesDir, APP_FOLDER).deleteRecursively()
-
         //clear zip folder
         File(appContext.filesDir, ZIP_APP_FOLDER).deleteRecursively()
     }
