@@ -14,7 +14,6 @@ import com.wimank.pbfs.util.ZIP_APP_FOLDER
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import org.zeroturnaround.zip.ZipUtil
 import java.io.File
 
@@ -31,7 +30,6 @@ class ExportWorker @WorkerInject constructor(
             val job = async(Dispatchers.IO) {
                 //loading tracks notify
                 workNotification.showLoadTracks()
-                delay(5000)
 
                 //load tracks
                 tracksManager.loadNetworkTracks()
