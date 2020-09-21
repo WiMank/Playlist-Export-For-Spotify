@@ -75,3 +75,7 @@ fun Fragment.showSnackBar(view: View, @StringRes message: Int) {
 fun NotificationCompat.Builder.clearActions() {
     mActions.clear()
 }
+
+fun ExtendedFloatingActionButton.changeExFabVisibility(pVisibility: Int) {
+    postDelayed({ visibility = pVisibility }, 250)
+}

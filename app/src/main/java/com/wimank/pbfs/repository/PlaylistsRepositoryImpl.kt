@@ -17,7 +17,7 @@ class PlaylistsRepositoryImpl @Inject constructor(
     private val networkPlaylistMapper: NetworkPlaylistMapper
 ) : PlaylistsRepository {
 
-    //all playlist saved here
+    //all playlists saved here
     private val listNetworkPlaylists = mutableListOf<NetworkPlaylists>()
 
     override suspend fun loadNetworkPlaylists(token: String, limit: Int, offset: Int) {

@@ -88,3 +88,6 @@ const val KEY_CANCEL = "export_cancel"
 
 //Value for cancel intent
 const val VALUE_CANCEL = "cancel"
+
+//Key for onSaveInstanceState
+const val EX_FAB_KEY = "exfab"

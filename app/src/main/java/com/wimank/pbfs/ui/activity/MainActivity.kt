@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import androidx.work.ExistingWorkPolicy
@@ -52,6 +53,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
         startObserve()
         connectivityWatcher()
         observeWork()
+
+        savedInstanceState?.let {
+            dataBinding.exFabMain.changeExFabVisibility(it.getInt(EX_FAB_KEY, View.GONE))
+        }
     }
 
     override fun getLayoutRes() = R.layout.activity_main
@@ -221,6 +226,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
 
     override fun completeAuthentication() {
         uiRouter.navigateToPlaylistFragment()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(EX_FAB_KEY, dataBinding.exFabMain.visibility)
+        super.onSaveInstanceState(outState)
     }
 
     override fun startLoad() {
