@@ -4,7 +4,6 @@ import com.wimank.pbfs.domain.model.Playlist
 import com.wimank.pbfs.repository.PlaylistsRepository
 import com.wimank.pbfs.util.AccessTokenException
 import com.wimank.pbfs.util.bearer
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class PlaylistManager @Inject constructor(
@@ -12,15 +11,15 @@ class PlaylistManager @Inject constructor(
     private val playlistsRepository: PlaylistsRepository
 ) {
 
-    suspend fun loadNetworkPlaylists(): Flow<List<Playlist>> {
-        sessionManager.checkSessionBeforeRequest().run {
+    suspend fun loadNetworkPlaylists() = run {
+        with(sessionManager.checkSessionBeforeRequest()) {
             if (isNotEmpty()) {
-                playlistsRepository.loadNetworkPlaylists(this.bearer())
+                playlistsRepository.refreshData(this.bearer())
+                playlistsRepository.flowingPlaylists()
             } else {
                 throw AccessTokenException()
             }
         }
-        return playlistsRepository.flowPlaylists()
     }
 
     suspend fun loadLocalPlaylists(): List<Playlist> {

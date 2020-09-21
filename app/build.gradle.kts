@@ -156,6 +156,17 @@ dependencies {
     //ZtZip
     implementation(Dependencies.ztZip)
 
+
+    testImplementation("io.mockk:mockk:1.10.0")
+    androidTestImplementation("io.mockk:mockk-android:1.10.0")
+
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.28.3-alpha")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.28.3-alpha")
+
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9")
+
+
 }
 
 fun BuildType.buildClientId() {

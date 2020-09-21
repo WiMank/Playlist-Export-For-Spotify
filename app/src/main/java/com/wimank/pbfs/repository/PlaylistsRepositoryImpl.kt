@@ -6,7 +6,7 @@ import com.wimank.pbfs.mapper.PlaylistMapper
 import com.wimank.pbfs.rest.PlaylistsApi
 import com.wimank.pbfs.rest.response.NetworkPlaylists
 import com.wimank.pbfs.room.dao.PlaylistDao
-import com.wimank.pbfs.room.entity.PlaylistsEntity
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -20,19 +20,11 @@ class PlaylistsRepositoryImpl @Inject constructor(
     //all playlists saved here
     private val listNetworkPlaylists = mutableListOf<NetworkPlaylists>()
 
-    override suspend fun loadNetworkPlaylists(token: String, limit: Int, offset: Int) {
-        playlistsApi.loadPlaylists(token, limit, offset).run {
-            listNetworkPlaylists.add(this)
-            if (next != null) {
-                loadNext(token, next)
+    override suspend fun flowingPlaylists(): Flow<List<Playlist>> {
+        return playlistDao.flowPlaylists().map { list ->
+            list.map {
+                playlistMapper.map(it)
             }
-        }
-        saveResponse(networkPlaylistMapper.map(listNetworkPlaylists))
-    }
-
-    override suspend fun flowPlaylists() = playlistDao.flowPlaylists().map { list ->
-        list.map {
-            playlistMapper.map(it)
         }
     }
 
@@ -40,6 +32,17 @@ class PlaylistsRepositoryImpl @Inject constructor(
         return playlistDao.getPlaylists().map {
             playlistMapper.map(it)
         }
+    }
+
+    override suspend fun refreshData(token: String, limit: Int, offset: Int) {
+        playlistsApi.loadPlaylists(token, limit, offset).run {
+            listNetworkPlaylists.add(this)
+            if (next != null) {
+                loadNext(token, next)
+            }
+        }
+        playlistDao.clearAndInsertPlaylists(networkPlaylistMapper.map(listNetworkPlaylists))
+        listNetworkPlaylists.clear()
     }
 
     /**
@@ -54,14 +57,5 @@ class PlaylistsRepositoryImpl @Inject constructor(
         }
         listNetworkPlaylists.add(pageResp)
         return pageResp
-    }
-
-    /**
-     * Save new playlists to database.
-     */
-    private suspend fun saveResponse(playlistsEntityList: List<PlaylistsEntity>) {
-        //clear and save new playlists
-        playlistDao.clearAndInsertPlaylists(playlistsEntityList)
-        listNetworkPlaylists.clear()
     }
 }

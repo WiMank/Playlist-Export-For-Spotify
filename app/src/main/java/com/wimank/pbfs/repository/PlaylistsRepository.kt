@@ -11,22 +11,18 @@ import kotlinx.coroutines.flow.Flow
 interface PlaylistsRepository {
 
     /**
-     * Loads playlists from web.
-     */
-    suspend fun loadNetworkPlaylists(
-        token: String,
-        limit: Int = PLAYLISTS_LIMIT,
-        offset: Int = START_OFFSET
-    )
-
-    /**
      * Asynchronous data stream for playlists.
      */
-    suspend fun flowPlaylists(): Flow<List<Playlist>>
+    suspend fun flowingPlaylists(): Flow<List<Playlist>>
 
     /**
      * Loads playlists from database.
      */
     suspend fun loadLocalPlaylists(): List<Playlist>
+
+    /**
+     * Loading from network and save new playlists to database.
+     */
+    suspend fun refreshData(token: String, limit: Int = PLAYLISTS_LIMIT, offset: Int = START_OFFSET)
 
 }
