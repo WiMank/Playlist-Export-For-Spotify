@@ -5,7 +5,7 @@ import com.wimank.pbfs.room.entity.PlaylistsEntity
 
 object MockPlaylistsRepository {
 
-    fun mockPlaylistsEntity(): List<PlaylistsEntity> {
+    fun getPlaylistsEntity(): List<PlaylistsEntity> {
         return listOf(
             PlaylistsEntity(
                 playlistId = "0",
@@ -28,7 +28,7 @@ object MockPlaylistsRepository {
         )
     }
 
-    fun mockPlaylist(): List<Playlist> {
+    fun getPlaylist(): List<Playlist> {
         return listOf(
             Playlist(
                 name = "F Tracks",

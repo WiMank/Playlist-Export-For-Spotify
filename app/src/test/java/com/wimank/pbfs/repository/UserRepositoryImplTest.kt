@@ -66,13 +66,13 @@ internal class UserRepositoryImplTest {
     @Test
     fun canUpdateProfile() = runBlockingTest {
         coEvery { userDao.getUpdateTime() } returns null
-        Assert.assertEquals(userRepositoryImpl.canUpdateProfile(), true)
+        Assert.assertTrue(userRepositoryImpl.canUpdateProfile())
 
         coEvery { userDao.getUpdateTime() } returns 1000 * System.currentTimeMillis()
-        Assert.assertEquals(userRepositoryImpl.canUpdateProfile(), false)
+        Assert.assertFalse(userRepositoryImpl.canUpdateProfile())
 
         coEvery { userDao.getUpdateTime() } returns 1000
-        Assert.assertEquals(userRepositoryImpl.canUpdateProfile(), true)
+        Assert.assertTrue(userRepositoryImpl.canUpdateProfile())
 
         coVerify(exactly = 3) { userDao.getUpdateTime() }
     }

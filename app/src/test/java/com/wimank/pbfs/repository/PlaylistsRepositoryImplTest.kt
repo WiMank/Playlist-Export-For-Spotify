@@ -5,8 +5,8 @@ import com.wimank.pbfs.mapper.PlaylistMapper
 import com.wimank.pbfs.rest.PlaylistsApi
 import com.wimank.pbfs.room.dao.PlaylistDao
 import com.wimank.pbfs.utils.CoroutineRule
-import com.wimank.pbfs.utils.MockPlaylistsRepository.mockPlaylist
-import com.wimank.pbfs.utils.MockPlaylistsRepository.mockPlaylistsEntity
+import com.wimank.pbfs.utils.MockPlaylistsRepository.getPlaylist
+import com.wimank.pbfs.utils.MockPlaylistsRepository.getPlaylistsEntity
 import io.mockk.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -41,8 +41,8 @@ internal class PlaylistsRepositoryImplTest {
 
     @Test
     fun loadNetworkPlaylists() = runBlockingTest {
-        val mockPlaylistsEntity = mockPlaylistsEntity()
-        val mockPlaylist = mockPlaylist()
+        val mockPlaylistsEntity = getPlaylistsEntity()
+        val mockPlaylist = getPlaylist()
 
         every { playlistDao.flowPlaylists() } returns flowOf(mockPlaylistsEntity)
         playlistsRepository.flowingPlaylists().collect {
@@ -53,8 +53,8 @@ internal class PlaylistsRepositoryImplTest {
 
     @Test
     fun loadLocalPlaylists() = runBlockingTest {
-        coEvery { playlistDao.getPlaylists() } returns mockPlaylistsEntity()
-        Assert.assertEquals(mockPlaylist(), playlistsRepository.loadLocalPlaylists())
+        coEvery { playlistDao.getPlaylists() } returns getPlaylistsEntity()
+        Assert.assertEquals(getPlaylist(), playlistsRepository.loadLocalPlaylists())
         coVerify { playlistDao.getPlaylists() }
     }
 }
