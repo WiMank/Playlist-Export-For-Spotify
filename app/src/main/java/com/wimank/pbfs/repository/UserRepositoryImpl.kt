@@ -18,8 +18,9 @@ class UserRepositoryImpl @Inject constructor(
 ) : UserRepository {
 
     override suspend fun loadNetworkUser(token: String) {
-        val userResp = userApi.getUserData(token)
-        saveResponse(userEntityMapper.map(userResp))
+        with(userApi.getUserData(token)) {
+            saveResponse(userEntityMapper.map(this))
+        }
     }
 
     override suspend fun flowUser(): Flow<User> {

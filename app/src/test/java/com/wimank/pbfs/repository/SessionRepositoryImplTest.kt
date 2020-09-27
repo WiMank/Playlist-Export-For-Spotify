@@ -50,7 +50,6 @@ internal class SessionRepositoryImplTest {
         coEvery { sessionRepositoryImpl.getSession() } returns getSessionEntity()
 
         Assert.assertEquals(getSessionEntity(), sessionRepositoryImpl.getSession())
-
     }
 
     @Test
