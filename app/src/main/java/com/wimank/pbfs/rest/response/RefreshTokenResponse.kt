@@ -7,17 +7,17 @@ import com.squareup.moshi.JsonClass
 data class RefreshTokenResponse(
 
     @Json(name = "access_token")
-    val accessToken: String?,
+    val accessToken: String,
 
     @Json(name = "expires_in")
-    val expiresIn: Int?,
+    val expiresIn: Int,
 
     @Json(name = "refresh_token")
-    val refreshToken: String?,
+    val refreshToken: String,
 
-    val scope: String?,
+    val scope: String,
 
     @Json(name = "token_type")
-    val tokenType: String?
+    val tokenType: String
 
 )

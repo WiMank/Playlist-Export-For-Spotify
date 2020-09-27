@@ -13,7 +13,7 @@ interface ApiRefreshToken {
 
     @POST("api/token")
     @FormUrlEncoded
-    suspend fun refreshToken(
+    suspend fun refreshTokens(
         @Field("grant_type") grantType: String,
         @Field("refresh_token") refresh_token: String,
         @Field("client_id") client_id: String

@@ -1,6 +1,7 @@
 package com.wimank.pbfs.mapper
 
 import com.wimank.pbfs.domain.model.Session
+import com.wimank.pbfs.rest.response.RefreshTokenResponse
 import com.wimank.pbfs.room.entity.SessionEntity
 import com.wimank.pbfs.util.SESSION_ID
 import javax.inject.Inject
@@ -25,6 +26,20 @@ class SessionEntityMapper @Inject constructor() : Mapper<SessionEntity, Session>
             accessToken = input.accessToken,
             tokenType = input.tokenType,
             expiresIn = input.expiresIn,
+            refreshToken = input.refreshToken,
+            scope = input.scope
+        )
+    }
+}
+
+class RefreshTokenResponseMapper @Inject constructor() :
+    Mapper<RefreshTokenResponse, SessionEntity> {
+    override fun map(input: RefreshTokenResponse): SessionEntity {
+        return SessionEntity(
+            sessionId = SESSION_ID,
+            accessToken = input.accessToken,
+            tokenType = input.tokenType,
+            expiresIn = input.expiresIn.times(1000).plus(System.currentTimeMillis()),
             refreshToken = input.refreshToken,
             scope = input.scope
         )

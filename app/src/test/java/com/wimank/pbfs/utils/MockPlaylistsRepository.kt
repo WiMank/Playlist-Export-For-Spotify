@@ -3,7 +3,7 @@ package com.wimank.pbfs.utils
 import com.wimank.pbfs.domain.model.Playlist
 import com.wimank.pbfs.room.entity.PlaylistsEntity
 
-object MockUtil {
+object MockPlaylistsRepository {
 
     fun mockPlaylistsEntity(): List<PlaylistsEntity> {
         return listOf(
@@ -49,5 +49,4 @@ object MockUtil {
             )
         )
     }
-
 }

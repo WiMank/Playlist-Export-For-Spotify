@@ -2,13 +2,12 @@ package com.wimank.pbfs.repository
 
 import com.wimank.pbfs.BuildConfig
 import com.wimank.pbfs.domain.model.Session
+import com.wimank.pbfs.mapper.RefreshTokenResponseMapper
 import com.wimank.pbfs.mapper.SessionEntityMapper
 import com.wimank.pbfs.rest.ApiRefreshToken
 import com.wimank.pbfs.room.dao.SessionDao
 import com.wimank.pbfs.room.entity.SessionEntity
-import com.wimank.pbfs.util.EMPTY_STRING
 import com.wimank.pbfs.util.REFRESH_TOKEN_GRANT_TYPE
-import com.wimank.pbfs.util.SESSION_ID
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -16,7 +15,8 @@ import javax.inject.Inject
 class SessionRepositoryImpl @Inject constructor(
     private val sessionDao: SessionDao,
     private val apiRefreshToken: ApiRefreshToken,
-    private val sessionEntityMapper: SessionEntityMapper
+    private val sessionEntityMapper: SessionEntityMapper,
+    private val refreshTokenResponseMapper: RefreshTokenResponseMapper,
 ) : SessionRepository {
 
     override suspend fun insertSession(session: SessionEntity) {
@@ -46,19 +46,12 @@ class SessionRepositoryImpl @Inject constructor(
     }
 
     override suspend fun refreshToken(): SessionEntity {
-        return apiRefreshToken.refreshToken(
+        return apiRefreshToken.refreshTokens(
             REFRESH_TOKEN_GRANT_TYPE,
             sessionDao.getCurrentSession().refreshToken,
             BuildConfig.clientId
         ).run {
-            SessionEntity(
-                sessionId = SESSION_ID,
-                accessToken = accessToken ?: EMPTY_STRING,
-                tokenType = tokenType ?: EMPTY_STRING,
-                expiresIn = (expiresIn?.times(1000)?.plus(System.currentTimeMillis()) ?: 0L),
-                refreshToken = refreshToken ?: EMPTY_STRING,
-                scope = scope ?: EMPTY_STRING
-            )
+            refreshTokenResponseMapper.map(this)
         }
     }
 }
