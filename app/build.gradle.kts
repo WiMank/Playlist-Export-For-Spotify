@@ -9,6 +9,7 @@ plugins {
     kotlin(Plugins.kapt)
     id(Plugins.hiltPlugin)
     id(Plugins.safeargsKotlinPlugin)
+    id(Plugins.junit5Plugin)
 }
 
 val secretsPropertiesFile = rootProject.file("secrets.properties")
@@ -80,9 +81,16 @@ dependencies {
 
     //Test
     testImplementation(Dependencies.junit)
-    testImplementation(Dependencies.junitJupiter)
+    testImplementation(Dependencies.junitJupiterApi)
+    testRuntimeOnly(Dependencies.junitJupiterEngine)
+    testImplementation(Dependencies.junitJupiterParams)
     androidTestImplementation(Dependencies.androidxJunit)
     androidTestImplementation(Dependencies.espressoCore)
+    testImplementation(Dependencies.mockk)
+    androidTestImplementation(Dependencies.mockkAndroid)
+    androidTestImplementation(Dependencies.daggerHiltTesting)
+    kaptAndroidTest(Dependencies.daggerHiltAndroidCompiler)
+    testImplementation(Dependencies.coroutinesTest)
 
     //View
     implementation(Dependencies.appcompat)
@@ -152,18 +160,6 @@ dependencies {
 
     //ZtZip
     implementation(Dependencies.ztZip)
-
-
-    testImplementation("io.mockk:mockk:1.10.0")
-    androidTestImplementation("io.mockk:mockk-android:1.10.0")
-
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.28.3-alpha")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.28.3-alpha")
-
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9")
-
-    testImplementation("androidx.test:core:1.3.0")
-
 }
 
 fun BuildType.buildClientId() {

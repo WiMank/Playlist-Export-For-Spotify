@@ -5,4 +5,5 @@ object Plugins {
     const val kapt = "kapt"
     const val hiltPlugin = "dagger.hilt.android.plugin"
     const val safeargsKotlinPlugin = "androidx.navigation.safeargs.kotlin"
+    const val junit5Plugin = "de.mannodermaus.android-junit5"
 }

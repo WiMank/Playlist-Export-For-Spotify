@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test
 
 @ExperimentalCoroutinesApi
 internal class PlaylistsRepositoryImplTest {
+
     private val playlistDao: PlaylistDao = mockk()
     private val playlistsApi: PlaylistsApi = mockk()
     private val playlistMapper = PlaylistMapper()

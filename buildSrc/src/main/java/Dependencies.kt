@@ -17,10 +17,12 @@ import Version.ktxVersion
 import Version.liveDataKtxVersion
 import Version.loggingInterceptorVersion
 import Version.materialVersion
+import Version.mockkVersion
 import Version.moshiVersion
 import Version.navigationComponentVersion
 import Version.navigationSafeArgsVersion
 import Version.okHttpVersion
+import Version.pluginsAndroidJunit5Version
 import Version.retrofitVersion
 import Version.roomVersion
 import Version.shimmerVersion
@@ -42,8 +44,11 @@ object Dependencies {
 
     const val junit = "junit:junit:$junitVersion"
 
-    const val junitJupiter = "org.junit.jupiter:junit-jupiter:$junitJupiterVersion"
-
+    const val junitJupiterApi = "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
+    const val junitJupiterEngine = "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
+    const val junitJupiterParams = "org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion"
+    const val pluginsAndroidJunit5 =
+        "de.mannodermaus.gradle.plugins:android-junit5:$pluginsAndroidJunit5Version"
     const val androidxJunit = "androidx.test.ext:junit:$androidJunitVersion"
 
     const val espressoCore = "androidx.test.espresso:espresso-core:$espressoVersion"
@@ -60,6 +65,9 @@ object Dependencies {
         "androidx.hilt:hilt-lifecycle-viewmodel:$daggerHiltLifecycleVersion"
     const val daggerHiltWork = "androidx.hilt:hilt-work:$daggerHiltWorkVersion"
     const val daggerHiltCompiler = "androidx.hilt:hilt-compiler:$daggerHiltLifecycleVersion"
+    const val daggerHiltTesting = "com.google.dagger:hilt-android-testing:$daggerHiltVersion"
+    const val daggerHiltAndroidCompiler =
+        "com.google.dagger:hilt-android-compiler:$daggerHiltVersion"
 
     const val navigationComponent =
         "androidx.navigation:navigation-fragment-ktx:$navigationComponentVersion"
@@ -72,6 +80,7 @@ object Dependencies {
     const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${viewModelVersion}"
 
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    const val coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
     const val moshi = "com.squareup.moshi:moshi:$moshiVersion"
     const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
@@ -105,6 +114,9 @@ object Dependencies {
     const val material = "com.google.android.material:material:$materialVersion"
 
     const val ztZip = "org.zeroturnaround:zt-zip:$ztZipVersion"
+
+    const val mockk = "io.mockk:mockk:$mockkVersion"
+    const val mockkAndroid = "io.mockk:mockk-android:$mockkVersion"
 }
 
 object Version {
@@ -139,4 +151,6 @@ object Version {
     const val kotlinxHtmlVersion = "0.7.2"
     const val materialVersion = "1.2.1"
     const val ztZipVersion = "1.14"
+    const val mockkVersion = "1.10.0"
+    const val pluginsAndroidJunit5Version = "1.6.2.0"
 }
