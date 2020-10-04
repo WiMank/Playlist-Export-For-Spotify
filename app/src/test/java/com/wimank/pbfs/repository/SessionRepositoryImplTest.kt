@@ -17,7 +17,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -49,7 +49,7 @@ internal class SessionRepositoryImplTest {
     fun getSession() = runBlockingTest {
         coEvery { sessionRepositoryImpl.getSession() } returns getSessionEntity()
 
-        Assert.assertEquals(getSessionEntity(), sessionRepositoryImpl.getSession())
+        assertEquals(getSessionEntity(), sessionRepositoryImpl.getSession())
     }
 
     @Test
@@ -57,7 +57,7 @@ internal class SessionRepositoryImplTest {
         coEvery { sessionDao.flowCurrentSession() } returns flowOf(getFlowSessionEntity())
 
         sessionRepositoryImpl.flowSession().collect {
-            Assert.assertEquals(getSessionList(), it)
+            assertEquals(getSessionList(), it)
         }
 
         verify { sessionDao.flowCurrentSession() }
@@ -66,10 +66,10 @@ internal class SessionRepositoryImplTest {
     @Test
     fun hasSession() = runBlockingTest {
         coEvery { sessionDao.hasSession() } returns true
-        Assert.assertEquals(true, sessionDao.hasSession())
+        assertEquals(true, sessionDao.hasSession())
 
         coEvery { sessionDao.hasSession() } returns false
-        Assert.assertEquals(false, sessionDao.hasSession())
+        assertEquals(false, sessionDao.hasSession())
 
         coVerify(exactly = 2) { sessionDao.hasSession() }
     }
@@ -85,11 +85,11 @@ internal class SessionRepositoryImplTest {
         coEvery { sessionDao.getCurrentSession() } returns sessionEntity
 
         with(sessionRepositoryImpl.refreshToken()) {
-            Assert.assertEquals(accessToken, sessionEntity.accessToken)
-            Assert.assertEquals(refreshToken, sessionEntity.refreshToken)
-            Assert.assertEquals(scope, sessionEntity.scope)
-            Assert.assertEquals(sessionId, sessionEntity.sessionId)
-            Assert.assertEquals(tokenType, sessionEntity.tokenType)
+            assertEquals(accessToken, sessionEntity.accessToken)
+            assertEquals(refreshToken, sessionEntity.refreshToken)
+            assertEquals(scope, sessionEntity.scope)
+            assertEquals(sessionId, sessionEntity.sessionId)
+            assertEquals(tokenType, sessionEntity.tokenType)
         }
 
         coVerify { apiRefreshToken.refreshTokens(any(), any(), any()) }

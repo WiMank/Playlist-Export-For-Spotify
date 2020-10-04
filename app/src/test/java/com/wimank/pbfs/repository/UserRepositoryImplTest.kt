@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -57,7 +58,7 @@ internal class UserRepositoryImplTest {
         coEvery { userDao.flowUser() } returns flowOf(getUserEntity())
 
         userRepositoryImpl.flowUser().collect {
-            Assert.assertEquals(getUser(), it)
+            assertEquals(getUser(), it)
         }
 
         coVerify { userDao.flowUser() }

@@ -14,7 +14,7 @@ import com.wimank.pbfs.utils.MockTracksRepository.getTracksEntities
 import io.mockk.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -64,7 +64,7 @@ internal class TracksRepositoryImplTest {
     fun loadLocalTracks() = runBlockingTest {
         coEvery { tracksDao.getTracks(any()) } returns getTracksEntities()
 
-        Assert.assertEquals(getTracks(), tracksRepositoryImpl.loadLocalTracks(EMPTY_STRING))
+        assertEquals(getTracks(), tracksRepositoryImpl.loadLocalTracks(EMPTY_STRING))
 
         coVerify { tracksDao.getTracks(any()) }
     }

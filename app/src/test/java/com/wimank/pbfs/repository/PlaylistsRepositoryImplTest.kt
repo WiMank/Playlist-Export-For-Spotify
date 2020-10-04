@@ -12,7 +12,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -47,7 +47,7 @@ internal class PlaylistsRepositoryImplTest {
 
         every { playlistDao.flowPlaylists() } returns flowOf(mockPlaylistsEntity)
         playlistsRepository.flowingPlaylists().collect {
-            Assert.assertEquals(mockPlaylist, it)
+            assertEquals(mockPlaylist, it)
         }
         verify { playlistDao.flowPlaylists() }
     }
@@ -55,7 +55,7 @@ internal class PlaylistsRepositoryImplTest {
     @Test
     fun loadLocalPlaylists() = runBlockingTest {
         coEvery { playlistDao.getPlaylists() } returns getPlaylistsEntity()
-        Assert.assertEquals(getPlaylist(), playlistsRepository.loadLocalPlaylists())
+        assertEquals(getPlaylist(), playlistsRepository.loadLocalPlaylists())
         coVerify { playlistDao.getPlaylists() }
     }
 }
