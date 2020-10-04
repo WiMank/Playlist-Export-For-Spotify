@@ -91,6 +91,8 @@ dependencies {
     androidTestImplementation(Dependencies.daggerHiltTesting)
     kaptAndroidTest(Dependencies.daggerHiltAndroidCompiler)
     testImplementation(Dependencies.coroutinesTest)
+    androidTestImplementation(Dependencies.truth)
+    androidTestImplementation(Dependencies.workTesting)
 
     //View
     implementation(Dependencies.appcompat)

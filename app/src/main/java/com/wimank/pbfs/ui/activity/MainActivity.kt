@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.annotation.VisibleForTesting
 import androidx.navigation.findNavController
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkInfo
@@ -34,7 +35,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
     UserProfileDialog.UserProfileDialogCallback {
 
     private val uiRouter: UiRouter by lazy { UiRouter(findNavController(R.id.main_nav_host)) }
-    private val viewModel: MainActivityViewModel by viewModels()
+
+    @VisibleForTesting
+    val viewModel: MainActivityViewModel by viewModels()
     private val workManager: WorkManager by lazy { WorkManager.getInstance(this) }
 
     @Inject

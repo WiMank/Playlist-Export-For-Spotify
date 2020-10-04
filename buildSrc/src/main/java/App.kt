@@ -6,5 +6,5 @@ object App {
     const val targetSdkVersion = 30
     const val versionCode = 100
     const val versionName = "1.1"
-    const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    const val testInstrumentationRunner = "com.wimank.pbfs.utils.AppTestRunner"
 }

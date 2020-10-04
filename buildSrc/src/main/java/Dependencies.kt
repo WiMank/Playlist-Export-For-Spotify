@@ -28,8 +28,10 @@ import Version.roomVersion
 import Version.shimmerVersion
 import Version.timberVersion
 import Version.toolsGradleVersion
+import Version.truthVersion
 import Version.viewModelVersion
 import Version.workManagerVersion
+import Version.workTestingVersion
 import Version.ztZipVersion
 
 object Dependencies {
@@ -117,6 +119,10 @@ object Dependencies {
 
     const val mockk = "io.mockk:mockk:$mockkVersion"
     const val mockkAndroid = "io.mockk:mockk-android:$mockkVersion"
+
+    const val truth = "com.google.truth:truth:$truthVersion"
+
+    const val workTesting = "androidx.work:work-testing:$workTestingVersion"
 }
 
 object Version {
@@ -153,4 +159,6 @@ object Version {
     const val ztZipVersion = "1.14"
     const val mockkVersion = "1.10.0"
     const val pluginsAndroidJunit5Version = "1.6.2.0"
+    const val truthVersion = "1.0.1"
+    const val workTestingVersion = "2.4.0"
 }
