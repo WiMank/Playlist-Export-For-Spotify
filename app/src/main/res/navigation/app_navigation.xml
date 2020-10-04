@@ -10,7 +10,9 @@
         android:label="PlaylistFragment">
         <action
             android:id="@+id/action_playlistFragment_to_userProfileDialog"
-            app:destination="@id/userProfileDialog" />
+            app:destination="@id/userProfileDialog"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 
     <fragment
@@ -20,8 +22,8 @@
         <action
             android:id="@+id/action_authenticationFragment_to_playlistFragment"
             app:destination="@id/playlistFragment"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/authenticationFragment"
@@ -35,8 +37,6 @@
         <action
             android:id="@+id/action_userProfileDialog_to_authenticationFragment"
             app:destination="@id/authenticationFragment"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/playlistFragment"

@@ -2,6 +2,7 @@ package com.wimank.pbfs.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.viewModels
 import com.wimank.pbfs.R
 import com.wimank.pbfs.databinding.AuthenticationFragmentBinding
@@ -12,7 +13,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AuthenticationFragment : BaseFragment<AuthenticationFragmentBinding>() {
 
-    private val viewModel: AuthenticationViewModel by viewModels()
+    @VisibleForTesting
+    val viewModel: AuthenticationViewModel by viewModels()
     private var authenticationFragmentCallBack: AuthenticationFragmentCallBack? = null
 
     override fun getLayoutRes() = R.layout.authentication_fragment

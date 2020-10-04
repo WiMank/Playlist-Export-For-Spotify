@@ -2,6 +2,7 @@ package com.wimank.pbfs.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -15,7 +16,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PlaylistFragment : BaseFragment<PlaylistFragmentBinding>() {
 
-    private val viewModel: PlaylistViewModel by viewModels()
+    @VisibleForTesting
+    val viewModel: PlaylistViewModel by viewModels()
     private var backupFragmentCallback: BackupFragmentCallback? = null
     private var rvAdapter: PlaylistAdapter = PlaylistAdapter()
 

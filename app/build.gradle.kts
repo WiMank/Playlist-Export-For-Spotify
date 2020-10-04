@@ -93,6 +93,7 @@ dependencies {
     testImplementation(Dependencies.coroutinesTest)
     androidTestImplementation(Dependencies.truth)
     androidTestImplementation(Dependencies.workTesting)
+    debugImplementation("androidx.fragment:fragment-testing:1.2.5")
 
     //View
     implementation(Dependencies.appcompat)
