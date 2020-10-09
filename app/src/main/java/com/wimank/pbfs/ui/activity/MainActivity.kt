@@ -1,6 +1,5 @@
 package com.wimank.pbfs.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,7 +12,6 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.wimank.pbfs.R
 import com.wimank.pbfs.databinding.ActivityMainBinding
-import com.wimank.pbfs.di.AuthModule.Companion.AUTH_INTENT
 import com.wimank.pbfs.ui.fragment.AuthenticationFragment
 import com.wimank.pbfs.ui.fragment.PlaylistFragment
 import com.wimank.pbfs.ui.fragment.UserProfileDialog
@@ -21,12 +19,7 @@ import com.wimank.pbfs.ui.utils.UiRouter
 import com.wimank.pbfs.util.*
 import com.wimank.pbfs.viewmodel.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import net.openid.appauth.AuthorizationException
-import net.openid.appauth.AuthorizationResponse
-import net.openid.appauth.AuthorizationService
-import timber.log.Timber
 import javax.inject.Inject
-import javax.inject.Named
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(),
@@ -38,14 +31,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
 
     @VisibleForTesting
     val viewModel: MainActivityViewModel by viewModels()
+
     private val workManager: WorkManager by lazy { WorkManager.getInstance(this) }
-
-    @Inject
-    lateinit var authService: AuthorizationService
-
-    @Inject
-    @Named(AUTH_INTENT)
-    lateinit var authIntent: Intent
 
     @Inject
     lateinit var connectivityWatcher: ConnectivityWatcher
@@ -174,32 +161,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
             }
     }
 
-    /**
-     * Start Spotify OAuth.
-     */
-    private fun requestToken() {
-        startActivityForResult(authIntent, AUTH_REQUEST_CODE)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (AUTH_REQUEST_CODE == requestCode) {
-            val resp: AuthorizationResponse? = data?.let { AuthorizationResponse.fromIntent(it) }
-            Timber.e(AuthorizationException.fromIntent(data))
-            resp?.createTokenExchangeRequest()?.let {
-                authService.performTokenRequest(it) { response, ex ->
-                    if (response != null) {
-                        //authorization success, save session
-                        viewModel.prepareAndWriteSession(response)
-                    } else {
-                        // authorization failed, check ex for more details
-                        Timber.e(ex)
-                    }
-                }
-            }
-        }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_toolbar, menu)
         return true
@@ -221,10 +182,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
             }
         }
         return true
-    }
-
-    override fun startAuthentication() {
-        requestToken()
     }
 
     override fun completeAuthentication() {

@@ -28,8 +28,6 @@ class MainActivityTest {
             it.moveToState(Lifecycle.State.RESUMED)
             it.onActivity { activity ->
                 assertThat(activity.viewModel).isNotNull()
-                assertThat(activity.authService).isNotNull()
-                assertThat(activity.authIntent).isNotNull()
                 activity.connectivityWatcher.observe(activity) { value ->
                     assertThat(value).isNotNull()
                 }

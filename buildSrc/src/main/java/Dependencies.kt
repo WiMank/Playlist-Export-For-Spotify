@@ -1,3 +1,4 @@
+import Version.activityKtxVersion
 import Version.androidJunitVersion
 import Version.appAuthVersion
 import Version.appcompatVersion
@@ -7,6 +8,8 @@ import Version.daggerHiltLifecycleVersion
 import Version.daggerHiltVersion
 import Version.daggerHiltWorkVersion
 import Version.espressoVersion
+import Version.fragmentKtxVersion
+import Version.fragmentTestingVersion
 import Version.glideVersion
 import Version.junitJupiterVersion
 import Version.junitVersion
@@ -123,6 +126,10 @@ object Dependencies {
     const val truth = "com.google.truth:truth:$truthVersion"
 
     const val workTesting = "androidx.work:work-testing:$workTestingVersion"
+
+    const val activityKtx = "androidx.activity:activity-ktx:$activityKtxVersion"
+    const val fragmentKtx = "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
+    const val fragmentTesting = "androidx.fragment:fragment-testing:$fragmentTestingVersion"
 }
 
 object Version {
@@ -134,9 +141,9 @@ object Version {
     const val androidJunitVersion = "1.1.1"
     const val junitJupiterVersion = "5.6.2"
     const val espressoVersion = "3.2.0"
-    const val toolsGradleVersion = "4.0.1"
+    const val toolsGradleVersion = "4.0.2"
     const val kotlinGradlePluginVersion = kotlinVersion
-    const val daggerHiltVersion = "2.28.3-alpha"
+    const val daggerHiltVersion = "2.29.1-alpha"
     const val daggerHiltLifecycleVersion = "1.0.0-alpha02"
     const val daggerHiltWorkVersion = "1.0.0-alpha02"
     const val navigationComponentVersion = "2.3.0"
@@ -161,4 +168,7 @@ object Version {
     const val pluginsAndroidJunit5Version = "1.6.2.0"
     const val truthVersion = "1.0.1"
     const val workTestingVersion = "2.4.0"
+    const val activityKtxVersion = "1.2.0-beta01"
+    const val fragmentKtxVersion= "1.3.0-beta01"
+    const val fragmentTestingVersion= "1.3.0-beta01"
 }

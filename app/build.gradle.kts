@@ -93,11 +93,13 @@ dependencies {
     testImplementation(Dependencies.coroutinesTest)
     androidTestImplementation(Dependencies.truth)
     androidTestImplementation(Dependencies.workTesting)
-    debugImplementation("androidx.fragment:fragment-testing:1.2.5")
+    debugImplementation(Dependencies.fragmentTesting)
 
-    //View
+    //Activity, Fragment, etc.
     implementation(Dependencies.appcompat)
     implementation(Dependencies.constraintlayout)
+    implementation(Dependencies.activityKtx)
+    implementation (Dependencies.fragmentKtx)
 
     //Room
     implementation(Dependencies.room)
