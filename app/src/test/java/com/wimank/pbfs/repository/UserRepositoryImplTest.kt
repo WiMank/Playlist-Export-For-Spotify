@@ -14,9 +14,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Rule
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -67,13 +68,13 @@ internal class UserRepositoryImplTest {
     @Test
     fun canUpdateProfile() = runBlockingTest {
         coEvery { userDao.getUpdateTime() } returns null
-        Assert.assertTrue(userRepositoryImpl.canUpdateProfile())
+        assertTrue(userRepositoryImpl.canUpdateProfile())
 
         coEvery { userDao.getUpdateTime() } returns 1000 * System.currentTimeMillis()
-        Assert.assertFalse(userRepositoryImpl.canUpdateProfile())
+        assertFalse(userRepositoryImpl.canUpdateProfile())
 
         coEvery { userDao.getUpdateTime() } returns 1000
-        Assert.assertTrue(userRepositoryImpl.canUpdateProfile())
+        assertTrue(userRepositoryImpl.canUpdateProfile())
 
         coVerify(exactly = 3) { userDao.getUpdateTime() }
     }
