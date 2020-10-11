@@ -15,6 +15,9 @@ abstract class UserDao : BaseDao<UserEntity> {
     @Query("DELETE FROM user")
     abstract suspend fun clearUser()
 
+    @Query("SELECT * FROM user")
+    abstract suspend fun getUser(): UserEntity
+
     @Query("SELECT update_time FROM user")
     abstract suspend fun getUpdateTime(): Long?
 
