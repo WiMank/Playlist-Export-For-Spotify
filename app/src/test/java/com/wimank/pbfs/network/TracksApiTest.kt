@@ -25,7 +25,7 @@ class TracksApiTest : ApiMockWebServer() {
             assertThat(this).isEqualTo(getNetworkTracks())
         }
 
-        // confirm HTTP request for user profile
+        // confirm HTTP request for tracks
         mockWebServer.takeRequest().run {
             assertThat("/tracks_url").isEqualTo(path)
             assertThat(getHeader("Authorization")).isNotNull()
