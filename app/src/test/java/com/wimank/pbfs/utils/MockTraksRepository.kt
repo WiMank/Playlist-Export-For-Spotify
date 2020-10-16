@@ -8,13 +8,13 @@ object MockTracksRepository {
 
     fun getNetworkTracks(): NetworkTracks {
         return NetworkTracks(
-            href = "h",
+            href = "https://api.spotify.com/v1/users/spotify_espa%C3%B1a/playlists/21THa8j9TaSGuXYNBU5tsC/tracks",
             items = listOf(),
-            limit = 0,
+            limit = 100,
             next = null,
             offset = 0,
             previous = null,
-            total = 100
+            total = 58
         )
     }
 
