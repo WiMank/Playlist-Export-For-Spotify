@@ -92,8 +92,10 @@ dependencies {
     kaptAndroidTest(Dependencies.daggerHiltAndroidCompiler)
     testImplementation(Dependencies.coroutinesTest)
     androidTestImplementation(Dependencies.truth)
+    testImplementation(Dependencies.truth)
     androidTestImplementation(Dependencies.workTesting)
     debugImplementation(Dependencies.fragmentTesting)
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.7.2")
 
     //Activity, Fragment, etc.
     implementation(Dependencies.appcompat)
