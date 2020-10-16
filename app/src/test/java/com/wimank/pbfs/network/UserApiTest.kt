@@ -26,7 +26,10 @@ class UserApiTest : ApiMockWebServer() {
             assertThat(this).isEqualTo(getNetworkUser())
         }
 
-        // confirm HTTP request for user
-        assertThat("/me").isEqualTo(mockWebServer.takeRequest().path)
+        // confirm HTTP request for user profile
+        mockWebServer.takeRequest().run {
+            assertThat("/me").isEqualTo(path)
+            assertThat(getHeader("Authorization")).isNotNull()
+        }
     }
 }
