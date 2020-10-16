@@ -84,24 +84,26 @@ dependencies {
     testImplementation(Dependencies.junitJupiterApi)
     testRuntimeOnly(Dependencies.junitJupiterEngine)
     testImplementation(Dependencies.junitJupiterParams)
+    testImplementation(Dependencies.mockk)
+    testImplementation(Dependencies.coroutinesTest)
+    testImplementation(Dependencies.truth)
+    testImplementation(Dependencies.mockWebServer)
+    debugImplementation(Dependencies.fragmentTesting)
+    kaptAndroidTest(Dependencies.daggerHiltAndroidCompiler)
+
+    //Android test
+    androidTestImplementation(Dependencies.workTesting)
     androidTestImplementation(Dependencies.androidxJunit)
     androidTestImplementation(Dependencies.espressoCore)
-    testImplementation(Dependencies.mockk)
     androidTestImplementation(Dependencies.mockkAndroid)
     androidTestImplementation(Dependencies.daggerHiltTesting)
-    kaptAndroidTest(Dependencies.daggerHiltAndroidCompiler)
-    testImplementation(Dependencies.coroutinesTest)
     androidTestImplementation(Dependencies.truth)
-    testImplementation(Dependencies.truth)
-    androidTestImplementation(Dependencies.workTesting)
-    debugImplementation(Dependencies.fragmentTesting)
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.7.2")
 
     //Activity, Fragment, etc.
     implementation(Dependencies.appcompat)
     implementation(Dependencies.constraintlayout)
     implementation(Dependencies.activityKtx)
-    implementation (Dependencies.fragmentKtx)
+    implementation(Dependencies.fragmentKtx)
 
     //Room
     implementation(Dependencies.room)

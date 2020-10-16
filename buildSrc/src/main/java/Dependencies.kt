@@ -20,6 +20,7 @@ import Version.ktxVersion
 import Version.liveDataKtxVersion
 import Version.loggingInterceptorVersion
 import Version.materialVersion
+import Version.mockWebServerVersion
 import Version.mockkVersion
 import Version.moshiVersion
 import Version.navigationComponentVersion
@@ -130,6 +131,8 @@ object Dependencies {
     const val activityKtx = "androidx.activity:activity-ktx:$activityKtxVersion"
     const val fragmentKtx = "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
     const val fragmentTesting = "androidx.fragment:fragment-testing:$fragmentTestingVersion"
+
+    const val mockWebServer = "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion"
 }
 
 object Version {
@@ -170,5 +173,6 @@ object Version {
     const val workTestingVersion = "2.4.0"
     const val activityKtxVersion = "1.2.0-beta01"
     const val fragmentKtxVersion= "1.3.0-beta01"
-    const val fragmentTestingVersion= "1.3.0-beta01"
+    const val fragmentTestingVersion = "1.3.0-beta01"
+    const val mockWebServerVersion = "4.7.2"
 }
