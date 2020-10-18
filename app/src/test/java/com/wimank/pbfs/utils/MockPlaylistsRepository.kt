@@ -1,6 +1,7 @@
 package com.wimank.pbfs.utils
 
 import com.wimank.pbfs.domain.model.Playlist
+import com.wimank.pbfs.rest.response.NetworkPlaylists
 import com.wimank.pbfs.room.entity.PlaylistsEntity
 
 object MockPlaylistsRepository {
@@ -47,6 +48,18 @@ object MockPlaylistsRepository {
                 isPublic = true,
                 isCollaborative = true
             )
+        )
+    }
+
+    fun getNetworkPlaylist(): NetworkPlaylists {
+        return NetworkPlaylists(
+            href = "https://api.spotify.com/v1/users/wizzler/playlists",
+            items = listOf(),
+            limit = 9,
+            next = null,
+            offset = 0,
+            previous = null,
+            total = 9
         )
     }
 }

@@ -1,0 +1,9 @@
+{
+  "href": "https://api.spotify.com/v1/users/wizzler/playlists",
+  "items": [],
+  "limit": 9,
+  "next": null,
+  "offset": 0,
+  "previous": null,
+  "total": 9
+}
