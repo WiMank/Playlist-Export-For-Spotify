@@ -1,6 +1,6 @@
 package com.wimank.pbfs.network
 
-import com.google.common.truth.Truth
+import com.google.common.truth.Truth.assertThat
 import com.wimank.pbfs.rest.PlaylistsApi
 import com.wimank.pbfs.utils.FileUtils
 import com.wimank.pbfs.utils.MockPlaylistsRepository.getNetworkPlaylist
@@ -24,13 +24,13 @@ class PlaylistsApiTest : ApiMockWebServer() {
         mockWebServer.enqueue(mockResponse)
 
         playlistsApi.loadPlaylists("token", 50, 0).run {
-            Truth.assertThat(this).isEqualTo(getNetworkPlaylist())
+            assertThat(this).isEqualTo(getNetworkPlaylist())
         }
 
         // confirm HTTP request for tracks
         mockWebServer.takeRequest().run {
-            Truth.assertThat("/me/playlists?limit=50&offset=0").isEqualTo(path)
-            Truth.assertThat(getHeader("Authorization")).isNotNull()
+            assertThat("/me/playlists?limit=50&offset=0").isEqualTo(path)
+            assertThat(getHeader("Authorization")).isNotNull()
         }
     }
 
@@ -39,13 +39,13 @@ class PlaylistsApiTest : ApiMockWebServer() {
         mockWebServer.enqueue(mockResponse)
 
         playlistsApi.loadNextPlaylists("token", "next_playlist").run {
-            Truth.assertThat(this).isEqualTo(getNetworkPlaylist())
+            assertThat(this).isEqualTo(getNetworkPlaylist())
         }
 
         // confirm HTTP request for playlists
         mockWebServer.takeRequest().run {
-            Truth.assertThat("/next_playlist").isEqualTo(path)
-            Truth.assertThat(getHeader("Authorization")).isNotNull()
+            assertThat("/next_playlist").isEqualTo(path)
+            assertThat(getHeader("Authorization")).isNotNull()
         }
     }
 }
