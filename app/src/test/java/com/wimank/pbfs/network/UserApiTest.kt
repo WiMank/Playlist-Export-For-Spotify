@@ -3,7 +3,7 @@ package com.wimank.pbfs.network
 import com.google.common.truth.Truth.assertThat
 import com.wimank.pbfs.rest.UserApi
 import com.wimank.pbfs.utils.FileUtils.readTestResourceFile
-import com.wimank.pbfs.utils.MockUserRepository.getNetworkUser
+import com.wimank.pbfs.utils.MockUser.getNetworkUser
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse

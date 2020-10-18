@@ -5,8 +5,8 @@ import com.wimank.pbfs.mapper.PlaylistMapper
 import com.wimank.pbfs.rest.PlaylistsApi
 import com.wimank.pbfs.room.dao.PlaylistDao
 import com.wimank.pbfs.utils.CoroutineRule
-import com.wimank.pbfs.utils.MockPlaylistsRepository.getPlaylist
-import com.wimank.pbfs.utils.MockPlaylistsRepository.getPlaylistsEntity
+import com.wimank.pbfs.utils.MockPlaylists.getPlaylist
+import com.wimank.pbfs.utils.MockPlaylists.getPlaylistsEntity
 import io.mockk.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect

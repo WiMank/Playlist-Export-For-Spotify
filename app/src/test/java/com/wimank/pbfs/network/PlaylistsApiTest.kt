@@ -3,7 +3,7 @@ package com.wimank.pbfs.network
 import com.google.common.truth.Truth.assertThat
 import com.wimank.pbfs.rest.PlaylistsApi
 import com.wimank.pbfs.utils.FileUtils
-import com.wimank.pbfs.utils.MockPlaylistsRepository.getNetworkPlaylist
+import com.wimank.pbfs.utils.MockPlaylists.getNetworkPlaylist
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse

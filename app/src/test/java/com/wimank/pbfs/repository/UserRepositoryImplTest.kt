@@ -6,9 +6,9 @@ import com.wimank.pbfs.rest.UserApi
 import com.wimank.pbfs.room.dao.UserDao
 import com.wimank.pbfs.util.EMPTY_STRING
 import com.wimank.pbfs.utils.CoroutineRule
-import com.wimank.pbfs.utils.MockUserRepository.getNetworkUser
-import com.wimank.pbfs.utils.MockUserRepository.getUser
-import com.wimank.pbfs.utils.MockUserRepository.getUserEntity
+import com.wimank.pbfs.utils.MockUser.getNetworkUser
+import com.wimank.pbfs.utils.MockUser.getUser
+import com.wimank.pbfs.utils.MockUser.getUserEntity
 import io.mockk.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
