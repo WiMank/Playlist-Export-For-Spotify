@@ -17,11 +17,13 @@ class PlaylistsApiTest : ApiMockWebServer() {
         .setResponseCode(HttpURLConnection.HTTP_OK)
         .setBody(FileUtils.readTestResourceFile("playlists.json"))
 
+    private val playlistsApi: PlaylistsApi by lazy { retrofit.create(PlaylistsApi::class.java) }
+
     @Test
     fun loadPlaylists() = runBlocking {
         mockWebServer.enqueue(mockResponse)
 
-        retrofit.create(PlaylistsApi::class.java).loadPlaylists("token", 50, 0).run {
+        playlistsApi.loadPlaylists("token", 50, 0).run {
             Truth.assertThat(this).isEqualTo(getNetworkPlaylist())
         }
 
@@ -36,11 +38,11 @@ class PlaylistsApiTest : ApiMockWebServer() {
     fun loadNextPlaylists() = runBlocking {
         mockWebServer.enqueue(mockResponse)
 
-        retrofit.create(PlaylistsApi::class.java).loadNextPlaylists("token", "next_playlist").run {
+        playlistsApi.loadNextPlaylists("token", "next_playlist").run {
             Truth.assertThat(this).isEqualTo(getNetworkPlaylist())
         }
 
-        // confirm HTTP request for tracks
+        // confirm HTTP request for playlists
         mockWebServer.takeRequest().run {
             Truth.assertThat("/next_playlist").isEqualTo(path)
             Truth.assertThat(getHeader("Authorization")).isNotNull()
