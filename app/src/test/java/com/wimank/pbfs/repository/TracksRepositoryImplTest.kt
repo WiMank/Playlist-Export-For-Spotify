@@ -7,7 +7,7 @@ import com.wimank.pbfs.room.dao.PlaylistDao
 import com.wimank.pbfs.room.dao.TracksDao
 import com.wimank.pbfs.util.EMPTY_STRING
 import com.wimank.pbfs.utils.CoroutineRule
-import com.wimank.pbfs.utils.MockPlaylistsRepository.getPlaylistsEntity
+import com.wimank.pbfs.utils.MockPlaylists.getPlaylistsEntity
 import com.wimank.pbfs.utils.MockTracksRepository.getNetworkTracks
 import com.wimank.pbfs.utils.MockTracksRepository.getTracks
 import com.wimank.pbfs.utils.MockTracksRepository.getTracksEntities

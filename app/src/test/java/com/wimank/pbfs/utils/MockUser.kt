@@ -4,7 +4,7 @@ import com.wimank.pbfs.domain.model.User
 import com.wimank.pbfs.rest.response.NetworkUser
 import com.wimank.pbfs.room.entity.UserEntity
 
-object MockUserRepository {
+object MockUser {
 
     fun getNetworkUser() = NetworkUser(
         country = "SE",

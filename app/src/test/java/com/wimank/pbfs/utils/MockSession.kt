@@ -4,7 +4,7 @@ import com.wimank.pbfs.domain.model.Session
 import com.wimank.pbfs.rest.response.RefreshTokenResponse
 import com.wimank.pbfs.room.entity.SessionEntity
 
-object MockSessionRepository {
+object MockSession {
 
     fun getSessionEntity() = SessionEntity(
         sessionId = 0,

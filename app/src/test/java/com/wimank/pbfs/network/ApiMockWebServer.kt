@@ -3,7 +3,7 @@ package com.wimank.pbfs.network
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
-import org.junit.Before
+import org.junit.jupiter.api.BeforeEach
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -13,7 +13,7 @@ open class ApiMockWebServer {
     internal var mockWebServer = MockWebServer()
     internal lateinit var retrofit: Retrofit
 
-    @Before
+    @BeforeEach
     fun setup() {
         mockWebServer.start()
         retrofit = Retrofit.Builder()

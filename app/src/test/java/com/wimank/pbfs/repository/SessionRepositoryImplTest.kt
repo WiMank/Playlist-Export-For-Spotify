@@ -5,10 +5,10 @@ import com.wimank.pbfs.mapper.SessionEntityMapper
 import com.wimank.pbfs.rest.ApiRefreshToken
 import com.wimank.pbfs.room.dao.SessionDao
 import com.wimank.pbfs.utils.CoroutineRule
-import com.wimank.pbfs.utils.MockSessionRepository.getFlowSessionEntity
-import com.wimank.pbfs.utils.MockSessionRepository.getRefreshTokenResponse
-import com.wimank.pbfs.utils.MockSessionRepository.getSessionEntity
-import com.wimank.pbfs.utils.MockSessionRepository.getSessionList
+import com.wimank.pbfs.utils.MockSession.getFlowSessionEntity
+import com.wimank.pbfs.utils.MockSession.getRefreshTokenResponse
+import com.wimank.pbfs.utils.MockSession.getSessionEntity
+import com.wimank.pbfs.utils.MockSession.getSessionList
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
