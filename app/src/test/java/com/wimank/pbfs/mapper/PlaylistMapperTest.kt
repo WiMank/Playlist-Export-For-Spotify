@@ -4,7 +4,7 @@ import com.google.common.truth.Truth.assertThat
 import com.wimank.pbfs.util.EMPTY_STRING
 import com.wimank.pbfs.utils.MockPlaylists.getNetworkPlaylist
 import com.wimank.pbfs.utils.MockPlaylists.getPlaylistsEntity
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class PlaylistMapperTest {
 

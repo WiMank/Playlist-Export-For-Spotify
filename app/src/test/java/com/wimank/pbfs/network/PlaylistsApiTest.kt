@@ -7,7 +7,7 @@ import com.wimank.pbfs.utils.MockPlaylists.getNetworkPlaylist
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import java.net.HttpURLConnection
 
 @ExperimentalCoroutinesApi

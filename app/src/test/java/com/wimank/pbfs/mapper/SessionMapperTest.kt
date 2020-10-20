@@ -4,7 +4,7 @@ import com.google.common.truth.Truth.assertThat
 import com.wimank.pbfs.utils.MockSession.getRefreshTokenResponse
 import com.wimank.pbfs.utils.MockSession.getSessionEntity
 import com.wimank.pbfs.utils.MockSession.getSessionList
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class SessionMapperTest {
 
