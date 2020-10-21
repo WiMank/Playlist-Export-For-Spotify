@@ -15,6 +15,24 @@ object MockSession {
         scope = "asd"
     )
 
+    fun getEmptySessionEntity() = SessionEntity(
+        sessionId = 0,
+        accessToken = "",
+        tokenType = "",
+        expiresIn = 0,
+        refreshToken = "",
+        scope = ""
+    )
+
+    fun getMaxExpiresInSessionEntity() = SessionEntity(
+        sessionId = 0,
+        accessToken = "token",
+        tokenType = "asd",
+        expiresIn = Long.MAX_VALUE,
+        refreshToken = "asd",
+        scope = "asd"
+    )
+
     fun getSessionList(): List<Session> {
         return listOf(
             Session(
