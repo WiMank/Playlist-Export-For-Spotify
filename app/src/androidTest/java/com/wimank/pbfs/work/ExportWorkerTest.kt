@@ -5,6 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.work.*
 import androidx.work.testing.SynchronousExecutor
+import androidx.work.testing.TestListenableWorkerBuilder
 import androidx.work.testing.WorkManagerTestInitHelper
 import com.google.common.truth.Truth.assertThat
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -23,13 +24,14 @@ class ExportWorkerTest {
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
 
+    private val context = InstrumentationRegistry.getInstrumentation().targetContext
+
     private val workManager: WorkManager by lazy {
         WorkManager.getInstance(InstrumentationRegistry.getInstrumentation().targetContext)
     }
 
     @Before
     fun setUp() {
-        val context = InstrumentationRegistry.getInstrumentation().targetContext
         val config = Configuration.Builder()
             // Set log level to Log.DEBUG to make it easier to debug
             .setMinimumLoggingLevel(Log.DEBUG)
@@ -56,5 +58,17 @@ class ExportWorkerTest {
         // Get WorkInfo
         val workInfo = workManager.getWorkInfoById(request.id).get()
         assertThat(workInfo.state).isNotEqualTo(WorkInfo.State.FAILED)
+    }
+
+    @Test
+    fun testListenableExportWorker() {
+        // Get the ListenableWorker with a RunAttemptCount of 3
+        val worker = TestListenableWorkerBuilder<ExportWorker>(context)
+            .setRunAttemptCount(3)
+            .build()
+
+        // Start the work synchronously
+        val result = worker.startWork().get()
+        assertThat(result).isEqualTo(ListenableWorker.Result.success())
     }
 }
