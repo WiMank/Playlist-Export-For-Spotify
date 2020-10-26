@@ -23,6 +23,9 @@ jobs:
 
       - name: Run unit tests
         run: ./gradlew test
+        env:
+          client_id: ${{ secrets.CLIENT_ID }}
+          redirect_uri: ${{ secrets.REDIRECT_URI }}
 
       - name: Build with Gradle
         run: ./gradlew assemble
