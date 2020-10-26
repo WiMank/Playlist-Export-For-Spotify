@@ -16,7 +16,6 @@
     <string name="export_cancelled">The export task has been canceled</string>
     <string name="export_conditions">Conditions for starting the task are not met, we are waiting…</string>
     <string name="export">export</string>
-    <string name="track_export_null">Can\'t track export status</string>
     <string name="share_zip_file">Share zip file</string>
     <string name="nothing_send">Nothing to send, export playlists first</string>
     <string name="authentication">Authentication</string>
