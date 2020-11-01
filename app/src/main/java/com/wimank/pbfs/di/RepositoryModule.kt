@@ -17,7 +17,6 @@ interface RepositoryModule {
     @Binds
     fun bindPlaylistRepository(playlistRepositoryImpl: PlaylistsRepositoryImpl): PlaylistsRepository
 
-
     @Binds
     fun bindTracksRepository(tracksRepositoryImpl: TracksRepositoryImpl): TracksRepository
 
