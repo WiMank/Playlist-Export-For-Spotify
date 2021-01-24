@@ -30,7 +30,7 @@ class UserProfileDialog : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         dataBinding = DataBindingUtil.inflate(inflater, R.layout.user_layout, container, false)
         dataBinding.lifecycleOwner = this
         dataBinding.viewModel = viewModel

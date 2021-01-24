@@ -67,13 +67,12 @@ object Dependencies {
     const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:$daggerHiltVersion"
     const val hiltClassPathPlugin =
         "com.google.dagger:hilt-android-gradle-plugin:$daggerHiltVersion"
+
     const val daggerHiltLifecycle =
         "androidx.hilt:hilt-lifecycle-viewmodel:$daggerHiltLifecycleVersion"
     const val daggerHiltWork = "androidx.hilt:hilt-work:$daggerHiltWorkVersion"
     const val daggerHiltCompiler = "androidx.hilt:hilt-compiler:$daggerHiltLifecycleVersion"
     const val daggerHiltTesting = "com.google.dagger:hilt-android-testing:$daggerHiltVersion"
-    const val daggerHiltAndroidCompiler =
-        "com.google.dagger:hilt-android-compiler:$daggerHiltVersion"
 
     const val navigationComponent =
         "androidx.navigation:navigation-fragment-ktx:$navigationComponentVersion"
@@ -146,7 +145,7 @@ object Version {
     const val espressoVersion = "3.2.0"
     const val toolsGradleVersion = "4.0.2"
     const val kotlinGradlePluginVersion = kotlinVersion
-    const val daggerHiltVersion = "2.29.1-alpha"
+    const val daggerHiltVersion = "2.31.2-alpha"
     const val daggerHiltLifecycleVersion = "1.0.0-alpha02"
     const val daggerHiltWorkVersion = "1.0.0-alpha02"
     const val navigationComponentVersion = "2.3.0"

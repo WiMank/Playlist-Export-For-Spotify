@@ -21,7 +21,6 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
-        maven(url = "https://dl.bintray.com/arrow-kt/arrow-kt/")
     }
 }
 

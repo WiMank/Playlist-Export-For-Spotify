@@ -89,7 +89,7 @@ dependencies {
     testImplementation(Dependencies.truth)
     testImplementation(Dependencies.mockWebServer)
     debugImplementation(Dependencies.fragmentTesting)
-    kaptAndroidTest(Dependencies.daggerHiltAndroidCompiler)
+    kaptAndroidTest(Dependencies.hiltAndroidCompiler)
 
     //Android test
     androidTestImplementation(Dependencies.workTesting)
