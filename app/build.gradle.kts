@@ -116,7 +116,7 @@ dependencies {
 
     //Dagger Lifecycle
     implementation(Dependencies.daggerHiltLifecycle)
-    kapt(Dependencies.daggerHiltCompiler)
+    kapt(Dependencies.daggerAndroidxHiltCompiler)
 
     //Dagger Work Manager
     implementation(Dependencies.daggerHiltWork)

@@ -53,33 +53,26 @@ object Dependencies {
     const val junitJupiterApi = "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
     const val junitJupiterEngine = "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
     const val junitJupiterParams = "org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion"
-    const val pluginsAndroidJunit5 =
-        "de.mannodermaus.gradle.plugins:android-junit5:$pluginsAndroidJunit5Version"
+    const val pluginsAndroidJunit5 = "de.mannodermaus.gradle.plugins:android-junit5:$pluginsAndroidJunit5Version"
     const val androidxJunit = "androidx.test.ext:junit:$androidJunitVersion"
 
     const val espressoCore = "androidx.test.espresso:espresso-core:$espressoVersion"
 
     const val toolsBuildGradle = "com.android.tools.build:gradle:$toolsGradleVersion"
-    const val kotlinGradlePlugin =
-        "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinGradlePluginVersion"
+    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinGradlePluginVersion"
 
     const val daggerHilt = "com.google.dagger:hilt-android:$daggerHiltVersion"
     const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:$daggerHiltVersion"
-    const val hiltClassPathPlugin =
-        "com.google.dagger:hilt-android-gradle-plugin:$daggerHiltVersion"
-
-    const val daggerHiltLifecycle =
-        "androidx.hilt:hilt-lifecycle-viewmodel:$daggerHiltLifecycleVersion"
-    const val daggerHiltWork = "androidx.hilt:hilt-work:$daggerHiltWorkVersion"
-    const val daggerHiltCompiler = "androidx.hilt:hilt-compiler:$daggerHiltLifecycleVersion"
+    const val hiltClassPathPlugin = "com.google.dagger:hilt-android-gradle-plugin:$daggerHiltVersion"
     const val daggerHiltTesting = "com.google.dagger:hilt-android-testing:$daggerHiltVersion"
 
-    const val navigationComponent =
-        "androidx.navigation:navigation-fragment-ktx:$navigationComponentVersion"
-    const val navigationComponentKtx =
-        "androidx.navigation:navigation-ui-ktx:$navigationComponentVersion"
-    const val navigationSafeArgs =
-        "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationSafeArgsVersion"
+    const val daggerHiltLifecycle = "androidx.hilt:hilt-lifecycle-viewmodel:$daggerHiltLifecycleVersion"
+    const val daggerAndroidxHiltCompiler = "androidx.hilt:hilt-compiler:$daggerHiltLifecycleVersion"
+    const val daggerHiltWork = "androidx.hilt:hilt-work:$daggerHiltWorkVersion"
+
+    const val navigationComponent = "androidx.navigation:navigation-fragment-ktx:$navigationComponentVersion"
+    const val navigationComponentKtx = "androidx.navigation:navigation-ui-ktx:$navigationComponentVersion"
+    const val navigationSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationSafeArgsVersion"
 
     const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${viewModelVersion}"
     const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${viewModelVersion}"
@@ -94,8 +87,7 @@ object Dependencies {
     const val retrofitConverterMoshi = "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
 
     const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
-    const val loggingInterceptor =
-        "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion"
+    const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion"
 
     const val glide = "com.github.bumptech.glide:glide:$glideVersion"
     const val glideCompiler = "com.github.bumptech.glide:compiler:$glideVersion"
