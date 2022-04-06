@@ -12,6 +12,7 @@ import com.wimank.pbfs.util.EMPTY_STRING
 import com.wimank.pbfs.util.Event
 import com.wimank.pbfs.util.SESSION_ID
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.openid.appauth.TokenResponse
@@ -52,16 +53,23 @@ class AuthenticationViewModel @ViewModelInject constructor(
 
     private fun checkSession() {
         viewModelScope.launch(context = Dispatchers.IO) {
-            try {
-                //waiting for the session update
-                sessionManager.flowSession().collect {
-                    it.forEach { list ->
-                        authComplete.postValue(list.accessToken.isNotEmpty() && (list.refreshToken.isNotEmpty()))
-                    }
-                }
-            } catch (e: Exception) {
+            runCatching {
+                sessionManager.flowSession()
+            }.onSuccess { sessionFlow ->
+                collectSession(sessionFlow)
+            }.onFailure {
                 authError.postValue(Event(R.string.authentication_error))
-                Timber.e(e)
+                Timber.e(it)
+            }
+        }
+    }
+
+    private suspend fun collectSession(sessionFlow: Flow<List<Session>>) {
+        sessionFlow.collect {
+            it.forEach { list ->
+                authComplete.postValue(
+                    list.accessToken.isNotEmpty() && (list.refreshToken.isNotEmpty())
+                )
             }
         }
     }

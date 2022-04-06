@@ -52,8 +52,23 @@ class HtmlBuilder(
     }
 
     private fun writeFile(text: String) {
-        File(File(context.filesDir, APP_FOLDER), playlists.name + HTML_EXT).run {
+        File(
+            File(context.filesDir, APP_FOLDER),
+            playlists.name.checkPlaylistsNameContainsSeparator() + HTML_EXT
+        ).run {
             BufferedWriter(FileWriter(this)).use { it.write(text) }
         }
+    }
+
+    private fun String.checkPlaylistsNameContainsSeparator(): String {
+        return if (contains(SEPARATOR))
+            replace(SEPARATOR, NEW_SEPARATOR)
+        else
+            this
+    }
+
+    private companion object {
+        private const val SEPARATOR = "/"
+        private const val NEW_SEPARATOR = "_"
     }
 }

@@ -20,7 +20,6 @@ class PlaylistAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-
             SHIMMER -> {
                 ShimmerViewHolder(
                     ShimmerProgressItemBinding

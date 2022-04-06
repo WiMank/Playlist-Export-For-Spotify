@@ -21,7 +21,7 @@ data class NetworkTracks(
         val addedBy: AddedBy?,
         @Json(name = "is_local")
         val isLocal: Boolean,
-        val track: Track
+        val track: Track,
     ) {
         @JsonClass(generateAdapter = true)
         data class AddedBy(
@@ -30,11 +30,11 @@ data class NetworkTracks(
             val href: String,
             val id: String,
             val type: String,
-            val uri: String
+            val uri: String,
         ) {
             @JsonClass(generateAdapter = true)
             data class ExternalUrls(
-                val spotify: String
+                val spotify: String,
             )
         }
 
@@ -61,7 +61,7 @@ data class NetworkTracks(
             @Json(name = "track_number")
             val trackNumber: Int,
             val type: String,
-            val uri: String
+            val uri: String,
         ) {
             @JsonClass(generateAdapter = true)
             data class Album(
@@ -76,7 +76,7 @@ data class NetworkTracks(
                 val images: List<Image>?,
                 val name: String,
                 val type: String,
-                val uri: String
+                val uri: String,
             ) {
                 @JsonClass(generateAdapter = true)
                 data class Artist(
@@ -86,24 +86,24 @@ data class NetworkTracks(
                     val id: String,
                     val name: String,
                     val type: String,
-                    val uri: String
+                    val uri: String,
                 ) {
                     @JsonClass(generateAdapter = true)
                     data class ExternalUrls(
-                        val spotify: String
+                        val spotify: String,
                     )
                 }
 
                 @JsonClass(generateAdapter = true)
                 data class ExternalUrls(
-                    val spotify: String
+                    val spotify: String,
                 )
 
                 @JsonClass(generateAdapter = true)
                 data class Image(
                     val height: Int,
                     val url: String,
-                    val width: Int
+                    val width: Int,
                 )
             }
 
@@ -115,22 +115,22 @@ data class NetworkTracks(
                 val id: String,
                 val name: String,
                 val type: String,
-                val uri: String
+                val uri: String,
             ) {
                 @JsonClass(generateAdapter = true)
                 data class ExternalUrls(
-                    val spotify: String
+                    val spotify: String,
                 )
             }
 
             @JsonClass(generateAdapter = true)
             data class ExternalIds(
-                val isrc: String
+                val isrc: String,
             )
 
             @JsonClass(generateAdapter = true)
             data class ExternalUrls(
-                val spotify: String
+                val spotify: String,
             )
         }
     }

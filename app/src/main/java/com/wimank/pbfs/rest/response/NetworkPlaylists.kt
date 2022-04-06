@@ -11,7 +11,7 @@ data class NetworkPlaylists(
     val next: String?,
     val offset: Int,
     val previous: String?,
-    val total: Int
+    val total: Int,
 ) {
     @JsonClass(generateAdapter = true)
     data class Item(
@@ -30,18 +30,18 @@ data class NetworkPlaylists(
         val snapshotId: String,
         val tracks: Tracks?,
         val type: String,
-        val uri: String
+        val uri: String,
     ) {
         @JsonClass(generateAdapter = true)
         data class ExternalUrls(
-            val spotify: String
+            val spotify: String,
         )
 
         @JsonClass(generateAdapter = true)
         data class PlaylistImage(
             val height: Any?,
             val url: String?,
-            val width: Any?
+            val width: Any?,
         )
 
         @JsonClass(generateAdapter = true)
@@ -51,18 +51,18 @@ data class NetworkPlaylists(
             val href: String,
             val id: String,
             val type: String,
-            val uri: String
+            val uri: String,
         ) {
             @JsonClass(generateAdapter = true)
             data class ExternalUrls(
-                val spotify: String
+                val spotify: String,
             )
         }
 
         @JsonClass(generateAdapter = true)
         data class Tracks(
             val href: String?,
-            val total: Int?
+            val total: Int?,
         )
     }
 }

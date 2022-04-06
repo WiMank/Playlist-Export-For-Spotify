@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.wimank.pbfs.R
+import com.wimank.pbfs.util.EMPTY_STRING
 import com.wimank.pbfs.util.KEY_CANCEL
 import com.wimank.pbfs.util.VALUE_CANCEL
 import com.wimank.pbfs.util.clearActions
@@ -31,12 +32,6 @@ class WorkNotification @Inject constructor(@ApplicationContext private val conte
     }
 
     private val cancelPendingIntent = PendingIntent.getBroadcast(context, 0, cancelIntent, 0)
-
-    private companion object {
-        const val CHANNEL_ID = "Playlists export"
-        const val NOTIFICATION_ID = 228996
-        const val ACTION_CANCEL = "action_cancel"
-    }
 
     init {
         createNotificationChannel()
@@ -89,14 +84,14 @@ class WorkNotification @Inject constructor(@ApplicationContext private val conte
         )
     }
 
-    fun showExportError(cause: String) {
+    fun showExportError(cause: String?) {
         notificationManager.notify(
             NOTIFICATION_ID,
             builder.apply {
                 setSmallIcon(R.drawable.ic_error)
                 setContentTitle(context.getString(R.string.export_error))
                 setProgress(0, 0, false)
-                setStyle(NotificationCompat.BigTextStyle().bigText(cause))
+                setStyle(NotificationCompat.BigTextStyle().bigText(cause ?: EMPTY_STRING))
                 priority = NotificationCompat.PRIORITY_DEFAULT
                 clearActions()
             }.build()
@@ -119,5 +114,11 @@ class WorkNotification @Inject constructor(@ApplicationContext private val conte
             //register the channel with the system
             notificationManager.createNotificationChannel(channel)
         }
+    }
+
+    private companion object {
+        private const val CHANNEL_ID = "Playlists export"
+        private const val NOTIFICATION_ID = 228996
+        private const val ACTION_CANCEL = "action_cancel"
     }
 }

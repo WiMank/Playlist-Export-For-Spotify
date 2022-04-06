@@ -6,6 +6,7 @@ import android.view.View
 import androidx.annotation.StringRes
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -78,4 +79,10 @@ fun NotificationCompat.Builder.clearActions() {
 
 fun ExtendedFloatingActionButton.changeExFabVisibility(pVisibility: Int) {
     postDelayed({ visibility = pVisibility }, 250)
+}
+
+suspend fun MutableLiveData<Boolean>.progressWrapper(block: suspend () -> Unit) {
+    postValue(true)
+    block()
+    postValue(false)
 }

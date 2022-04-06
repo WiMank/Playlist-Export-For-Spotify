@@ -7,11 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.wimank.pbfs.R
 import com.wimank.pbfs.domain.model.User
 import com.wimank.pbfs.domain.usecase.UserManager
-import com.wimank.pbfs.util.Event
-import com.wimank.pbfs.util.EventMessage
-import com.wimank.pbfs.util.LoadError
-import com.wimank.pbfs.util.Logout
+import com.wimank.pbfs.util.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -33,19 +31,15 @@ class UserProfileViewModel @ViewModelInject constructor(
      */
     private fun startLoad() {
         viewModelScope.launch(context = Dispatchers.IO) {
-            try {
-                update.postValue(true)
-                //wait data
-                userManager.loadUser().collect {
-                    data.postValue(it)
-                    update.postValue(false)
+            update.progressWrapper {
+                runCatching {
+                    userManager.loadUser()
+                }.onSuccess { userFlow ->
+                    collectUserFlow(userFlow)
+                }.onFailure { ex ->
+                    event.postValue(Event(LoadError(R.string.user_data_load_failed)))
+                    Timber.e(ex)
                 }
-
-            } catch (e: Exception) {
-                Timber.e(e)
-                event.postValue(Event(LoadError(R.string.user_data_load_failed)))
-            } finally {
-                update.postValue(false)
             }
         }
     }
@@ -57,6 +51,13 @@ class UserProfileViewModel @ViewModelInject constructor(
         viewModelScope.launch(context = Dispatchers.IO) {
             userManager.logout()
             event.postValue(Event(Logout(R.string.sign_out)))
+        }
+    }
+
+    private suspend fun collectUserFlow(userFlow: Flow<User>) {
+        userFlow.collect {
+            data.postValue(it)
+            update.postValue(false)
         }
     }
 }

@@ -9,6 +9,7 @@ import com.wimank.pbfs.domain.model.Playlist
 import com.wimank.pbfs.domain.usecase.PlaylistManager
 import com.wimank.pbfs.util.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -46,7 +47,7 @@ class PlaylistViewModel @ViewModelInject constructor(
             } else {
                 //show snackbar with the remaining time
                 event.value = Event(Timeout(currentTimeOutTime()))
-                showRefresh(false)
+                hideRefresh()
             }
         } else {
             //offline mode
@@ -60,33 +61,42 @@ class PlaylistViewModel @ViewModelInject constructor(
      */
     private fun startLoadPlaylists() {
         viewModelScope.launch(context = Dispatchers.IO) {
-            try {
-                showRefresh(true)
-
-                //wait data
-                playlistManager.loadNetworkPlaylists().collect {
-                    //set data
-                    playListData.postValue(it)
-
-                    if (it.isNotEmpty()) {
-                        event.postValue(Event(LoadComplete(R.string.load_playlists_complete)))
-                    } else {
-                        event.postValue(Event(EmptyList(R.string.playlists_empty)))
-                        emptyData.postValue(true)
-                    }
-
-                    showRefresh(false)
+            updateData.progressWrapper {
+                runCatching {
+                    playlistManager.loadNetworkPlaylists()
+                }.onSuccess { playlistFlow ->
+                    collectPlaylistFlow(playlistFlow)
+                }.onFailure { ex ->
+                    handleLoadPlaylistsFailure(ex)
                 }
-            } catch (ex: Exception) {
-                event.postValue(Event(LoadError(R.string.load_playlists_error)))
-                clearUpdateTime()
-                Timber.e(ex)
-            } catch (httpEx: HttpException) {
-                if (httpEx.code() == UNAUTHORIZED_CODE)
-                    event.postValue(Event(Logout(R.string.need_authentication)))
-            } finally {
-                showRefresh(false)
             }
+        }
+    }
+
+    private suspend fun collectPlaylistFlow(playlistFlow: Flow<List<Playlist>>) {
+        playlistFlow.collect {
+            //set data
+            playListData.postValue(it)
+
+            if (it.isNotEmpty()) {
+                event.postValue(Event(LoadComplete(R.string.load_playlists_complete)))
+            } else {
+                event.postValue(Event(EmptyList(R.string.playlists_empty)))
+                emptyData.postValue(true)
+            }
+
+            hideRefresh()
+        }
+    }
+
+    private fun handleLoadPlaylistsFailure(ex: Throwable) {
+        if (ex is HttpException) {
+            if (ex.code() == UNAUTHORIZED_CODE)
+                event.postValue(Event(Logout(R.string.need_authentication)))
+        } else {
+            event.postValue(Event(LoadError(R.string.load_playlists_error)))
+            clearUpdateTime()
+            Timber.e(ex)
         }
     }
 
@@ -95,14 +105,15 @@ class PlaylistViewModel @ViewModelInject constructor(
      */
     private fun loadLocalPlaylists() {
         viewModelScope.launch(context = Dispatchers.IO) {
-            try {
-                showRefresh(true)
-                playListData.postValue(playlistManager.loadLocalPlaylists())
-            } catch (ex: Exception) {
-                event.postValue(Event(LoadError(R.string.load_playlists_error)))
-                Timber.e(ex)
-            } finally {
-                showRefresh(false)
+            updateData.progressWrapper {
+                runCatching {
+                    playlistManager.loadLocalPlaylists()
+                }.onSuccess { playlists ->
+                    playListData.postValue(playlists)
+                }.onFailure { ex ->
+                    event.postValue(Event(LoadError(R.string.load_playlists_error)))
+                    Timber.e(ex)
+                }
             }
         }
     }
@@ -137,9 +148,9 @@ class PlaylistViewModel @ViewModelInject constructor(
     private fun currentTimeOutTime() = ((updateTime - System.currentTimeMillis()) / 1000).toString()
 
     /**
-     * To show or hide the animation updates.
+     * Hide the animation updates.
      */
-    private fun showRefresh(show: Boolean) {
-        updateData.postValue(show)
+    private fun hideRefresh() {
+        updateData.postValue(false)
     }
 }

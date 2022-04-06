@@ -17,8 +17,14 @@ class MainActivityViewModel @ViewModelInject constructor(
     private val networkManager: NetworkManager
 ) : ViewModel() {
 
-    val sessionState = liveData(Dispatchers.IO) {
-        emit(checkSessionState())
+    val sessionState = liveData<Boolean>(Dispatchers.IO) {
+        runCatching {
+            sessionManager.hasSession()
+        }.onSuccess { hasSession ->
+            emit(hasSession)
+        }.onFailure {
+            emit(false)
+        }
     }
 
     val networkState = liveData(Dispatchers.Default) {
@@ -36,13 +42,5 @@ class MainActivityViewModel @ViewModelInject constructor(
                     .build()
             )
         }.build()
-    }
-
-    private suspend fun checkSessionState(): Boolean {
-        return try {
-            sessionManager.hasSession()
-        } catch (e: Exception) {
-            false
-        }
     }
 }

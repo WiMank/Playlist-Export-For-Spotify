@@ -17,23 +17,23 @@ data class NetworkUser(
     val images: List<Image>?,
     val product: String?,
     val type: String,
-    val uri: String
+    val uri: String,
 ) {
     @JsonClass(generateAdapter = true)
     data class Image(
         val height: Int?,
         val url: String?,
-        val width: Int?
+        val width: Int?,
     )
 
     @JsonClass(generateAdapter = true)
     data class Followers(
         val href: Any?,
-        val total: Int?
+        val total: Int?,
     )
 
     @JsonClass(generateAdapter = true)
     data class ExternalUrls(
-        val spotify: String?
+        val spotify: String?,
     )
 }

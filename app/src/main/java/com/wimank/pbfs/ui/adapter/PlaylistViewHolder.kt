@@ -7,12 +7,12 @@ import com.wimank.pbfs.domain.model.Playlist
 /**
  * ViewHolder for displaying [Playlist].
  */
-class PlaylistViewHolder(private val playlistItemBinding: PlaylistItemBinding) :
-    RecyclerView.ViewHolder(playlistItemBinding.root) {
+class PlaylistViewHolder(
+    private val playlistItemBinding: PlaylistItemBinding
+) : RecyclerView.ViewHolder(playlistItemBinding.root) {
 
     fun bind(playlist: Playlist) {
         playlistItemBinding.playlistItem = playlist
         playlistItemBinding.executePendingBindings()
     }
-
 }
